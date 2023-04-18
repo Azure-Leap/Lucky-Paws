@@ -16,6 +16,9 @@
      background-color: white;
      height: 30vh;
      padding: 60px;
+     bottom: 0;
+     position: absolute;
+     width: 100vw;
     }
   }
   @layer components {
