@@ -1,10 +1,14 @@
-import CategoryCards from '@/components/CategoryCards/CategoryCards'
-import React from 'react'
+import CategoryCards from "@/components/CategoryCards/CategoryCards";
+import LoginPage from "@/components/Login/LoginPage";
+import React from "react";
 
 const Test = () => {
   return (
-    <CategoryCards/>
-  )
-}
+    <div>
+      <CategoryCards />
+      <LoginPage />
+    </div>
+  );
+};
 
-export default Test
+export default Test;
