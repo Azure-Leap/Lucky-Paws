@@ -1,10 +1,14 @@
-import CategoryCards from '@/components/CategoryCards/CategoryCards'
-import React from 'react'
+import CategoryCards from "@/components/CategoryCards/CategoryCards";
+import HeroSection from "@/components/HeroSection/HeroSection";
+import React from "react";
 
 const Test = () => {
   return (
-    <CategoryCards/>
-  )
-}
+    <>
+      <HeroSection />
+      <CategoryCards />
+    </>
+  );
+};
 
-export default Test
+export default Test;
