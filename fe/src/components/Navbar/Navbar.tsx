@@ -22,14 +22,14 @@ export default function Navbar() {
         <>
           <div className="mx-auto max-w-[85vw] px-5 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
+              <div className="absolute inset-y-0 right-0 flex items-center md:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-orange-400 hover:bg-orange-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
+
                   {open ? (
-                    <FontAwesomeIcon icon={faX} className="block h-6 w-6" aria-hidden="true" />
+                    <FontAwesomeIcon icon={faX} className="block h-6 w-6 " aria-hidden="true" />
                   ) : (
-                    <FontAwesomeIcon icon={faBars} className="block h-6 w-6" aria-hidden="true" />
+                    <FontAwesomeIcon icon={faBars} className="block h-6 w-6 " aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
@@ -71,13 +71,13 @@ export default function Navbar() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6  sm:pr-0">
                 <button
                   type="button"
-                  className="rounded-full text-xl p-2  hover:text-orange-500"
+                  className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
                        <FontAwesomeIcon icon={faPaw}/>
                 </button>
                 <button
                   type="button"
-                  className="rounded-full text-xl p-2  hover:text-orange-500"
+                  className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
                        <FontAwesomeIcon icon={faShoppingCart}/>
                 </button>
@@ -139,7 +139,7 @@ export default function Navbar() {
                   </Transition>
                 </Menu> */}
                 
-               <p className="p-4  text-3xl hidden md:ml-6 md:block">|</p>
+               <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>
                <button className="font-bold text-xl m-3 hidden md:ml-6 md:block">
                 login
                </button>
@@ -150,7 +150,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          <Disclosure.Panel className="md:hidden">
+          <Disclosure.Panel className="md:hidden bg-orange-200 text-center">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
                 <Disclosure.Button
@@ -158,7 +158,7 @@ export default function Navbar() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? ' text-black font-bold' : 'text-black font-bold  hover:bg-orange-400 hover:text-white',
+                    item.current ? '  text-black font-bold hover:bg-orange-400 hover:text-white' : 'text-black font-bold  hover:bg-orange-400 hover:text-white',
                     'block rounded-md px-3 py-2 text-base '
                   )}
                   aria-current={item.current ? 'page' : undefined}

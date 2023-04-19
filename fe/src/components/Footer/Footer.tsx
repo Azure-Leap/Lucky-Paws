@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFacebook,faYoutube,faFigma,faFacebookMessenger} from "@fortawesome/free-brands-svg-icons";
-import {faShoppingCart,faPaw,faHouse} from '@fortawesome/free-solid-svg-icons'
+import {faShoppingCart,faPaw,faHouse,faPhone,faEnvelope,faLocationDot} from '@fortawesome/free-solid-svg-icons'
 
 const Footer = () => {
   const navigation = [
@@ -22,12 +22,6 @@ const Footer = () => {
     { name: 'Products', href: '#', current: false },
     { name: 'Media Kit', href: '#', current: false },
     { name: 'Feature stories', href: '#', current: false },
-  ]
-  const contactUs=[
-    { name: '89800332', href: '#', current: false },
-    { name: 'maito:lucky_paws@gmail.com', href: '#', current: false },
-    { name: 'Media Kit', href: '#', current: false },
-    { name: 'M-Stars Hub, Ulaanbaatar, Mongolgia', href: '#', current: false },
   ]
   return (
     <div>
@@ -76,7 +70,7 @@ const Footer = () => {
 
             </div>
             <div>
-              <h3>Product</h3>
+              <h3 className='font-bold'>Product</h3>
               {products.map((item) => (
                       
                       <a
@@ -89,7 +83,7 @@ const Footer = () => {
 
             </div>
             <div>
-              <h3>News</h3>
+              <h3 className='font-bold'>News</h3>
               {news.map((item) => (
                       
                       <a
@@ -104,23 +98,21 @@ const Footer = () => {
 
             </div>
         </div>
-        <div className='mx-32'>
-              <h3>Contact Us</h3>
-              {contactUs.map((item) => (
-                      
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className='flex p-2'
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
+        <div className='mx-20'>
+              <h3 className='font-bold mx-2'>Contact Us</h3>
+             <p><FontAwesomeIcon icon={faPhone} className='mx-2 mt-3'/> : 89800332</p>
+             <p><FontAwesomeIcon icon={faEnvelope} className='mx-2 mt-3' />maito:lucky_paws@gmail.com </p>
+             <p><FontAwesomeIcon icon={faLocationDot} className='mx-2 mt-3'/>M-Stars Hub, Ulaanbaatar, Mongolgia</p>
         </div>
 
         </div>
-        <hr />
+        <hr className='m-5' />
+        <div className='mx-[120px] grid grid-cols-3 max-w-[100vw] mt-4 text-stone-200 mb-0'>
+           <p className='text-xl'>Copy Right @2023</p>
+           <p className='text-2xl'>|</p>
+           <p className='text-xl'>Lucky Paws</p>
+
+        </div>
     </div>
     <div className='xl:hidden  grid grid-cols-3 absolute bottom-0 w-[100vw] h-[10vh] bg-white'>
       <button
