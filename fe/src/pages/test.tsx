@@ -1,13 +1,13 @@
 import CategoryCards from "@/components/CategoryCards/CategoryCards";
-import HeroSection from "@/components/HeroSection/HeroSection";
+import LoginPage from "@/components/Login/LoginPage";
 import React from "react";
 
 const Test = () => {
   return (
-    <>
-      <HeroSection />
+    <div>
       <CategoryCards />
-    </>
+      <LoginPage />
+    </div>
   );
 };
 
