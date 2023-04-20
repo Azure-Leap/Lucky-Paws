@@ -25,7 +25,7 @@ const Footer = () => {
   ]
   return (
     <div>
-    <div className='footer hidden w-[100vw] xl:block '>
+    <div className=' bg-white hidden w-[100vw] xl:block pt-12'>
         <div className='grid grid-cols-3 gap-24 max-w-[85vw] mx-auto sm:px-6 lg:px-8s'>
           <div>
         <div className='flex flex-shrink-0 items-center'>  
@@ -114,7 +114,7 @@ const Footer = () => {
 
         </div>
     </div>
-    <div className='xl:hidden  grid grid-cols-3 absolute bottom-0 w-[100vw] h-[10vh] bg-white'>
+    <div className='xl:hidden  grid grid-cols-3 w-[100vw] h-[10vh] bg-white'>
       <button
        type="button"
        className="rounded-full text-3xl p-2  hover:text-orange-500"><FontAwesomeIcon icon={faHouse} /></button>

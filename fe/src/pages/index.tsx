@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import axios from 'axios'
 import { Inter } from 'next/font/google'
 
 import Navbar from '@/components/Navbar/Navbar'
@@ -12,9 +13,17 @@ export default function Home() {
   return (
     <div className='body'>
 <Navbar/>
-{/* <Story/> */}
+<Story/>
 {/* <Shop/> */}
 <Footer/>
     </div>
   )
+}
+
+export async function getServerSideProps(ctx: any) {
+  const { data} = await axios.get(
+    `http://localhost:8000/product`)
+
+  console.log("DATA",data.product);
+  return { props: { products: data} };
 }
