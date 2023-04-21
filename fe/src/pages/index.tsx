@@ -14,7 +14,7 @@ export default function Home() {
     <div className='body'>
 <Navbar/>
 <Story/>
-{/* <Shop/> */}
+<Shop/>
 <Footer/>
     </div>
   )
