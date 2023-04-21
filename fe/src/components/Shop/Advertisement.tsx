@@ -2,7 +2,9 @@ import React from 'react'
 
 const Advertisement = () => {
   return (
-    <div>Advertisement</div>
+    <div className='bg-slate-200 rounded-xl'>
+
+    </div>
   )
 }
 
