@@ -2,13 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* end body dr baih style biclee */
-@layer components {
-    .body {
-     background-color: #fff3d3;
-     margin: auto;
-    }
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
+}
   @layer components {
     .icon {
    border: 2px solid black;

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import axios from 'axios'
+import Test from './test'
 import { Inter } from 'next/font/google'
 
 import Navbar from '@/components/Navbar/Navbar'
@@ -11,11 +11,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <div className='body'>
-<Navbar/>
-<Story/>
-<Shop/>
-<Footer/>
-    </div>
+    <main className="">
+      <Test/>
+    </main>
   )
 }
