@@ -7,7 +7,7 @@ import {faShoppingCart,faPaw,faBars,faX} from '@fortawesome/free-solid-svg-icons
 const navigation = [
   { name: 'Home', href: '#', current: true },
   { name: 'Pets', href: '#', current: false },
-  { name: 'Shop', href: '#', current: false },
+  { name: 'Shop', href: '/products', current: false },
   { name: 'Blog', href: '#', current: false },
 ]
 
