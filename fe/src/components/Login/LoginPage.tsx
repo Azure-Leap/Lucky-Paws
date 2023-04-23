@@ -4,7 +4,7 @@ import SignupForm from "./SignupForm";
 import LeftOverlayContent from "./LeftOverlayContent";
 import RightOverlayContent from "./RightOverlayContent";
 
-const LoginPage = () => {
+export default function LoginPage() {
   const [isAnimated, setIsAnimated] = useState(false);
   //   const overlayBg =
   //     "bg-gradient-to-r from-blue-800 via-purple-800 to-indigo-800";
@@ -73,6 +73,6 @@ const LoginPage = () => {
       </div>
     </div>
   );
-};
+}
 
-export default LoginPage;
+// export default LoginPage;
