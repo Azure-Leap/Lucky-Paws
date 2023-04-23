@@ -5,7 +5,7 @@ import Footer from "@/components/Footer/Footer";
 import LoginPage from "../components/Login/LoginPage";
 
 
-const Test = () => {
+export default function Test() {
   return (
     <div>
       <Navbar/>
@@ -14,6 +14,4 @@ const Test = () => {
       {/* <LoginPage /> */}
     </div>
   );
-};
-
-export default Test;
+}
