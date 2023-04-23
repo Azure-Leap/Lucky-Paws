@@ -5,12 +5,15 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import Story from "@/components/Story/Story";
 import Shop from "@/components/Shop/Shop";
+import Dogs from "@/components/DogsCard/DogsCard";
+
 
 const Test = () => {
   return (
-    <div>
+    <div className="body">
       <Navbar/>
       <CategoryCards />
+      <Dogs/>
       <Story/>
       <Shop/>
       <Footer/>
