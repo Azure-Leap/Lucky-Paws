@@ -23,13 +23,9 @@
    padding: 5px;
     }
   }
-body{
-  background-color: #fff3d3;
-}
 
-/* .orange-cat {
-  position: fixed;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-} */
+  @layer components {
+    .body {
+    background-color: rgb(241, 224, 203);
+    }
+  }

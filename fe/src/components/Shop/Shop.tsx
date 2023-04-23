@@ -4,13 +4,13 @@ import Advertisement from './Advertisement'
 
 const Shop = () => {
   return (
-    <div className='m-10 grid grid-cols-3 '>
-      <div className='col-span-2'>
+    <div className='m-24 grid grid-cols-4 gap-5 '>
+      <div className='xl:col-span-3 lg:w-full sm:col-span-4 max-sm:col-span-4 '>
       <ShopCard/>
       </div>
-   <div className='grid grid-cols-2  col-span-1 m-15 sm:hidden'>
-   <Advertisement/>
-   </div>
+      <div className='col-span-1 m-15 hidden xl:block'>
+      <Advertisement/>
+      </div>
     </div>
   )
 }

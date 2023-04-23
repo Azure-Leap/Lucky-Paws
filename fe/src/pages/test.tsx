@@ -7,7 +7,7 @@ import LoginPage from "../components/Login/LoginPage";
 
 export default function Test() {
   return (
-    <div>
+    <div className="body">
       <Navbar/>
       <HomePage/>
       <Footer/>
