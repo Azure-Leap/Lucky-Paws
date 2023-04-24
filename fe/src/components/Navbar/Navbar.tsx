@@ -1,18 +1,23 @@
-
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import {faShoppingCart,faPaw,faBars,faX} from '@fortawesome/free-solid-svg-icons';
+import {
+  faShoppingCart,
+  faPaw,
+  faBars,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Pets', href: '#', current: false },
-  { name: 'Shop', href: '/products', current: false },
-  { name: 'Blog', href: '#', current: false },
-]
+  { name: "Home", href: "/", current: true },
+  { name: "Pets", href: "#", current: false },
+  { name: "Shop", href: "/products", current: false },
+  { name: "Blog", href: "#", current: false },
+];
 
-function classNames(...classes:any) {
-  return classes.filter(Boolean).join(' ')
+function classNames(...classes: any) {
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
@@ -25,31 +30,37 @@ export default function Navbar() {
               <div className="absolute inset-y-0 right-0 flex items-center md:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-orange-400 hover:bg-orange-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-
                   {open ? (
-                    <FontAwesomeIcon icon={faX} className="block h-6 w-6 " aria-hidden="true" />
+                    <FontAwesomeIcon
+                      icon={faX}
+                      className="block h-6 w-6 "
+                      aria-hidden="true"
+                    />
                   ) : (
-                    <FontAwesomeIcon icon={faBars} className="block h-6 w-6 " aria-hidden="true" />
+                    <FontAwesomeIcon
+                      icon={faBars}
+                      className="block h-6 w-6 "
+                      aria-hidden="true"
+                    />
                   )}
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch md:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                <Image
-                  src="/images/logo.png"
-                  alt="logo"
-                  width={30}
-                  height={30}
-                 />
-                
-              <Image
-              src="/images/LuckyPaws.png"
-              alt="logo"
-              width={120}
-              height={100}
-              />
-                   
-                </div>
+                <Link href={"/"} className="flex flex-shrink-0 items-center">
+                  <Image
+                    src="/images/logo.png"
+                    alt="logo"
+                    width={30}
+                    height={30}
+                  />
+
+                  <Image
+                    src="/images/LuckyPaws.png"
+                    alt="logo"
+                    width={120}
+                    height={100}
+                  />
+                </Link>
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
@@ -57,10 +68,12 @@ export default function Navbar() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ? 'bg-orange-500 text-white text-xl' : 'text-xl text-black hover:bg-orange-500 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
+                          item.current
+                            ? "bg-orange-500 text-white text-xl"
+                            : "text-xl text-black hover:bg-orange-500 hover:text-white",
+                          "rounded-md px-3 py-2 text-sm font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </a>
@@ -73,15 +86,14 @@ export default function Navbar() {
                   type="button"
                   className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
-                       <FontAwesomeIcon icon={faPaw}/>
+                  <FontAwesomeIcon icon={faPaw} />
                 </button>
                 <button
                   type="button"
                   className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
-                       <FontAwesomeIcon icon={faShoppingCart}/>
+                  <FontAwesomeIcon icon={faShoppingCart} />
                 </button>
-
 
                 {/* Profile dropdown */}
                 {/* <Menu as="div" className="relative ml-3 ">
@@ -138,14 +150,14 @@ export default function Navbar() {
                     </Menu.Items>
                   </Transition>
                 </Menu> */}
-                
-               <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>
-               <button className="font-bold text-xl m-3 hidden md:ml-6 md:block">
-                login
-               </button>
-               <button className="font-bold m-3 text-xl bg-orange-500 p-2 w-32 rounded-3xl text-white hidden md:ml-6 md:block">
-                Sign Up
-               </button>
+
+                <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>
+                <button className="font-bold text-xl m-3 hidden md:ml-6 md:block">
+                  login
+                </button>
+                <button className="font-bold m-3 text-xl bg-orange-500 p-2 w-32 rounded-3xl text-white hidden md:ml-6 md:block">
+                  Sign Up
+                </button>
               </div>
             </div>
           </div>
@@ -158,10 +170,12 @@ export default function Navbar() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? '  text-black font-bold hover:bg-orange-400 hover:text-white' : 'text-black font-bold  hover:bg-orange-400 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base '
+                    item.current
+                      ? "  text-black font-bold hover:bg-orange-400 hover:text-white"
+                      : "text-black font-bold  hover:bg-orange-400 hover:text-white",
+                    "block rounded-md px-3 py-2 text-base "
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
@@ -171,5 +185,5 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
