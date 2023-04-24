@@ -26,7 +26,6 @@ const Product = ({ product }: any) => {
 
   return (
     <div className="bg-[#fff3d3]">
-      <Navbar />
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
           <div className=" m-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2">
@@ -91,7 +90,6 @@ const Product = ({ product }: any) => {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

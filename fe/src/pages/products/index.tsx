@@ -19,43 +19,47 @@ const index = () => {
 
   return (
     <div className="bg-[#fff3d3]">
-      <Navbar />
-
       <div className="m-auto container grid grid-cols-5">
-        <div className="col-span-1 bg-white sm:aspect-[10/12] md:aspect-[9/12] rounded-lg m-5">
-          <div className="text-2xl text-center font-bold m-5">Product list</div>
-          <div className="p-2">
+        <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5">
+          <div className="xl:text-2xl text-center font-bold m-5">
+            Product list
+          </div>
+          <div className="p-2 xl:text-lg sm:text-xs">
             <button className="font-bold">Cat</button>
           </div>
-          <div className="p-2">
+          <div className="p-2 xl:text-lg sm:text-xs">
             <button className="font-bold">Dog</button>
           </div>
         </div>
-        <div className="mx-auto col-span-4 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-3 p-2">
+        <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {products?.map((product: any, idx: number) => (
             <Link href={`products/${product._id}`} passHref>
               <div
                 key={idx}
-                className="group bg-white hover:bg-orange-100 rounded-xl m-3"
+                className="group bg-white hover:bg-orange-100 rounded-xl m-2 grid grid-cols-2 "
               >
-                <div className="sm:aspect-[12/12] md:aspect-[12/12] group ">
-                  <Image
-                    src={product.img}
-                    alt="productsPhoto"
-                    width={300}
-                    height={100}
-                    className="h-full w-full rounded-lg object-contain "
-                  />
-                  <div className=" text-xl p-1 ">{product.title}</div>
-                  <div className="p-1">{product.price}</div>
+                <div className="sm:aspect-[12/12] md:aspect-[12/12] group grid grid-cols-2">
+                  <div className="xl:col-span-2 sm:col-span-1 max-sm:col-span-1">
+                    <Image
+                      src={product.img}
+                      alt="productsPhoto"
+                      width={300}
+                      height={100}
+                      className="max-h-[200px] rounded-lg object-fill"
+                    />
+                  </div>
+                  <div className="xl:col-span-2 sm:col-span-1 max-sm:col-span-1">
+                    <div className=" xl:text-xl p-1 max-sm:col-span-1">
+                      {product.title}
+                    </div>
+                    <div className="p-1 max-sm:col-span-1">{product.price}</div>
+                  </div>
                 </div>
               </div>
             </Link>
           ))}
         </div>
-        <div className="bg-red-200 "></div>
       </div>
-      <Footer />
     </div>
   );
 };
