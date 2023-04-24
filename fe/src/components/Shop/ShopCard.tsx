@@ -6,7 +6,7 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useProducts } from "../../hooks/useProducts";
 
 const ShopCard = () => {
-  const [product] = useProducts();
+  const [products] = useProducts();
 
   // const getAllPruducts = async () => {
   //   try {
@@ -23,10 +23,10 @@ const ShopCard = () => {
   // }, []);
 
   return (
-    <div className="bg-orange-200 rounded-3xl ">
+    <div className="bg-orange-100 rounded-3xl ">
       <div className="  ">
         <div className="grid xl:grid-cols-4 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
-          {product?.slice(0, 7).map((product, idx) => (
+          {products?.slice(0, 7).map((product, idx) => (
             <Link href={`products/${product._id}`} passHref>
               <div
                 key={idx}

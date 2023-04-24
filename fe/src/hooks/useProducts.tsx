@@ -4,7 +4,7 @@ import axios from "axios";
 import { IProduct } from "@/utils/interfaces";
 
 export const useProducts = () => {
-  const [product, setProduct] = useState<IProduct[]>([]);
+  const [products, setProduct] = useState<IProduct[]>([]);
 
   const getAllPruducts = async () => {
     try {
@@ -20,5 +20,5 @@ export const useProducts = () => {
     getAllPruducts();
   }, []);
 
-  return [product];
+  return [products];
 };

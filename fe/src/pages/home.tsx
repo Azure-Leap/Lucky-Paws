@@ -1,6 +1,7 @@
 import CategoryCards from "@/components/CategoryCards/CategoryCards";
 import Dogs from "@/components/DogsCard/DogsCard";
 import HeroSection from "@/components/HeroSection/HeroSection";
+import Shop from "@/components/Shop/Shop";
 import Story from "@/components/Story/Story";
 
 export default function HomePage() {
@@ -15,6 +16,7 @@ export default function HomePage() {
       />
       <Dogs />
       <Story />
+      <Shop />
     </section>
   );
 }

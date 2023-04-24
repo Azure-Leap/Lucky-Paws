@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faFacebook,faYoutube,faFigma,faFacebookMessenger} from "@fortawesome/free-brands-svg-icons";
+import {faFacebook,faYoutube,faFacebookMessenger, faInstagram} from "@fortawesome/free-brands-svg-icons";
 import {faShoppingCart,faPaw,faHouse,faPhone,faEnvelope,faLocationDot} from '@fortawesome/free-solid-svg-icons'
 
 const Footer = () => {
@@ -45,11 +45,11 @@ const Footer = () => {
               
         </div>
           <p className='my-3 px-2'>We are a lorem ispum sit amet, consectetur adipiscing eli</p>
-          <div className='flex flex-shrink-0 items-center'>
-          <FontAwesomeIcon className='icon' icon={faFacebook} />
-          <FontAwesomeIcon className='icon' icon={faYoutube} />
-          <FontAwesomeIcon className='icon' icon={faFigma}/>
-          <FontAwesomeIcon className='icon' icon={faFacebookMessenger}/>
+          <div className='flex flex-shrink-0 gap-6 items-center'>
+          <FontAwesomeIcon className='border-2 border-black p-2 rounded-full' icon={faFacebook} />
+          <FontAwesomeIcon className='border-2 border-black p-2 rounded-full' icon={faYoutube} />
+          <FontAwesomeIcon className='border-2 border-black p-2 rounded-full' icon={faInstagram}/>
+          <FontAwesomeIcon className='border-2 border-black p-2 rounded-full' icon={faFacebookMessenger}/>
 
           </div>
           </div>
