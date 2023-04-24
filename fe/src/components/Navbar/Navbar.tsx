@@ -59,6 +59,7 @@ export default function Navbar() {
                     alt="logo"
                     width={120}
                     height={100}
+                    className="w-auto h-auto"
                   />
                 </Link>
                 <div className="hidden lg:ml-6 lg:block">
