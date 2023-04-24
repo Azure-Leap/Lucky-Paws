@@ -1,13 +1,17 @@
-import CategoryCards from "@/components/CategoryCards/CategoryCards";
-import LoginPage from "../components/Login/LoginPage";
 import React from "react";
+import Navbar from "@/components/Navbar/Navbar";
+import HomePage from "./home"
+import Footer from "@/components/Footer/Footer";
+import LoginPage from "../components/Login/LoginPage";
+
 
 export default function Test() {
   return (
-    <div>
-      <CategoryCards />
-      Hello
-      <LoginPage />
+    <div className="body">
+      <Navbar/>
+      <HomePage/>
+      <Footer/>
+      {/* <LoginPage /> */}
     </div>
   );
 }

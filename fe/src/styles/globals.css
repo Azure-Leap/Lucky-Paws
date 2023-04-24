@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
+:root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -14,14 +14,18 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-} */
-
-body {
-  background: #fff3d3;
 }
+  @layer components {
+    .icon {
+   border: 2px solid black;
+   border-radius: 50%;
+   margin: 8px;
+   padding: 5px;
+    }
+  }
 
-.bg-hero-image {
-  background-image: url("https://images.unsplash.com/photo-1623387641168-d9803ddd3f35?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
-  background-size: cover;
-  background-position: center;
-}
+  @layer components {
+    .body {
+    background-color: #fff3d3;
+    }
+  }
