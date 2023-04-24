@@ -3,6 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react'
 import { useRouter } from "next/router";
+import Navbar from '@/components/Navbar/Navbar';
+import Footer from '@/components/Footer/Footer';
+import { IProduct } from '.';
 
 const Product = ({product}:any) => {
     const router = useRouter();
@@ -19,9 +22,28 @@ const Product = ({product}:any) => {
         setCount(count - 1);
       };
 
+      const [products, setProduct] = useState<IProduct[]>([]);
+
+      const getAllPruducts=async()=>{
+        try {
+          const result = await axios.get("http://localhost:8000/product");
+          setProduct(result.data.product);
+          console.log(result);
+        } catch (err) {
+          console.log("ERR", err);
+        }
+      }
+      
+      useEffect(()=>{
+        getAllPruducts();
+      },[])
+  
+
   return (
-    <div className='bg-orange-200 container mx-auto p-5 mt-7 rounded-xl'>
-        <div className="grid grid-cols-2 bg-orange-200">
+    <div className='bg-[#fff3d3]'>
+  <Navbar/>
+    <div className=' container mx-auto my-10 p-5 mt-7 rounded-xl bg-white'>
+        <div className="grid grid-cols-2 ">
                 <div className=" m-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2">
                     <Image
                       src={product.img}
@@ -47,10 +69,10 @@ const Product = ({product}:any) => {
             <button className='bg-orange-400 rounded-lg m-5 text-white font-bold h-10 border-2 border-white border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2'>Add To Card</button>
             <button className='bg-white rounded-lg m-5 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2'>Buy</button>
         </div>
-    {/* <div className='bg-red-200'>
-           {product?.slice(0,4).map((product:any, index:number) => (
+     <div className='bg-red-200 grid grid-cols-3'>
+           {products?.slice(0,3).map((product:any, index:number) => (
                 <div key={index} className="group bg-orange-100 hover:bg-orange-300 rounded-xl m-3">
-                  <div className="sm:aspect-[12/12] md:aspect-[12/12]   group ">
+                  <div className="sm:aspect-[12/12] md:aspect-[12/12]  group ">
                     <Image
                       src={product.img}
                       alt="productsPhoto"
@@ -63,7 +85,10 @@ const Product = ({product}:any) => {
                   </div>
                 </div>
             ))}
-    </div> */}
+    </div> 
+    </div>
+    <Footer/>
+
     </div>
      
   )

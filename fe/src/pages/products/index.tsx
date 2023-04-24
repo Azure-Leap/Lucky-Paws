@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { useRouter } from "next/router";
 import { useEffect,useState } from 'react';
 import axios from 'axios';
+import Navbar from '@/components/Navbar/Navbar';
+import Footer from '@/components/Footer/Footer';
 
 
-interface IProduct {
+export interface IProduct {
   _id:Number;
   title:String;
   price:Number;
@@ -40,7 +42,10 @@ const index = () => {
     },[])
 
   return (
-    <div className="m-auto container grid grid-cols-5 bg-orange-200">
+<div className='bg-[#fff3d3]'>
+  <Navbar/>
+
+    <div className="m-auto container grid grid-cols-5">
       <div className='col-span-1 bg-white sm:aspect-[10/12] md:aspect-[9/12] rounded-lg m-5'>
           <div className='text-2xl text-center font-bold m-5'>Product list</div>
         <div className='p-2'>
@@ -75,6 +80,8 @@ const index = () => {
            
     </div>
   </div>
+  <Footer/>
+</div>
   )
 }
 
