@@ -8,7 +8,9 @@ export const useProducts = () => {
 
   const getAllPruducts = async () => {
     try {
-      const result = await axios.get("http://127.0.0.1:8000/product");
+      const result = await axios.get(
+        "https://lucky-paws-api.onrender.com/product"
+      );
       setProduct(result.data.product);
       console.log(result);
     } catch (err) {
