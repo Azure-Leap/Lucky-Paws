@@ -16,10 +16,12 @@ export default function HeroSection(): JSX.Element {
       <div className="grid max-w-screen-xl px-4 pt-24 pb-32 mx-auto lg:grid-cols-12">
         <div className=" my-auto lg:col-span-7 sm:mx-auto md:mr-48">
           <div className="relative">
-            <img
+            <Image
               src="/images/HeroSection/lines.png"
               alt="lines"
-              className="absolute top-[-20px] left-[-20px]"
+              width={32}
+              height={30}
+              className="absolute top-[-20px] left-[-20px] w-auto h-auto"
             />
             <h1
               className={` max-w-md mb-4 text-4xl font-extrabold tracking-tight leading-none lg:text-5xl xl:text-6xl ${fredokaOne.className}`}
@@ -32,14 +34,18 @@ export default function HeroSection(): JSX.Element {
               a<br />
               Forever Home
             </h1>
-            <img
+            <Image
               src="/images/HeroSection/cat.png"
               alt="cat"
+              width={154}
+              height={98}
               className="absolute top-[-45px] left-[220px] hidden  xl:block"
             />
-            <img
+            <Image
               src="/images/HeroPaws/paw4.png"
               alt="paw_no4"
+              width={93}
+              height={92}
               className="absolute top-[150px] left-[-100px]"
             />
           </div>
@@ -61,29 +67,42 @@ export default function HeroSection(): JSX.Element {
             <FontAwesomeIcon icon={faPhone} />
             Schedule a Call
           </a>
-          <img
+          <Image
             src="/images/HeroPaws/paw5.png"
             alt="paw_no5"
+            width={168}
+            height={190}
             className="absolute left-[200px] bottom-[-10px] -z-10"
           />
         </div>
         <div className="hidden relative lg:mt-0 lg:col-span-5 lg:flex justify-end">
-          <img
+          <Image
             src="/images/HeroPaws/paw1.png"
             alt="paw_no1"
+            width={138}
+            height={134}
             className="absolute right-[350px]"
           />
-          <img
+          <Image
             src="/images/HeroPaws/paw2.png"
             alt="paw_no2"
+            width={184}
+            height={181}
             className="absolute right-[-170px] top-[100px]"
           />
-          <img
+          <Image
             src="/images/HeroPaws/paw3.png"
             alt="paw_no3"
+            width={92}
+            height={92}
             className="absolute right-[500px] top-[350px]"
           />
-          <img src="/images/HeroSection/dog.png" alt="dog" />
+          <Image
+            src="/images/HeroSection/dog.png"
+            alt="dog"
+            width={331}
+            height={499}
+          />
         </div>
       </div>
     </section>

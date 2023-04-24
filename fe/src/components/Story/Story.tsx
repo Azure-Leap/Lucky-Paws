@@ -41,8 +41,8 @@ const Story = () => {
           life. She had a warm bed to sleep in, plenty of toys to play with, and
           all the love and attention she could ever want. Her new owners even
           took her to the vet for a check-up, where they found out that Coco had
-          some minor health issues that needed treatment. They didn't hesitate
-          to provide her with the care she needed...
+          some minor health issues that needed treatment. They didn(&apos)t
+          hesitate to provide her with the care she needed...
         </p>
         <Link
           href={`movies` || " "}
