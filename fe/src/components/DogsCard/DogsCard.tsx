@@ -11,31 +11,37 @@ const dogs = [
   {
     name: "Koby",
     image: "/koby.jpg",
-    link:"#"
+    link: "#",
   },
   {
     name: "Sara",
     image: "/sara.jpg",
-    link:"#"
+    link: "#",
   },
   {
     name: "Max",
     image: "/max.jpg",
-    link:"#"
+    link: "#",
   },
 ];
 
 const Dogs = () => {
   return (
     <div className="container mx-auto my-48 grid grid-flow-row gap-12 text-white sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {dogs.map((e) => (
+      {dogs.map((e, idx) => (
         <Link
+          key={idx}
           href={e.link}
           className="flex flex-col bg-white text-center rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)] hover:scale-105"
         >
           <div className="relative w-full h-52">
-
-          <Image src={e.image} fill alt="koby" className="rounded-3xl"/>
+            <Image
+              src={e.image}
+              alt="koby"
+              fill
+              sizes="100%"
+              className="rounded-3xl w-auto h-auto"
+            />
           </div>
           <div
             className={`text-4xl font-bold my-auto text-orange-500 ${fredokaOne.className}`}
@@ -45,20 +51,16 @@ const Dogs = () => {
         </Link>
       ))}
       <Link
-          href="#"
-          className="px-16 pt-10 pb-6 flex flex-col gap-10   text-center justify-center rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)] bg-gradient-to-t from-orange-500 to-yellow-300 hover:scale-105"
+        href="#"
+        className="px-16 pt-10 pb-6 flex flex-col gap-10   text-center justify-center rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)] bg-gradient-to-t from-orange-500 to-yellow-300 hover:scale-105"
+      >
+        <FontAwesomeIcon icon={faPaw} size="8x" className="text-white " />
+        <div
+          className={`text-4xl font-extrabold text-white border-t-2  ${fredokaOne.className}`}
         >
-          <FontAwesomeIcon
-            icon={faPaw}
-            size="8x"
-            className="text-white "
-          />
-          <div
-            className={`text-4xl font-extrabold text-white border-t-2  ${fredokaOne.className}`}
-          >
-            See More
-          </div>
-        </Link>
+          See More
+        </div>
+      </Link>
     </div>
     // <div className="flex justify-evenly items-center h-screen">
     //   {dogs.map((d, name) => (

@@ -3,7 +3,6 @@ import Product from "../models/products";
 const getProduct = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      console.log(req.params)
       const baraa = await Product.findById( {_id:id} );
       res.status(200).json({ success: true, baraa });
     } catch (error) {
