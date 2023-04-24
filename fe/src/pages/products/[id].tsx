@@ -8,21 +8,20 @@ import Footer from "@/components/Footer/Footer";
 import { useProducts } from "../../hooks/useProducts";
 
 const Product = ({ product }: any) => {
+  const [count, setCount] = useState(0);
+  const [products] = useProducts();
   const router = useRouter();
   const {} = useRouter();
   if (router.isFallback) {
     return <div> Loading ...</div>;
   }
 
-  const [count, setCount] = useState(0);
   const addCount = () => {
     setCount(count + 1);
   };
   const subCount = () => {
     setCount(count - 1);
   };
-
-  const [products] = useProducts();
 
   return (
     <div className="bg-[#fff3d3]">
