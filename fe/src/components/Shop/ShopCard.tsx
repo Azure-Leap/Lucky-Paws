@@ -27,11 +27,8 @@ const ShopCard = () => {
       <div className="  ">
         <div className="grid xl:grid-cols-4 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {products?.slice(0, 7).map((product, idx) => (
-            <Link href={`products/${product._id}`} passHref>
-              <div
-                key={idx}
-                className="group bg-orange-100 hover:bg-orange-300 rounded-xl m-3"
-              >
+            <Link key={idx} href={`products/${product._id}`} passHref>
+              <div className="group bg-orange-100 hover:bg-orange-300 rounded-xl m-3">
                 <div className="sm:aspect-[12/12] md:aspect-[12/12]   group ">
                   <Image
                     src={product.img}

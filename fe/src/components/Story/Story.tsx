@@ -15,7 +15,7 @@ const Story = () => {
         alt="Photo"
         width={400}
         height={200}
-        className="rounded-lg"
+        className="rounded-lg w-auto h-auto"
       />
       <div className="sm:p-3 max-sm:p-3">
         <h2
