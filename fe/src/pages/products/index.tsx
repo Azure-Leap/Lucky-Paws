@@ -71,6 +71,9 @@ const index = () => {
         ))}
 
     </div>
+        <div className='bg-red-200 '>
+           
+    </div>
   </div>
   )
 }

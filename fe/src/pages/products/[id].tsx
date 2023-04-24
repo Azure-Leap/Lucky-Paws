@@ -43,9 +43,9 @@ const Product = ({product}:any) => {
                    </div>
                 </div>
     </div>
-        <div className='grid grid-cols-4 m-8 mx-auto'>
-            <button className='bg-orange-400 rounded-lg m-5 text-white font-bold h-10 border-2 border-white border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-1 sm:col-span-2 max-sm:col-span-2'>Add To Card</button>
-            <button className='bg-white rounded-lg m-5 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-1 sm:col-span-2 max-sm:col-span-2'>Buy</button>
+        <div className='grid grid-cols-6 m-8 mx-auto'>
+            <button className='bg-orange-400 rounded-lg m-5 text-white font-bold h-10 border-2 border-white border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2'>Add To Card</button>
+            <button className='bg-white rounded-lg m-5 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2'>Buy</button>
         </div>
     {/* <div className='bg-red-200'>
            {product?.slice(0,4).map((product:any, index:number) => (
