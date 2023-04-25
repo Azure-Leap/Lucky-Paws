@@ -4,6 +4,7 @@ import { Fredoka_One } from "next/font/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import HeroPaws from "./HeroPaws/HeroPaws";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
 // const linesImg = require("/images/HeroSection/lines.png");
 
@@ -21,7 +22,7 @@ export default function HeroSection(): JSX.Element {
               alt="lines"
               width={32}
               height={30}
-              className="absolute top-[-20px] left-[-20px] w-auto h-auto"
+              className="absolute top-[-15px] left-[-15px] w-auto h-auto scale-[2.5]"
             />
             <h1
               className={` max-w-md mb-4 text-4xl font-extrabold tracking-tight leading-none lg:text-5xl xl:text-6xl ${fredokaOne.className}`}
@@ -64,7 +65,7 @@ export default function HeroSection(): JSX.Element {
             href="#"
             className="inline-flex gap-3 items-center justify-center  py-3 text-base font-bold text-center text-black"
           >
-            <FontAwesomeIcon icon={faPhone} />
+            <FontAwesomeIcon icon={faPhone} size="1x" />
             Schedule a Call
           </a>
           <Image

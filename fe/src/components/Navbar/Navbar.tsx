@@ -12,7 +12,7 @@ import Link from "next/link";
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Pets", href: "#", current: false },
-  { name: "Shop", href: "/", current: false },
+  { name: "Shop", href: "/products", current: false },
   { name: "Blog", href: "#", current: false },
 ];
 
@@ -154,9 +154,11 @@ export default function Navbar() {
                 </Menu> */}
 
                 <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>
-                <button className="font-bold text-xl m-3 hidden md:ml-6 md:block">
-                  login
-                </button>
+                <Link href={"/auth"}>
+                  <button className="font-bold text-xl m-3 hidden md:ml-6 md:block">
+                    login
+                  </button>
+                </Link>
                 <button className="font-bold m-3 text-xl bg-orange-500 p-2 w-32 rounded-3xl text-white hidden md:ml-6 md:block">
                   Sign Up
                 </button>
