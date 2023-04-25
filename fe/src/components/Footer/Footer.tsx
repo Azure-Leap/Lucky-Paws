@@ -111,15 +111,23 @@ const Footer = () => {
           <div className="mx-20">
             <h3 className="font-bold mx-2">Contact Us</h3>
             <p>
-              <FontAwesomeIcon icon={faPhone} className="mx-2 mt-3" /> :
-              89800332
+              <FontAwesomeIcon icon={faPhone} size="1x" className="mx-2 mt-3" />{" "}
+              : 89800332
             </p>
             <p>
-              <FontAwesomeIcon icon={faEnvelope} className="mx-2 mt-3" />
+              <FontAwesomeIcon
+                icon={faEnvelope}
+                size="1x"
+                className="mx-2 mt-3"
+              />
               maito:lucky_paws@gmail.com{" "}
             </p>
             <p>
-              <FontAwesomeIcon icon={faLocationDot} className="mx-2 mt-3" />
+              <FontAwesomeIcon
+                icon={faLocationDot}
+                size="1x"
+                className="mx-2 mt-3"
+              />
               M-Stars Hub, Ulaanbaatar, Mongolgia
             </p>
           </div>

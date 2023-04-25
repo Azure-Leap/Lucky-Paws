@@ -8,7 +8,8 @@ export default function LoginPage() {
   const [isAnimated, setIsAnimated] = useState(false);
   //   const overlayBg =
   //     "bg-gradient-to-r from-blue-800 via-purple-800 to-indigo-800";
-
+  // const catImage = require("../../assets/images/cat.png");
+  // const dogImage = require("../../assets/images/golden.png");
   return (
     <div className="grid grid-cols-1 ">
       <div className="h-screen w-full bg-white relative overflow-hidden rounded-lg">
@@ -48,7 +49,7 @@ export default function LoginPage() {
           >
             <div
               id="overlay-left"
-              className={`w-1/2 h-full absolute flex justify-center items-center top-0 transform -translate-x-[20%] transition transition-transform duration-700 ease-in-out ${
+              className={`bg-[url('../assets/images/cat.png')] w-1/2 h-full absolute flex justify-center items-center top-0 transform -translate-x-[20%] transition transition-transform duration-700 ease-in-out ${
                 isAnimated ? "translate-x-0" : "-translate-x-[20%]"
               }`}
             >
@@ -59,7 +60,7 @@ export default function LoginPage() {
             </div>
             <div
               id="overlay-right"
-              className={`w-1/2 h-full absolute flex justify-center items-center top-0 right-0 transform transition transition-transform duration-700 ease-in-out ${
+              className={`bg-[url('../assets/images/golden.png')] bg- h-full absolute flex justify-center items-center top-0 right-0 transform transition transition-transform duration-700 ease-in-out ${
                 isAnimated ? "translate-x-[20%]" : "translate-x-0"
               }`}
             >

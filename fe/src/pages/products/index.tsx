@@ -18,19 +18,19 @@ const Products = () => {
 
   return (
     <div className="bg-[#fff3d3]">
-      <Navbar />
-
       <div className="m-auto container grid grid-cols-5">
-        <div className="col-span-1 bg-white sm:aspect-[10/12] md:aspect-[9/12] rounded-lg m-5">
-          <div className="text-2xl text-center font-bold m-5">Product list</div>
-          <div className="p-2">
+        <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5">
+          <div className="xl:text-2xl text-center font-bold m-5">
+            Product list
+          </div>
+          <div className="p-2 xl:text-lg sm:text-xs">
             <button className="font-bold">Cat</button>
           </div>
-          <div className="p-2">
+          <div className="p-2 xl:text-lg sm:text-xs">
             <button className="font-bold">Dog</button>
           </div>
         </div>
-        <div className="mx-auto col-span-4 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-3 p-2">
+        <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {products?.map((product: any, idx: number) => (
             <Link key={idx} href={`products/${product._id}`} passHref>
               <div className="group bg-white hover:bg-orange-100 rounded-xl m-3">
@@ -49,9 +49,7 @@ const Products = () => {
             </Link>
           ))}
         </div>
-        <div className="bg-red-200 "></div>
       </div>
-      <Footer />
     </div>
   );
 };
