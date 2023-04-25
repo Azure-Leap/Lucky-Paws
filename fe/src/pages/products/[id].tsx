@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
 import { useProducts } from "../../hooks/useProducts";
 
 const Product = ({ product }: any) => {
@@ -68,22 +66,25 @@ const Product = ({ product }: any) => {
             </button>
           </div>
         </div>
-        <div className=" grid grid-cols-3 m-5 ">
+        <div className=" grid grid-cols-3 m-5  ">
           {products?.slice(0, 3).map((product: any, index: number) => (
-            <div
-              key={index}
-              className="group bg-white hover:bg-orange-100 rounded-3xl m-3"
-            >
-              <div className="sm:aspect-[12/12] md:aspect-[12/12]  group ">
-                <Image
-                  src={product.img}
-                  alt="productsPhoto"
-                  width={300}
-                  height={100}
-                  className="h-full w-full rounded-lg object-contain "
-                />
-                <div className=" text-xl p-1 ">{product.title}</div>
-                <div className="p-1">{product.price}</div>
+            <div className="group bg-white hover:scale-105 shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-xl mx-6 mt-16 max-sm:col-span-3 sm:col-span-3  md:col-span-3 lg:col-span-1 ">
+              <div className="group grid grid-cols-2">
+                <div className="max-sm:col-span-1 col-span-1 md:col-span-1 xl:col-span-1 ">
+                  <Image
+                    src={product.img}
+                    alt="productsPhoto"
+                    width={300}
+                    height={100}
+                    className="h-[200px] w-full rounded-lg object-contain "
+                  />
+                </div>
+                <div className="max-sm:col-span-1 sm:col-span-1 md:col-span-1 xl:col-span-1 m-auto">
+                  <div className=" max-sm:text-2xl sm:text-2xl md:text-xl text-center p-1 ">
+                    {product.title}
+                  </div>
+                  <div className="p-1">{product.price}</div>
+                </div>
               </div>
             </div>
           ))}
