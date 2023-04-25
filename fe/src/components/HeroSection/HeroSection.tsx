@@ -18,7 +18,7 @@ export default function HeroSection(): JSX.Element {
         <div className=" my-auto lg:col-span-7 sm:mx-auto md:mr-48">
           <div className="relative">
             <Image
-              src="/images/HeroSection/lines.png"
+              src={"/images/HeroSection/lines.png"}
               alt="lines"
               width={32}
               height={30}
