@@ -8,14 +8,13 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { useProducts } from "../../hooks/useProducts";
 
-const index = () => {
+const Products = () => {
+  const [products] = useProducts();
   const router = useRouter();
   const {} = useRouter();
   if (router.isFallback) {
     return <div> Loading ...</div>;
   }
-
-  const [products] = useProducts();
 
   return (
     <div className="bg-[#fff3d3]">
@@ -33,27 +32,18 @@ const index = () => {
         </div>
         <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {products?.map((product: any, idx: number) => (
-            <Link href={`products/${product._id}`} passHref>
-              <div
-                key={idx}
-                className="group bg-white hover:bg-orange-100 rounded-xl m-2 grid grid-cols-2 "
-              >
-                <div className="sm:aspect-[12/12] md:aspect-[12/12] group grid grid-cols-2">
-                  <div className="xl:col-span-2 sm:col-span-1 max-sm:col-span-1">
-                    <Image
-                      src={product.img}
-                      alt="productsPhoto"
-                      width={300}
-                      height={100}
-                      className="max-h-[200px] rounded-lg object-fill"
-                    />
-                  </div>
-                  <div className="xl:col-span-2 sm:col-span-1 max-sm:col-span-1">
-                    <div className=" xl:text-xl p-1 max-sm:col-span-1">
-                      {product.title}
-                    </div>
-                    <div className="p-1 max-sm:col-span-1">{product.price}</div>
-                  </div>
+            <Link key={idx} href={`products/${product._id}`} passHref>
+              <div className="group bg-white hover:bg-orange-100 rounded-xl m-3">
+                <div className="sm:aspect-[12/12] md:aspect-[12/12] group ">
+                  <Image
+                    src={product.img}
+                    alt="productsPhoto"
+                    width={300}
+                    height={100}
+                    className="h-full w-full rounded-lg object-contain "
+                  />
+                  <div className=" text-xl p-1 ">{product.title}</div>
+                  <div className="p-1">{product.price}</div>
                 </div>
               </div>
             </Link>
@@ -64,4 +54,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Products;

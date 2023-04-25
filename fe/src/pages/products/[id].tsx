@@ -8,21 +8,20 @@ import Footer from "@/components/Footer/Footer";
 import { useProducts } from "../../hooks/useProducts";
 
 const Product = ({ product }: any) => {
+  const [count, setCount] = useState(0);
+  const [products] = useProducts();
   const router = useRouter();
   const {} = useRouter();
   if (router.isFallback) {
     return <div> Loading ...</div>;
   }
 
-  const [count, setCount] = useState(0);
   const addCount = () => {
     setCount(count + 1);
   };
   const subCount = () => {
     setCount(count - 1);
   };
-
-  const [products] = useProducts();
 
   return (
     <div className="bg-[#fff3d3]">
@@ -95,7 +94,7 @@ const Product = ({ product }: any) => {
 };
 
 export async function getStaticPaths() {
-  const res = await fetch("http://localhost:8000/product");
+  const res = await fetch("https://lucky-paws-api.onrender.com/product");
   const products = await res.json();
   const ids = products?.product?.map((product: any) => product._id);
   const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
@@ -106,7 +105,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: any) {
-  const res = await fetch(`http://localhost:8000/product/${params.id}`);
+  const res = await fetch(
+    `https://lucky-paws-api.onrender.com/product/${params.id}`
+  );
   const data = await res.json();
   console.log("data:", data);
 

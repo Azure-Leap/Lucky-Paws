@@ -75,9 +75,9 @@ const Footer = () => {
           <div className="grid grid-cols-3">
             <div>
               <h3 className="font-bold">Menu</h3>
-              {navigation.map((item) => (
+              {navigation.map((item, idx) => (
                 <a
-                  key={item.name}
+                  key={idx}
                   href={item.href}
                   className="flex"
                   aria-current={item.current ? "page" : undefined}
@@ -88,17 +88,17 @@ const Footer = () => {
             </div>
             <div>
               <h3 className="font-bold">Product</h3>
-              {products.map((item) => (
-                <a key={item.name} className="flex ">
+              {products.map((item, idx) => (
+                <a key={idx} className="flex ">
                   {item.name}
                 </a>
               ))}
             </div>
             <div>
               <h3 className="font-bold">News</h3>
-              {news.map((item) => (
+              {news.map((item, idx) => (
                 <a
-                  key={item.name}
+                  key={idx}
                   href={item.href}
                   className="flex "
                   aria-current={item.current ? "page" : undefined}
@@ -111,15 +111,23 @@ const Footer = () => {
           <div className="mx-20">
             <h3 className="font-bold mx-2">Contact Us</h3>
             <p>
-              <FontAwesomeIcon icon={faPhone} className="mx-2 mt-3" /> :
-              89800332
+              <FontAwesomeIcon icon={faPhone} size="1x" className="mx-2 mt-3" />{" "}
+              : 89800332
             </p>
             <p>
-              <FontAwesomeIcon icon={faEnvelope} className="mx-2 mt-3" />
+              <FontAwesomeIcon
+                icon={faEnvelope}
+                size="1x"
+                className="mx-2 mt-3"
+              />
               maito:lucky_paws@gmail.com{" "}
             </p>
             <p>
-              <FontAwesomeIcon icon={faLocationDot} className="mx-2 mt-3" />
+              <FontAwesomeIcon
+                icon={faLocationDot}
+                size="1x"
+                className="mx-2 mt-3"
+              />
               M-Stars Hub, Ulaanbaatar, Mongolgia
             </p>
           </div>
@@ -131,7 +139,7 @@ const Footer = () => {
           <p className="text-xl">Lucky Paws</p>
         </div>
       </div>
-      <div className="xl:hidden grid grid-cols-3 w-[100vw]  bg-white">
+      <div className="xl:hidden  grid grid-cols-3 w-[100vw] h-[10vh] bg-white">
         <button
           type="button"
           className="rounded-full text-3xl p-2  hover:text-orange-500"
