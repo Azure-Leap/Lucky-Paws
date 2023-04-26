@@ -70,7 +70,7 @@ const Product = ({ product }: any) => {
         </div>
         <div className=" grid grid-cols-3 m-5  ">
           {products?.slice(0, 3).map((product: any, index: number) => (
-            <div className="group bg-white hover:scale-105 shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-xl mx-6 mt-16 max-sm:col-span-3 sm:col-span-3  md:col-span-3 lg:col-span-1 ">
+            <div key={index} className="group bg-white hover:scale-105 shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-xl mx-6 mt-16 max-sm:col-span-3 sm:col-span-3  md:col-span-3 lg:col-span-1 ">
               <div className="group grid grid-cols-2">
                 <div className="max-sm:col-span-1 col-span-1 md:col-span-1 xl:col-span-1 ">
                   <Image
