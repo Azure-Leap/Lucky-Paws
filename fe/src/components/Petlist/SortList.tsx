@@ -32,8 +32,8 @@ export default function SortList() {
       </h1>
       <Menu as="div" className="">
         <div className=" w-full">
-          {subMenuList?.map((menu) => (
-            <div key={menu.name} className="flex flex-col text-black ">
+          {subMenuList?.map((menu, idx) => (
+            <div key={idx} className="flex flex-col text-black ">
               <SortMenu data={menu} />
             </div>
           ))}

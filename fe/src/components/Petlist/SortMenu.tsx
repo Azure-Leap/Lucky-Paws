@@ -41,8 +41,8 @@ const SortMenu = ({ data }: any) => {
           subMenuOpen && "h-fit"
         }`}
       >
-        {data.menus.map((menu: any) => (
-          <div>
+        {data.menus.map(({ menu, idx }: any) => (
+          <div key={idx}>
             <Link
               href="#"
               className="link !bg-transparent capitalize hover:text-orange-500"
