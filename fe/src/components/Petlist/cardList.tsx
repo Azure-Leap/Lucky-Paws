@@ -1,5 +1,6 @@
 import SortList from "./SortList";
 import Pagination from "./pagination";
+import Image from "next/image";
 
 const products = [
   {
@@ -98,10 +99,16 @@ export default function CardList() {
             className="group bg-white rounded-3xl"
           >
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-3xl bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-              <img
+              {/* <img
                 src={product.imageSrc}
                 alt={product.imageAlt}
                 className="h-full w-full object-cover object-center group-hover:opacity-75"
+              /> */}
+              <Image
+                width={400}
+                height={400}
+                src={product.imageSrc}
+                alt={product.imageAlt}
               />
             </div>
             <div className="px-7 pb-5">
