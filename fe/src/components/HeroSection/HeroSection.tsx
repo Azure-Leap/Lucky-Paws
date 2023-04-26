@@ -6,7 +6,15 @@ import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import HeroPaws from "./HeroPaws/HeroPaws";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
-// const linesImg = require("/images/HeroSection/lines.png");
+const linesImg = require("../../assets/images/HeroSection/Lines.png");
+const catImg = require("../../assets/images/HeroSection/Cat.png");
+const dogImg = require("../../assets/images/HeroSection/dog.png");
+
+const paw1 = require("../../assets/images/HeroPaws/paw1.png");
+const paw2 = require("../../assets/images/HeroPaws/paw2.png");
+const paw3 = require("../../assets/images/HeroPaws/paw3.png");
+const paw4 = require("../../assets/images/HeroPaws/paw4.png");
+const paw5 = require("../../assets/images/HeroPaws/paw5.png");
 
 const fredokaOne = Fredoka_One({ subsets: ["latin"], weight: ["400"] });
 
@@ -18,7 +26,7 @@ export default function HeroSection(): JSX.Element {
         <div className=" my-auto lg:col-span-7 sm:mx-auto md:mr-48">
           <div className="relative">
             <Image
-              src={"/images/HeroSection/lines.png"}
+              src={linesImg}
               alt="lines"
               width={32}
               height={30}
@@ -36,14 +44,14 @@ export default function HeroSection(): JSX.Element {
               Forever Home
             </h1>
             <Image
-              src="/images/HeroSection/cat.png"
+              src={catImg}
               alt="cat"
               width={154}
               height={98}
               className="absolute top-[-45px] left-[220px] hidden  xl:block"
             />
             <Image
-              src="/images/HeroPaws/paw4.png"
+              src={paw4}
               alt="paw_no4"
               width={93}
               height={92}
@@ -69,7 +77,7 @@ export default function HeroSection(): JSX.Element {
             Schedule a Call
           </a>
           <Image
-            src="/images/HeroPaws/paw5.png"
+            src={paw5}
             alt="paw_no5"
             width={168}
             height={190}
@@ -78,32 +86,27 @@ export default function HeroSection(): JSX.Element {
         </div>
         <div className="hidden relative lg:mt-0 lg:col-span-5 lg:flex justify-end">
           <Image
-            src="/images/HeroPaws/paw1.png"
+            src={paw1}
             alt="paw_no1"
             width={138}
             height={134}
             className="absolute right-[350px]"
           />
           <Image
-            src="/images/HeroPaws/paw2.png"
+            src={paw2}
             alt="paw_no2"
             width={184}
             height={181}
             className="absolute right-[-170px] top-[100px]"
           />
           <Image
-            src="/images/HeroPaws/paw3.png"
+            src={paw3}
             alt="paw_no3"
             width={92}
             height={92}
             className="absolute right-[500px] top-[350px]"
           />
-          <Image
-            src="/images/HeroSection/dog.png"
-            alt="dog"
-            width={331}
-            height={499}
-          />
+          <Image src={dogImg} alt="dog" width={331} height={499} />
         </div>
       </div>
     </section>

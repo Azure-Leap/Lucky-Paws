@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { useProducts } from "../../hooks/useProducts";
+import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
 const Product = ({ product }: any) => {
   const [count, setCount] = useState(0);
@@ -23,8 +24,14 @@ const Product = ({ product }: any) => {
     setCount(count - 1);
   };
 
+  const breadCrumbs = [
+    { name: "Products", link: "/products" },
+    { name: product.title, link: "" },
+  ];
+
   return (
     <div className="bg-[#fff3d3]">
+      <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
           <div className=" m-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2">
