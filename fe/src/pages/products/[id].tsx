@@ -61,9 +61,11 @@ const Product = ({ product }: any) => {
             <button className="bg-orange-400 rounded-lg m-5 text-white font-bold h-10 border-2 border-white border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
               Add To Card
             </button>
+            <Link href={`/payment`} passHref>
             <button className="bg-white rounded-lg m-5 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
               Buy
             </button>
+            </Link>
           </div>
         </div>
         <div className=" grid grid-cols-3 m-5  ">
