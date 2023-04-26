@@ -8,6 +8,8 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import { useState } from "react";
 
 const navigation = [
   { name: "Home", href: "/", current: true },
@@ -21,6 +23,14 @@ function classNames(...classes: any) {
 }
 
 export default function Navbar() {
+  const [current,setCurrent]=useState(false)
+
+  const navigation = [
+    { name: "Home", href: "/", current: false },
+    { name: "Pets", href: "#", current: false },
+    { name: "Shop", href: "/products", current: false },
+    { name: "Blog", href: "#", current: false },
+  ];
   return (
     <Disclosure as="nav">
       {({ open }) => (
@@ -69,6 +79,7 @@ export default function Navbar() {
                       <a
                         key={item.name}
                         href={item.href}
+                        // onClick={setCurrent(true)}
                         className={classNames(
                           item.current
                             ? "bg-orange-500 text-white text-xl"
@@ -186,6 +197,7 @@ export default function Navbar() {
               ))}
             </div>
           </Disclosure.Panel>
+          {/* <Breadcrumbs/> */}
         </>
       )}
     </Disclosure>
