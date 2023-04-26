@@ -5,10 +5,10 @@ import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const dog1 = require("../assets/Images/dogbone.png");
-const dog2 = require("../assets/Images/hachig.png");
-const dog3 = require("../assets/Images/german.png");
-const dog4 = require("../assets/Images/drink.png");
+const dog1 = require("../../assets/images/dogbone.png");
+const dog2 = require("../../assets/images/hachig.png");
+const dog3 = require("../../assets/images/german.png");
+const dog4 = require("../../assets/images/drink.png");
 
 const lists = [
   {
