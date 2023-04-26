@@ -22,7 +22,7 @@ const SortMenu = ({ data }: any) => {
       </span> */}
       <Menu.Button
         onClick={() => setSubMenuOpen(!subMenuOpen)}
-        className={`inline-flex w-full justify-between mb-3 rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ${
+        className={`inline-flex w-full justify-between rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ${
           subMenuOpen && ""
         }`}
       >
@@ -37,12 +37,12 @@ const SortMenu = ({ data }: any) => {
         />
       </Menu.Button>
       <div
-        className={`flex flex-col pl-14 mb-7 text-lg rounded-lg overflow-hidden h-0 ${
+        className={`flex flex-col pl-5 mb-7 mt-5 text-lg rounded-lg overflow-hidden h-0 ${
           subMenuOpen && "h-fit"
         }`}
       >
-        {data.menus.map(({ menu, idx }: any) => (
-          <div key={idx}>
+        {data.menus.map((menu: any, idx: any) => (
+          <div key={idx} className="">
             <Link
               href="#"
               className="link !bg-transparent capitalize hover:text-orange-500"
