@@ -1,13 +1,9 @@
-import Image from 'next/image'
-import Test from './test'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import HomePage from "./home";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Test/>
+    <main className="">
+      <HomePage />
     </main>
-  )
+  );
 }

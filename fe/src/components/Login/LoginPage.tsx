@@ -4,14 +4,14 @@ import SignupForm from "./SignupForm";
 import LeftOverlayContent from "./LeftOverlayContent";
 import RightOverlayContent from "./RightOverlayContent";
 
-const LoginPage = () => {
+export default function LoginPage() {
   const [isAnimated, setIsAnimated] = useState(false);
   //   const overlayBg =
   //     "bg-gradient-to-r from-blue-800 via-purple-800 to-indigo-800";
 
   return (
-    <div className="grid grid-cols-1 ">
-      <div className="h-screen w-full bg-white relative overflow-hidden rounded-lg">
+    <div className="">
+      <div className="container m-auto h-screen w-full bg-white relative overflow-hidden rounded-3xl">
         <div
           id="signin"
           className={`bg-white absolute top-0 left-0 h-full w-1/2 flex justify-center items-center transition-all duration-700 ease-in-out z-20 ${
@@ -73,6 +73,6 @@ const LoginPage = () => {
       </div>
     </div>
   );
-};
+}
 
-export default LoginPage;
+// export default LoginPage;
