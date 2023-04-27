@@ -1,7 +1,7 @@
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -10,6 +10,14 @@ import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
 const Product = ({ product }: any) => {
   const [count, setCount] = useState(0);
+
+  const [slideIndex, setSlideIndex] = useState(1);
+  const [width, setWidth] = useState(0);
+  const [start, setStart] = useState(0);
+  const [change, setChange] = useState(9);
+
+  const slideRef = useRef<HTMLDivElement>(null);
+
   const [products] = useProducts();
   const router = useRouter();
   const {} = useRouter();
@@ -24,6 +32,43 @@ const Product = ({ product }: any) => {
     setCount(count - 1);
   };
 
+  const dragStart = (n: any) => {
+    setStart(n.clientX);
+  };
+  const dragOver = (n: any) => {
+    let touch = n.clientX;
+    setChange(start - touch);
+  };
+  const dragEnd = (n: number) => {
+    if (change > 0) {
+      slideRef.current?.scrollLeft;
+    } else {
+      slideRef.current?.scrollLeft;
+    }
+  };
+
+  const plusSlides = (n: number) => {
+    setSlideIndex((prev) => prev + n);
+    slideShow(slideIndex + n);
+  };
+
+  const slideShow = (n: number) => {
+    if (n > product.img.length) {
+      setSlideIndex(1);
+    }
+    if (n < 1) {
+      setSlideIndex(product.img.length);
+    }
+  };
+
+  useEffect(() => {
+    if (!slideRef.current) return;
+    const scrollWidth = slideRef.current.scrollWidth;
+    const childrenElementCount = slideRef.current.childElementCount;
+    const width = scrollWidth / childrenElementCount;
+    setWidth(width);
+  }, []);
+
   const breadCrumbs = [
     { name: "Products", link: "/products" },
     { name: product.title, link: "" },
@@ -34,7 +79,53 @@ const Product = ({ product }: any) => {
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
-          <div className=" m-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2">
+          <div className="product-page-img">
+            <div className="big-images">
+              {products.img.map((image: any, index: number) => (
+                <div
+                  key={index}
+                  className="mySlides"
+                  style={{
+                    display: index + 1 === slideIndex ? "block" : "none",
+                  }}
+                >
+                  <div className="numbertext">
+                    {index + 1} / {product.images.length}
+                  </div>
+                  <img src={image.src} alt="" />
+                </div>
+              ))}
+
+              <a href="#!" className="prev" onClick={() => plusSlides(-1)}>
+                &#10094;
+              </a>
+              <a href="#!" className="next" onClick={() => plusSlides(1)}>
+                &#10095;
+              </a>
+            </div>
+
+            <div
+              className="slider-img"
+              draggable={true}
+              ref={slideRef}
+              onDragStart={dragStart}
+              onDragOver={dragOver}
+              // onDragEnd={dragEnd}
+            >
+              {product.img.map((image: any, index: number) => (
+                <div
+                  key={index}
+                  className={`slider-box ${
+                    index + 1 === slideIndex ? "active" : ""
+                  }`}
+                  onClick={() => setSlideIndex(index + 1)}
+                >
+                  <img src={image.src} alt="" />
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* <div className=" m-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2">
             <Image
               src={product.img}
               alt="productsPhoto"
@@ -42,7 +133,7 @@ const Product = ({ product }: any) => {
               height={200}
               className="rounded-lg object-fill  "
             />
-          </div>
+          </div> */}
           <div className="m-6  xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
             <div className=" text-3xl p-1 font-bold ">{product.title}</div>
             <div className="mt-6">{product.detail}</div>
