@@ -11,19 +11,15 @@ import Link from "next/link";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import { useState } from "react";
 
-const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Pets", href: "#", current: false },
-  { name: "Shop", href: "/products", current: false },
-  { name: "Blog", href: "/blog", current: false },
-];
+const logoImg = require("../../assets/images/NavBar/logo.png");
+const luckyPaws = require("../../assets/images/NavBar/LuckyPaws.png");
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
-  const [current,setCurrent]=useState(false)
+  const [current, setCurrent] = useState(false);
 
   const navigation = [
     { name: "Home", href: "/", current: false },
@@ -58,7 +54,7 @@ export default function Navbar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch md:justify-start">
                 <Link href={"/"} className="flex flex-shrink-0 items-center">
                   <Image
-                    src="/images/logo.png"
+                    src={logoImg}
                     alt="logo"
                     width={30}
                     height={30}
@@ -66,7 +62,7 @@ export default function Navbar() {
                   />
 
                   <Image
-                    src="/images/LuckyPaws.png"
+                    src={luckyPaws}
                     alt="logo"
                     width={120}
                     height={100}

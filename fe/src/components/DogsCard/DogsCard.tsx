@@ -7,20 +7,24 @@ import { Fredoka_One } from "next/font/google";
 
 const fredokaOne = Fredoka_One({ subsets: ["latin"], weight: ["400"] });
 
+const kobyImg = require("../../assets/images/AnimalCards/koby.jpg");
+const saraImg = require("../../assets/images/AnimalCards/sara.jpg");
+const maxImg = require("../../assets/images/AnimalCards/max.jpg");
+
 const dogs = [
   {
     name: "Koby",
-    image: "/koby.jpg",
+    image: kobyImg,
     link: "#",
   },
   {
     name: "Sara",
-    image: "/sara.jpg",
+    image: saraImg,
     link: "#",
   },
   {
     name: "Max",
-    image: "/max.jpg",
+    image: maxImg,
     link: "#",
   },
 ];
@@ -40,7 +44,7 @@ const Dogs = () => {
               alt="koby"
               fill
               sizes="100%"
-              className="rounded-3xl w-auto h-auto"
+              className="rounded-t-3xl w-auto h-auto"
             />
           </div>
           <div

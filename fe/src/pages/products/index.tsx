@@ -7,6 +7,7 @@ import axios from "axios";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { useProducts } from "../../hooks/useProducts";
+import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
 const Products = () => {
   const [products] = useProducts();
@@ -15,9 +16,10 @@ const Products = () => {
   if (router.isFallback) {
     return <div> Loading ...</div>;
   }
-
+  const breadCrumbs = [{ name: "Products", link: "" }];
   return (
     <div className="bg-[#fff3d3]">
+      <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="m-auto container grid grid-cols-5">
         <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5">
           <div className="xl:text-2xl text-center font-bold m-5">
