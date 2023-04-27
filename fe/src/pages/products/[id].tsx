@@ -9,14 +9,6 @@ import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
 const product1 = {
-  // Product Data
-  id: 1,
-  name: "new macbook laptop",
-  slug: "new-luxury-laptop",
-  photo:
-    "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  price: 1999,
-  desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque consectetur vero asperiores quis animi explicabo accusamus nemo cupiditate harum pariatur! Provident sit tenetur totam mollitia consectetur nesciunt, recusandae obcaecati itaque!",
   img: [
     {
       src: "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -34,9 +26,6 @@ const product1 = {
       src: "https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
-      src: "https://images.pexels.com/photos/209151/pexels-photo-209151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
       src: "https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
@@ -51,34 +40,7 @@ const product1 = {
     {
       src: "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
-    {
-      src: "https://images.pexels.com/photos/209151/pexels-photo-209151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
   ],
-  colors: ["#2287fa", "#f71b1b", "green"],
-  infos: [
-    {
-      title: "highlights",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis magni illum, sint explicabo esse temporibus! Dicta, voluptatum dolorem numquam deserunt, doloribus, voluptatem consequuntur praesentium deleniti nulla in repellendus eum vero.",
-    },
-    {
-      title: "materials",
-      content: "materials",
-    },
-    {
-      title: "how to use",
-      content: "how to use",
-    },
-    {
-      title: "pro tips",
-      content: "pro tips",
-    },
-  ],
-  discount: 20,
-  sold: 52,
-  category: "laptop",
-  brand: "apple",
 };
 
 const Product = ({ product }: any) => {
@@ -152,33 +114,33 @@ const Product = ({ product }: any) => {
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
-          <div className="product-page-img">
-            <div className="big-images">
+          <div className="product-page-img w-full h-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2 overflow-hidden">
+            <div className="big-images bg-red-300  w-full h-80 relative">
               {product1.img.map((image: any, index: number) => (
                 <div
                   key={index}
-                  className="mySlides"
+                  className="mySlides w-full h-full"
                   style={{
                     display: index + 1 === slideIndex ? "block" : "none",
                   }}
                 >
-                  <div className="numbertext">
-                    {index + 1} / {product1.img.length}
+                  <div className="numbertext absolute text-gray-500 font-bold m-3">
+                    {index + 1}/{product1.img.length}
                   </div>
-                  <img src={image.src} alt="" />
+                  <img src={image.src} alt="product_image" style={{objectFit:"contain",display:"inline-block"}} />
                 </div>
               ))}
 
-              <a href="#!" className="prev" onClick={() => plusSlides(-1)}>
+              <a className="prev absolute top-1/2 -translate-y-1/2 left-4 text-white text-4xl cursor-pointer" onClick={() => plusSlides(-1)}>
                 &#10094;
               </a>
-              <a href="#!" className="next" onClick={() => plusSlides(1)}>
+              <a className="next absolute top-1/2 -translate-y-1/2 right-4 text-white text-4xl cursor-pointer" onClick={() => plusSlides(1)}>
                 &#10095;
               </a>
             </div>
 
             <div
-              className="slider-img"
+              className="slider-img mt-2 w-full h-28 grid grid-cols-12 overflow-x-scroll scrollbar-hide"
               draggable={true}
               ref={slideRef}
               onDragStart={dragStart}
@@ -186,27 +148,21 @@ const Product = ({ product }: any) => {
               // onDragEnd={dragEnd}
             >
               {product1.img.map((image: any, index: number) => (
+              
+                
                 <div
                   key={index}
-                  className={`slider-box ${
-                    index + 1 === slideIndex ? "active" : ""
+                  className={`slider-box w-full h-full col-span-4 bg-yellow-500 border-2  cursor-pointer overflow-hidden opacity-60   ${
+                    index + 1 === slideIndex ? "active:border-2 active:border-green-500" : ""
                   }`}
                   onClick={() => setSlideIndex(index + 1)}
                 >
-                  <img src={image.src} alt="" />
+                  <img src={image.src} alt="" style={{objectFit:"contain",display:"inline-block",width:"100%",height:"100%"}} />
                 </div>
               ))}
             </div>
           </div>
-          {/* <div className=" m-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2">
-            <Image
-              src={product.img.src}
-              alt="productsPhoto"
-              width={400}
-              height={200}
-              className="rounded-lg object-fill  "
-            />
-          </div> */}
+
           <div className="m-6  xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
             <div className=" text-3xl p-1 font-bold ">{product.title}</div>
             <div className="mt-6">{product.detail}</div>
@@ -229,14 +185,14 @@ const Product = ({ product }: any) => {
                 +
               </button>
             </div>
-          </div>
-          <div className="grid grid-cols-6 m-8 mx-auto">
-            <button className="bg-orange-400 rounded-lg m-5 text-white font-bold h-10 border-2 border-white border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
-              Add To Card
-            </button>
-            <button className="bg-white rounded-lg m-5 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
-              Buy
-            </button>
+            <div className="grid grid-cols-6 m-8 mx-auto">
+              <button className="bg-orange-400 rounded-lg m-5 text-white font-bold h-10 border-2 border-white border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
+                Add To Card
+              </button>
+              <button className="bg-white rounded-lg m-5 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
+                Buy
+              </button>
+            </div>
           </div>
         </div>
         {/* <div className=" grid grid-cols-3 m-5 ">
