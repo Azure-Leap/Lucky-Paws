@@ -3,8 +3,11 @@ import { Schema, model } from "mongoose";
 interface IProduct {
   title:String;
   price:Number;
-  img:String;
+  img:[String];
   detail:String;
+  netWeight:String;
+  type:String;
+  inStock:Number;
 }
 
 const productSchema = new Schema<IProduct>({ title: {
@@ -15,14 +18,27 @@ price: {
   type: Number,
   required: true,
 },
-img: {
+img: [{
   type: String,
   required: true,
-},
+}],
 detail: {
   type: String,
   required: true,
-}});
+},
+netWeight:{
+  type:String,
+  required:true,
+},
+type:{
+  type:String,
+  required:true,
+},
+inStock:{
+  type:Number,
+  required:true,
+}
+});
 
 const Product = model("Product", productSchema);
 
