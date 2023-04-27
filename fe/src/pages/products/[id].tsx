@@ -8,6 +8,79 @@ import Footer from "@/components/Footer/Footer";
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
+const product1 = {
+  // Product Data
+  id: 1,
+  name: "new macbook laptop",
+  slug: "new-luxury-laptop",
+  photo:
+    "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  price: 1999,
+  desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque consectetur vero asperiores quis animi explicabo accusamus nemo cupiditate harum pariatur! Provident sit tenetur totam mollitia consectetur nesciunt, recusandae obcaecati itaque!",
+  img: [
+    {
+      src: "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/812264/pexels-photo-812264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/209151/pexels-photo-209151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/812264/pexels-photo-812264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/209151/pexels-photo-209151.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+  ],
+  colors: ["#2287fa", "#f71b1b", "green"],
+  infos: [
+    {
+      title: "highlights",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis magni illum, sint explicabo esse temporibus! Dicta, voluptatum dolorem numquam deserunt, doloribus, voluptatem consequuntur praesentium deleniti nulla in repellendus eum vero.",
+    },
+    {
+      title: "materials",
+      content: "materials",
+    },
+    {
+      title: "how to use",
+      content: "how to use",
+    },
+    {
+      title: "pro tips",
+      content: "pro tips",
+    },
+  ],
+  discount: 20,
+  sold: 52,
+  category: "laptop",
+  brand: "apple",
+};
+
 const Product = ({ product }: any) => {
   const [count, setCount] = useState(0);
 
@@ -18,7 +91,7 @@ const Product = ({ product }: any) => {
 
   const slideRef = useRef<HTMLDivElement>(null);
 
-  const [products] = useProducts();
+  // const [products] = useProducts();
   const router = useRouter();
   const {} = useRouter();
   if (router.isFallback) {
@@ -53,11 +126,11 @@ const Product = ({ product }: any) => {
   };
 
   const slideShow = (n: number) => {
-    if (n > product.img.length) {
+    if (n > product1.img.length) {
       setSlideIndex(1);
     }
     if (n < 1) {
-      setSlideIndex(product.img.length);
+      setSlideIndex(product1.img.length);
     }
   };
 
@@ -81,7 +154,7 @@ const Product = ({ product }: any) => {
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
           <div className="product-page-img">
             <div className="big-images">
-              {products.img.map((image: any, index: number) => (
+              {product1.img.map((image: any, index: number) => (
                 <div
                   key={index}
                   className="mySlides"
@@ -90,7 +163,7 @@ const Product = ({ product }: any) => {
                   }}
                 >
                   <div className="numbertext">
-                    {index + 1} / {product.images.length}
+                    {index + 1} / {product1.img.length}
                   </div>
                   <img src={image.src} alt="" />
                 </div>
@@ -112,7 +185,7 @@ const Product = ({ product }: any) => {
               onDragOver={dragOver}
               // onDragEnd={dragEnd}
             >
-              {product.img.map((image: any, index: number) => (
+              {product1.img.map((image: any, index: number) => (
                 <div
                   key={index}
                   className={`slider-box ${
@@ -127,7 +200,7 @@ const Product = ({ product }: any) => {
           </div>
           {/* <div className=" m-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2">
             <Image
-              src={product.img}
+              src={product.img.src}
               alt="productsPhoto"
               width={400}
               height={200}
@@ -166,8 +239,8 @@ const Product = ({ product }: any) => {
             </button>
           </div>
         </div>
-        <div className=" grid grid-cols-3 m-5 ">
-          {products?.slice(0, 3).map((product: any, index: number) => (
+        {/* <div className=" grid grid-cols-3 m-5 ">
+          {product?.slice(0, 3).map((product: any, index: number) => (
             <div
               key={index}
               className="group bg-white hover:bg-orange-100 rounded-3xl m-3"
@@ -185,7 +258,7 @@ const Product = ({ product }: any) => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
