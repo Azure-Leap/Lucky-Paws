@@ -1,16 +1,17 @@
-import { Schema, model } from "mongoose";
+import { Schema, model,Document } from "mongoose";
 
 interface IProduct {
   title:String;
   price:Number;
-  img:[String];
+  imgList:[{src:String}];
   detail:String;
   netWeight:String;
   type:String;
   inStock:Number;
 }
 
-const productSchema = new Schema<IProduct>({ title: {
+const productSchema = new Schema<IProduct>({ 
+title: {
   type: String,
   required: true,
 },
@@ -18,9 +19,8 @@ price: {
   type: Number,
   required: true,
 },
-img: [{
-  type: String,
-  required: true,
+imgList: [{
+  src: {type:String, required:true}
 }],
 detail: {
   type: String,

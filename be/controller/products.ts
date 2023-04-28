@@ -24,8 +24,8 @@ const getProduct = async (req: Request, res: Response) => {
   
   const createProduct = async (req:Request, res:Response) => {
     console.log(req.body)
-    const { title, detail, img, price } = req.body;
-    if (!title || !detail || !img || !price ) {
+    const { title, detail, imgList, price } = req.body;
+    if (!title || !detail || !imgList || !price ) {
       res.status(400).json({ message: "Medeelliig buren oruulna uu" });
     }
     try {
