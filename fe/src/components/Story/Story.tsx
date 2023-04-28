@@ -9,6 +9,8 @@ const cocoImg = require("../../assets/images/coco.png");
 
 const Story = () => {
   return (
+    <div className="max-sm:p-4 mb-8">
+
     <div className="bg-white container mx-auto rounded-3xl m-24 grid grid-cols-2">
       <div className="sm:p-3 max-sm:p-3 lg:m-8 ">
         <h2
@@ -56,6 +58,7 @@ const Story = () => {
           className="rounded-e-3xl w-full h-auto object-contain"
         />
       </div>
+    </div>
     </div>
   );
 };

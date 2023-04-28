@@ -2,10 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
+
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
@@ -39,7 +36,7 @@ const Products = () => {
                 <div className="sm:aspect-[12/12] md:aspect-[12/12] group grid grid-cols-2">
                   <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 ">
                     <Image
-                      src={product.img}
+                      src={product.img[0]}
                       alt="productsPhoto"
                       width={300}
                       height={100}

@@ -7,21 +7,6 @@ import { useProducts } from "../../hooks/useProducts";
 
 const ShopCard = () => {
   const [products] = useProducts();
-
-  // const getAllPruducts = async () => {
-  //   try {
-  //     const result = await axios.get("http://localhost:8000/product");
-  //     setProduct(result.data.product);
-  //     console.log(result);
-  //   } catch (err) {
-  //     console.log("ERR", err);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getAllPruducts();
-  // }, []);
-
   return (
     <div className="bg- rounded-3xl ">
       <div className="  ">

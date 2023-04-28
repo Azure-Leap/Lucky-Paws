@@ -2,26 +2,28 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft,faAngleRight, faCheck ,faX} from "@fortawesome/free-solid-svg-icons";
+
 import { useRouter } from "next/router";
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
+
 const Product = ({ product }: any) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [products] = useProducts();
   const router = useRouter();
   const {} = useRouter();
   if (router.isFallback) {
     return <div> Loading ...</div>;
-  }
-
+  }  
   const addCount = () => {
     setCount(count + 1);
   };
   const subCount = () => {
-    setCount(count - 1);
+    setCount(count > 1 ? -1 : -0);
   };
-
   const breadCrumbs = [
     { name: "Products", link: "/products" },
     { name: product.title, link: "" },
@@ -29,7 +31,7 @@ const Product = ({ product }: any) => {
 
   return (
     <div className="bg-[#fff3d3]">
-      <Breadcrumbs breadCrumbs={breadCrumbs} />
+      <Breadcrumbs breadCrumbs={breadCrumbs}/>
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
           <div className=" m-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2">
@@ -41,42 +43,48 @@ const Product = ({ product }: any) => {
               className="rounded-lg object-fill  "
             />
           </div>
-          <div className="m-6  xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
-            <div className=" text-3xl p-1 font-bold ">{product.title}</div>
-            <div className="mt-6">{product.detail}</div>
-            <div className="mt-6 flex">
-              <h3 className="font-bold">Price :</h3> {product.price}
+          <div className="m-12 xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
+            <div className=" text-4xl p-1 font-bold ">{product.title}</div>
+            <div className="mt-6 font-bold text-2xl">
+            ₮ {product.price}
             </div>
-            <h3 className="mt-6 font-bold">Quantity :</h3>
-            <div className="mt-4 w-24 border-2 border-black border-opacity-75 md:border-opacity-50 grid grid-cols-3 rounded-lg">
+            <div className="text-lg mt-6">In Stock  {product.inStock === 0 ? <FontAwesomeIcon icon={faX} className="text-red-500 text-xl" /> : <FontAwesomeIcon icon={faCheck} className="text-green-500 text-xl"/> }</div>
+            <div className="mt-6 text-lg"><h2 className="text-2xl font-bold mb-3">Description:</h2> {product.detail}</div>
+            <div className="font-bold text-2xl mt-6">Net Weight</div>
+            <div className="mt-2 text-lg"> {product.netWeight}</div>
+            <div className="font-bold text-2xl mt-6">Type </div>
+            <div className="mt-2 text-lg">{product.type}</div>
+            <h3 className="mt-6 font-bold text-2xl">Quantity</h3>
+            <div className="mt-4 w-24 border-2 border-orange-400 border-opacity-75 md:border-opacity-50 grid grid-cols-3 rounded-full">
               <button
                 onClick={subCount}
-                className="bg-orange-400 p-2 text-xl rounded-s-lg font-bold text-white hover:bg-white hover:text-orange-400"
+                className=" p-2 text-xl  font-bold text-orange-400 "
               >
-                -
+                <FontAwesomeIcon icon={faAngleLeft} />
               </button>
               <h2 className="p-2 text-center text-lg">{count}</h2>
               <button
                 onClick={addCount}
-                className="bg-orange-400 p-2 text-xl  rounded-e-lg font-bold text-white  hover:bg-white hover:text-orange-400"
+                className=" p-2 text-xl  font-bold text-orange-400 "
               >
-                +
+                <FontAwesomeIcon icon={faAngleRight} />
               </button>
             </div>
-          </div>
-          <div className="grid grid-cols-6 m-8 mx-auto">
-            <button className="bg-orange-400 rounded-lg m-5 text-white font-bold h-10 border-2 border-white border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
+          <div className="grid grid-cols-6 my-12">
+            <button className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
               Add To Card
             </button>
             <Link href={`/payment`} passHref>
-            <button className="bg-white rounded-lg m-5 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
+            <button className="bg-white rounded-lg mx-8 w-28 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
               Buy
             </button>
             </Link>
           </div>
+          </div>
         </div>
         <div className=" grid grid-cols-3 m-5  ">
           {products?.slice(0, 3).map((product: any, index: number) => (
+            <Link key={index} href={`products/${product._id}`} passHref>
             <div key={index} className="group bg-white hover:scale-105 shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-xl mx-6 mt-16 max-sm:col-span-3 sm:col-span-3  md:col-span-3 lg:col-span-1 ">
               <div className="group grid grid-cols-2">
                 <div className="max-sm:col-span-1 col-span-1 md:col-span-1 xl:col-span-1 ">
@@ -96,6 +104,7 @@ const Product = ({ product }: any) => {
                 </div>
               </div>
             </div>
+            </Link>
           ))}
         </div>
       </div>

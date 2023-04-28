@@ -31,24 +31,23 @@ const dogs = [
 
 const Dogs = () => {
   return (
-    <div className="container mx-auto my-48 grid grid-flow-row gap-12 text-white sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="container p-5 mx-auto my-48 grid grid-flow-row gap-12 text-white max-sm:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {dogs.map((e, idx) => (
         <Link
           key={idx}
           href={e.link}
-          className="flex flex-col bg-white text-center rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)] hover:scale-105"
+          className="bg-white text-center rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)] hover:scale-105 grid grid-cols-2"
         >
-          <div className="relative w-full h-52">
+          <div className="relative w-full h-52 max-sm:col-span-1 sm:col-span-1 md:col-span-2">
             <Image
               src={e.image}
               alt="koby"
               fill
-              sizes="100%"
               className="rounded-t-3xl w-auto h-auto"
             />
           </div>
           <div
-            className={`text-4xl font-bold my-auto text-orange-500 ${fredokaOne.className}`}
+            className={`text-4xl font-bold my-auto text-orange-500 max-sm:col-span-1 sm:col-span-1 md:col-span-2 ${fredokaOne.className}`}
           >
             {e.name}
           </div>
