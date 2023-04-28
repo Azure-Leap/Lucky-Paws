@@ -53,7 +53,7 @@ const Product = ({ product }: any) => {
 
   const slideRef = useRef<HTMLDivElement>(null);
 
-  // const [products] = useProducts();
+  const [products] = useProducts();
   const router = useRouter();
   const {} = useRouter();
   if (router.isFallback) {
@@ -74,13 +74,13 @@ const Product = ({ product }: any) => {
     let touch = n.clientX;
     setChange(start - touch);
   };
-  const dragEnd = (n: number) => {
-    if (change > 0) {
-      slideRef.current?.scrollLeft;
-    } else {
-      slideRef.current?.scrollLeft;
-    }
-  };
+  // const dragEnd = (n: any) => {
+  //   if (change > 0) {
+  //     slideRef.current?.scrollLeft + n;
+  //   } else {
+  //     slideRef.current?.scrollLeft - n;
+  //   }
+  // };
 
   const plusSlides = (n: number) => {
     setSlideIndex((prev) => prev + n);
@@ -114,8 +114,8 @@ const Product = ({ product }: any) => {
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
-          <div className="product-page-img w-full h-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2 overflow-hidden">
-            <div className="big-images bg-red-300  w-full h-80 relative">
+          <div className="product-page-img w-full h-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
+            <div className="big-images bg-red-300  w-full relative">
               {product1.img.map((image: any, index: number) => (
                 <div
                   key={index}
@@ -127,37 +127,56 @@ const Product = ({ product }: any) => {
                   <div className="numbertext absolute text-gray-500 font-bold m-3">
                     {index + 1}/{product1.img.length}
                   </div>
-                  <img src={image.src} alt="product_image" style={{objectFit:"contain",display:"inline-block"}} />
+                  <img
+                    src={image.src}
+                    alt="product_image"
+                    style={{ objectFit: "contain", display: "inline-block" }}
+                  />
                 </div>
               ))}
 
-              <a className="prev absolute top-1/2 -translate-y-1/2 left-4 text-white text-4xl cursor-pointer" onClick={() => plusSlides(-1)}>
+              <a
+                className="prev absolute top-1/2 -translate-y-1/2 left-4 text-white text-4xl cursor-pointer"
+                onClick={() => plusSlides(-1)}
+              >
                 &#10094;
               </a>
-              <a className="next absolute top-1/2 -translate-y-1/2 right-4 text-white text-4xl cursor-pointer" onClick={() => plusSlides(1)}>
+              <a
+                className="next absolute top-1/2 -translate-y-1/2 right-4 text-white text-4xl cursor-pointer"
+                onClick={() => plusSlides(1)}
+              >
                 &#10095;
               </a>
             </div>
 
             <div
-              className="slider-img mt-2 w-full h-28 grid grid-cols-12 overflow-x-scroll scrollbar-hide"
+              className="slider-img w-full h-40 overflow-scroll flex"
               draggable={true}
               ref={slideRef}
-              onDragStart={dragStart}
-              onDragOver={dragOver}
+              // onDragStart={dragStart}
+              // onDragOver={dragOver}
               // onDragEnd={dragEnd}
             >
               {product1.img.map((image: any, index: number) => (
-              
-                
                 <div
                   key={index}
-                  className={`slider-box w-full h-full col-span-4 bg-yellow-500 border-2  cursor-pointer overflow-hidden opacity-60   ${
-                    index + 1 === slideIndex ? "active:border-2 active:border-green-500" : ""
+                  className={`slider-box w-1/3 flex-none h-full cursor-pointer inline opacity-100 ${
+                    index === slideIndex
+                      ? "hover:bg-violet-600 active:border-purple-700 active:border-2 focus:outline-none focus:ring focus:ring-violet-300"
+                      : ""
                   }`}
                   onClick={() => setSlideIndex(index + 1)}
                 >
-                  <img src={image.src} alt="" style={{objectFit:"contain",display:"inline-block",width:"100%",height:"100%"}} />
+                  <img
+                    src={image.src}
+                    alt=""
+                    style={{
+                      objectFit: "fill",
+                      display: "inline-block",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -196,7 +215,7 @@ const Product = ({ product }: any) => {
           </div>
         </div>
         {/* <div className=" grid grid-cols-3 m-5 ">
-          {product?.slice(0, 3).map((product: any, index: number) => (
+          {products?.slice(0, 3).map((product: any, index: number) => (
             <div
               key={index}
               className="group bg-white hover:bg-orange-100 rounded-3xl m-3"
