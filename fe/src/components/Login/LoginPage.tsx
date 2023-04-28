@@ -7,13 +7,9 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 
 export default function LoginPage() {
   const [isAnimated, setIsAnimated] = useState(false);
-  //   const overlayBg =
-  //     "bg-gradient-to-r from-blue-800 via-purple-800 to-indigo-800";
-  const breadCrumbs = [{ name: "Sign In/Sign Up", link: "" }];
 
   return (
     <div className="">
-      <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="container m-auto h-screen w-full bg-white relative overflow-hidden rounded-3xl">
         <div
           id="signin"
@@ -39,19 +35,19 @@ export default function LoginPage() {
 
         <div
           id="overlay-container"
-          className={`absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition transition-transform duration-700 ease-in-out z-100 ${
+          className={`absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition-transform duration-700 ease-in-out z-100 ${
             isAnimated ? "-translate-x-full" : ""
           }`}
         >
           <div
             id="overlay"
-            className={`bg-hero-image relative -left-full h-full w-[200%] transform transition transition-transform duration-700 ease-in-out ${
+            className={`bg-hero-image relative -left-full h-full w-[200%] transform transition-transform duration-700 ease-in-out ${
               isAnimated ? "translate-x-1/2" : "translate-x-0"
             }`}
           >
             <div
               id="overlay-left"
-              className={`w-1/2 h-full absolute flex justify-center items-center top-0 transform -translate-x-[20%] transition transition-transform duration-700 ease-in-out ${
+              className={`w-1/2 h-full absolute flex justify-center items-center top-0 transform -translate-x-[20%] transition-transform duration-700 ease-in-out ${
                 isAnimated ? "translate-x-0" : "-translate-x-[20%]"
               }`}
             >
@@ -62,7 +58,7 @@ export default function LoginPage() {
             </div>
             <div
               id="overlay-right"
-              className={`w-1/2 h-full absolute flex justify-center items-center top-0 right-0 transform transition transition-transform duration-700 ease-in-out ${
+              className={`w-1/2 h-full absolute flex justify-center items-center top-0 right-0 transform transition-transform duration-700 ease-in-out ${
                 isAnimated ? "translate-x-[20%]" : "translate-x-0"
               }`}
             >

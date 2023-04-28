@@ -1,8 +1,8 @@
 export interface IProduct {
   _id: string;
   title: String;
-  price: number;
-  img: string;
-  detail: string;
+  price: Number;
+  img: [String];
+  detail: String;
   quantity: Number;
 }
