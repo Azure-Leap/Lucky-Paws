@@ -9,9 +9,51 @@ import { useRouter } from "next/router";
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
+const product1 = {
+  img: [
+    {
+      src: "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/812264/pexels-photo-812264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/812264/pexels-photo-812264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      src: "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+  ],
+};
 
 const Product = ({ product }: any) => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
+
+  const [slideIndex, setSlideIndex] = useState(1);
+  const [width, setWidth] = useState(0);
+  const [start, setStart] = useState(0);
+  const [change, setChange] = useState(9);
+
+  const slideRef = useRef<HTMLDivElement>(null);
+
   const [products] = useProducts();
   const router = useRouter();
   const {} = useRouter();
@@ -24,6 +66,44 @@ const Product = ({ product }: any) => {
   const subCount = () => {
     setCount(count > 1 ? -1 : -0);
   };
+
+  const dragStart = (n: any) => {
+    setStart(n.clientX);
+  };
+  const dragOver = (n: any) => {
+    let touch = n.clientX;
+    setChange(start - touch);
+  };
+  // const dragEnd = (n: any) => {
+  //   if (change > 0) {
+  //     slideRef.current?.scrollLeft + n;
+  //   } else {
+  //     slideRef.current?.scrollLeft - n;
+  //   }
+  // };
+
+  const plusSlides = (n: number) => {
+    setSlideIndex((prev) => prev + n);
+    slideShow(slideIndex + n);
+  };
+
+  const slideShow = (n: number) => {
+    if (n > product1.img.length) {
+      setSlideIndex(1);
+    }
+    if (n < 1) {
+      setSlideIndex(product1.img.length);
+    }
+  };
+
+  useEffect(() => {
+    if (!slideRef.current) return;
+    const scrollWidth = slideRef.current.scrollWidth;
+    const childrenElementCount = slideRef.current.childElementCount;
+    const width = scrollWidth / childrenElementCount;
+    setWidth(width);
+  }, []);
+
   const breadCrumbs = [
     { name: "Products", link: "/products" },
     { name: product.title, link: "" },
@@ -34,19 +114,79 @@ const Product = ({ product }: any) => {
       <Breadcrumbs breadCrumbs={breadCrumbs}/>
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
-          <div className=" m-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2">
-            <Image
-              src={product.img}
-              alt="productsPhoto"
-              width={400}
-              height={200}
-              className="rounded-lg object-fill  "
-            />
+          <div className="product-page-img w-full h-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
+            <div className="big-images bg-red-300  w-full relative">
+              {product1.img.map((image: any, index: number) => (
+                <div
+                  key={index}
+                  className="mySlides w-full h-full"
+                  style={{
+                    display: index + 1 === slideIndex ? "block" : "none",
+                  }}
+                >
+                  <div className="numbertext absolute text-gray-500 font-bold m-3">
+                    {index + 1}/{product1.img.length}
+                  </div>
+                  <img
+                    src={image.src}
+                    alt="product_image"
+                    style={{ objectFit: "contain", display: "inline-block" }}
+                  />
+                </div>
+              ))}
+
+              <a
+                className="prev absolute top-1/2 -translate-y-1/2 left-4 text-white text-4xl cursor-pointer"
+                onClick={() => plusSlides(-1)}
+              >
+                &#10094;
+              </a>
+              <a
+                className="next absolute top-1/2 -translate-y-1/2 right-4 text-white text-4xl cursor-pointer"
+                onClick={() => plusSlides(1)}
+              >
+                &#10095;
+              </a>
+            </div>
+
+            <div
+              className="slider-img w-full h-40 overflow-scroll flex"
+              draggable={true}
+              ref={slideRef}
+              // onDragStart={dragStart}
+              // onDragOver={dragOver}
+              // onDragEnd={dragEnd}
+            >
+              {product1.img.map((image: any, index: number) => (
+                <div
+                  key={index}
+                  className={`slider-box w-1/3 flex-none h-full cursor-pointer inline opacity-100 ${
+                    index === slideIndex
+                      ? "hover:bg-violet-600 active:border-purple-700 active:border-2 focus:outline-none focus:ring focus:ring-violet-300"
+                      : ""
+                  }`}
+                  onClick={() => setSlideIndex(index + 1)}
+                >
+                  <img
+                    src={image.src}
+                    alt=""
+                    style={{
+                      objectFit: "fill",
+                      display: "inline-block",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="m-12 xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
-            <div className=" text-4xl p-1 font-bold ">{product.title}</div>
-            <div className="mt-6 font-bold text-2xl">
-            ₮ {product.price}
+
+          <div className="m-6  xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
+            <div className=" text-3xl p-1 font-bold ">{product.title}</div>
+            <div className="mt-6">{product.detail}</div>
+            <div className="mt-6 flex">
+              <h3 className="font-bold">Price :</h3> {product.price}
             </div>
             <div className="text-lg mt-6">In Stock  {product.inStock === 0 ? <FontAwesomeIcon icon={faX} className="text-red-500 text-xl" /> : <FontAwesomeIcon icon={faCheck} className="text-green-500 text-xl"/> }</div>
             <div className="mt-6 text-lg"><h2 className="text-2xl font-bold mb-3">Description:</h2> {product.detail}</div>
@@ -106,7 +246,7 @@ const Product = ({ product }: any) => {
             </div>
             </Link>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );
