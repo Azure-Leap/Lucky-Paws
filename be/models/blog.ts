@@ -1,7 +1,5 @@
 import mongoose, { Schema, SchemaType, model } from "mongoose";
 import {ICategory} from "./blogCategories"
-import { timeStamp } from "console";
-
 interface IBlog {
   title:String;
   img:String;
