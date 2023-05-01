@@ -2,7 +2,16 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["cdn.zochil.shop", "tailwindui.com","images.pexels.com"],
+    remotePatterns:[
+      {protocol:"https", hostname: 'cdn.zochil.shop',pathname:'**'},
+      {protocol:"https", hostname: 'tailwindui.com',pathname:'**'},
+      {protocol:"https", hostname: 'images.pexels.com',pathname:'**'},
+      {protocol:"https", hostname: 'cdn.royalcanin-weshare-online.io',pathname:'**'},
+      {protocol:"https", hostname: 'd2c-cdn.royalcanin.com',pathname:'**'},
+      {protocol:"https", hostname: 'm.media-amazon.com',pathname:'**'},
+      {protocol:"https", hostname: 'tailybuddy.com',pathname:'**'},
+    ],
+    
   },
 };
 

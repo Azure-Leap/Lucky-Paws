@@ -17,6 +17,7 @@ export const useBlogs = () => {
       console.log("ERR", err);
     }
   };
+  console.log(blogs)
 
   useEffect(() => {
     getAllBlogs();

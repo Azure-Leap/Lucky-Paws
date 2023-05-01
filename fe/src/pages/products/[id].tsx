@@ -1,7 +1,7 @@
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft,faAngleRight, faCheck ,faX} from "@fortawesome/free-solid-svg-icons";
 
@@ -9,43 +9,9 @@ import { useRouter } from "next/router";
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
-const product1 = {
-  img: [
-    {
-      src: "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      src: "https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      src: "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      src: "https://images.pexels.com/photos/812264/pexels-photo-812264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      src: "https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      src: "https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      src: "https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      src: "https://images.pexels.com/photos/812264/pexels-photo-812264.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      src: "https://images.pexels.com/photos/1006293/pexels-photo-1006293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-    {
-      src: "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    },
-  ],
-};
 
 const Product = ({ product }: any) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const [slideIndex, setSlideIndex] = useState(1);
   const [width, setWidth] = useState(0);
@@ -87,15 +53,6 @@ const Product = ({ product }: any) => {
     slideShow(slideIndex + n);
   };
 
-  const slideShow = (n: number) => {
-    if (n > product1.img.length) {
-      setSlideIndex(1);
-    }
-    if (n < 1) {
-      setSlideIndex(product1.img.length);
-    }
-  };
-
   useEffect(() => {
     if (!slideRef.current) return;
     const scrollWidth = slideRef.current.scrollWidth;
@@ -103,6 +60,17 @@ const Product = ({ product }: any) => {
     const width = scrollWidth / childrenElementCount;
     setWidth(width);
   }, []);
+
+  const slideShow = (n: number) => {
+    if (n > product.imgList.length) {
+      setSlideIndex(1);
+    }
+    if (n < 1) {
+      setSlideIndex(product.imgList.length);
+    }
+  };
+
+
 
   const breadCrumbs = [
     { name: "Products", link: "/products" },
@@ -115,8 +83,8 @@ const Product = ({ product }: any) => {
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
           <div className="product-page-img w-full h-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
-            <div className="big-images bg-red-300  w-full relative">
-              {product1.img.map((image: any, index: number) => (
+            <div className="big-images w-full relative">
+              {product.imgList.map((image: any, index: number) => (
                 <div
                   key={index}
                   className="mySlides w-full h-full"
@@ -125,44 +93,47 @@ const Product = ({ product }: any) => {
                   }}
                 >
                   <div className="numbertext absolute text-gray-500 font-bold m-3">
-                    {index + 1}/{product1.img.length}
+                    {index + 1}/{product.imgList.length}
                   </div>
                   <img
                     src={image.src}
                     alt="product_image"
-                    style={{ objectFit: "contain", display: "inline-block" }}
+                    className="mx-auto"
+                    style={{ objectFit: "contain", display: "inline-block"}}
                   />
                 </div>
               ))}
 
               <a
-                className="prev absolute top-1/2 -translate-y-1/2 left-4 text-white text-4xl cursor-pointer"
-                onClick={() => plusSlides(-1)}
+                className="prev text-orange-500 absolute top-1/2 -translate-y-1/2 left-4  text-4xl cursor-pointer"
+                onClick={() => {plusSlides(-1)
+                console.log("Prev",slideIndex)}}
               >
                 &#10094;
               </a>
               <a
-                className="next absolute top-1/2 -translate-y-1/2 right-4 text-white text-4xl cursor-pointer"
-                onClick={() => plusSlides(1)}
+                className="next absolute top-1/2 -translate-y-1/2 right-4 text-orange-500 text-4xl cursor-pointer"
+                onClick={() => {plusSlides(1)
+                console.log("Next",slideIndex)}}
               >
                 &#10095;
               </a>
             </div>
 
             <div
-              className="slider-img w-full h-40 overflow-scroll flex"
+              className="slider-img w-full h-40 overflow-scroll overflow-y-hidden flex"
               draggable={true}
               ref={slideRef}
-              // onDragStart={dragStart}
-              // onDragOver={dragOver}
+              onDragStart={dragStart}
+              onDragOver={dragOver}
               // onDragEnd={dragEnd}
             >
-              {product1.img.map((image: any, index: number) => (
+              {product.imgList.map((image: any, index: number) => (
                 <div
                   key={index}
-                  className={`slider-box w-1/3 flex-none h-full cursor-pointer inline opacity-100 ${
-                    index === slideIndex
-                      ? "hover:bg-violet-600 active:border-purple-700 active:border-2 focus:outline-none focus:ring focus:ring-violet-300"
+                  className={`slider-box w-1/3 bottom-0 flex-none h-full cursor-pointer inline opacity-100 ${
+                    index === slideIndex - 1
+                      ? "border-4 border-green-500"
                       : ""
                   }`}
                   onClick={() => setSlideIndex(index + 1)}
@@ -246,7 +217,7 @@ const Product = ({ product }: any) => {
             </div>
             </Link>
           ))}
-        </div> */}
+        </div>
       </div>
     </div>
   );

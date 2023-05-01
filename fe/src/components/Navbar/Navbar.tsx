@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import { useState } from "react";
+import { useRouter } from 'next/router'
 
 const logoImg = require("../../assets/images/NavBar/logo.png");
 const luckyPaws = require("../../assets/images/NavBar/LuckyPaws.png");
@@ -20,6 +21,8 @@ function classNames(...classes: any) {
 
 export default function Navbar() {
   const [current, setCurrent] = useState(false);
+  const [dropdownOpen, setdropdownOpen] = useState(false);
+  const router= useRouter()
 
   const navigation = [
     { name: "Home", href: "/", current: false },
@@ -71,7 +74,7 @@ export default function Navbar() {
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
                         // onClick={setCurrent(true)}
@@ -84,25 +87,29 @@ export default function Navbar() {
                         aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
-                   <Link  href={`blog/`} passHref className="p-2 text-xl font-medium relative w-20 group bg-red-100">
-                   <div >Blog</div>
-                   <div className="absolute w-20 invisible group-hover:visible bg-green-100">
-                         <div>Item1</div>
-                           <div className="relative group2 bg-red-100">
-                             <div>
-                               Menu
-                             </div>
-                             <div className="absolute w-20 top-0 left-20 invisible group2-hover:visible bg-green-100">
-                               <div>Item1</div>
-                               <div>Item2</div>
-                               <div>Item3</div>
-                             </div>
-                           </div>
-                         <div>Item3</div>
-                       </div>
-                   </Link>
+                   <button onClick={() => {setdropdownOpen(!dropdownOpen)}}  className="group p-2 text-center text-xl font-medium relative  group rounded-md  hover:bg-orange-500 hover:text-white ">
+                          Blog
+                      <div
+                            className={`${dropdownOpen ? `top-full opacity-100 visible ` : 'invisible opacity-0'} text-black text-start m-2 -ml-2 rounded-xl group-hover:block shadow-[0_8px_16px_rgba(132,74,20,0.25)] absolute left-0 z-40 mt-2 w-48 border-[.5px] border-light  shadow-card transition-all`}>
+                            <Link 
+                          
+                          className="rounded-t-xl bg-white hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
+                          href="#"
+                          >Advice</Link>
+                      
+                        <Link 
+                          className="bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
+                          href="#"
+                          >News</Link>
+                      
+                        <Link 
+                          className="rounded-b-xl bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
+                          href="#"
+                          >Abcd</Link>
+                        </div>
+                   </button>
                   </div>
                 </div>
               </div>
@@ -120,8 +127,11 @@ export default function Navbar() {
                   <FontAwesomeIcon icon={faShoppingCart} />
                 </button>
 
+                
+
+                <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>
                 {/* Profile dropdown */}
-                {/* <Menu as="div" className="relative ml-3 ">
+                <Menu as="div" className="relative ml-3 ">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
@@ -133,7 +143,7 @@ export default function Navbar() {
                     </Menu.Button>
                   </div>
                   <Transition
-                    as={Fragment}
+                    // as={Fragment}
                     enter="transition ease-out duration-100"
                     enterFrom="transform opacity-0 scale-95"
                     enterTo="transform opacity-100 scale-100"
@@ -174,17 +184,15 @@ export default function Navbar() {
                       </Menu.Item>
                     </Menu.Items>
                   </Transition>
-                </Menu> */}
-
-                <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>
-                <Link href={"/auth"}>
+                </Menu>
+                {/* <Link href={"/auth"}>
                   <button className="font-bold text-xl m-3 hidden md:ml-6 md:block">
                     login
                   </button>
                 </Link>
                 <button className="font-bold m-3 text-xl bg-orange-500 p-2 w-32 rounded-3xl text-white hidden md:ml-6 md:block">
                   Sign Up
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

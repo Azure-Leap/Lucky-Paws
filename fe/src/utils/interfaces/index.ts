@@ -2,14 +2,15 @@ export interface IProduct {
   _id: string;
   title: String;
   price: Number;
-  img: [String];
+  imgList: {src:String}[];
   detail: String;
   quantity: Number;
 }
 export interface Iblog{
-  title:String;
-  img:String;
-  description:String;
-  publishedBy:String;
+  _id: string;
+  title:string;
+  imgList:string;
+  description:string;
+  publishedBy:string;
   date:Date;
 }
