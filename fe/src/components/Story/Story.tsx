@@ -9,16 +9,9 @@ const cocoImg = require("../../assets/images/coco.png");
 
 const Story = () => {
   return (
+    <div className="max-sm:p-4 mb-8">
+
     <div className="bg-white container mx-auto rounded-3xl m-24 grid grid-cols-2">
-      <div>
-        <Image
-          src={cocoImg}
-          alt="Photo"
-          width={400}
-          height={200}
-          className="rounded-s-3xl w-full h-auto object-contain"
-        />
-      </div>
       <div className="sm:p-3 max-sm:p-3 lg:m-8 ">
         <h2
           className={` lg:text-3xl font-bold my-12 sm:text-lg 2xl:text-4xl  2xl:my-16 max-sm:text-sm max:sm-mx-5 max-sm:my-2 ${fredokaOne.className}`}
@@ -56,6 +49,16 @@ const Story = () => {
           Read More ...
         </Link>
       </div>
+      <div>
+        <Image
+          src={cocoImg}
+          alt="Photo"
+          width={400}
+          height={200}
+          className="rounded-e-3xl w-full h-auto object-contain"
+        />
+      </div>
+    </div>
     </div>
   );
 };

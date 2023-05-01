@@ -37,7 +37,7 @@ const Footer = () => {
   ];
   return (
     <div>
-      <div className=" bg-white hidden w-[100vw] xl:block pt-12">
+      <div className=" bg-white hidden w-[100vw] xl:block pt-12 mt-20">
         <div className="grid grid-cols-3 gap-24 max-w-[85vw] mx-auto sm:px-6 lg:px-8s">
           <div>
             <div className="flex flex-shrink-0 items-center">

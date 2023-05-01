@@ -24,8 +24,7 @@ export default function Navbar() {
   const navigation = [
     { name: "Home", href: "/", current: false },
     { name: "Pets", href: "#", current: false },
-    { name: "Shop", href: "/products", current: false },
-    { name: "Blog", href: "#", current: false },
+    { name: "Shop", href: "/products", current: false }
   ];
   return (
     <Disclosure as="nav">
@@ -87,6 +86,23 @@ export default function Navbar() {
                         {item.name}
                       </a>
                     ))}
+                   <Link  href={`blog/`} passHref className="p-2 text-xl font-medium relative w-20 group bg-red-100">
+                   <div >Blog</div>
+                   <div className="absolute w-20 invisible group-hover:visible bg-green-100">
+                         <div>Item1</div>
+                           <div className="relative group2 bg-red-100">
+                             <div>
+                               Menu
+                             </div>
+                             <div className="absolute w-20 top-0 left-20 invisible group2-hover:visible bg-green-100">
+                               <div>Item1</div>
+                               <div>Item2</div>
+                               <div>Item3</div>
+                             </div>
+                           </div>
+                         <div>Item3</div>
+                       </div>
+                   </Link>
                   </div>
                 </div>
               </div>

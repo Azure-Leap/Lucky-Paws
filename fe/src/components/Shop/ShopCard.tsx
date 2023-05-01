@@ -7,38 +7,29 @@ import { useProducts } from "../../hooks/useProducts";
 
 const ShopCard = () => {
   const [products] = useProducts();
-
-  // const getAllPruducts = async () => {
-  //   try {
-  //     const result = await axios.get("http://localhost:8000/product");
-  //     setProduct(result.data.product);
-  //     console.log(result);
-  //   } catch (err) {
-  //     console.log("ERR", err);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getAllPruducts();
-  // }, []);
-
   return (
-    <div className="bg-orange-100 rounded-3xl ">
+    <div className="bg- rounded-3xl ">
       <div className="  ">
-        <div className="grid xl:grid-cols-4 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
+        <div className="grid xl:grid-cols-4 sm:grid-cols-3 md:grid-cols-3  max-sm:grid-cols-1 p-2">
           {products?.slice(0, 7).map((product, idx) => (
             <Link key={idx} href={`products/${product._id}`} passHref>
-              <div className="group bg-orange-100 hover:bg-orange-300 rounded-xl m-3">
-                <div className="sm:aspect-[12/12] md:aspect-[12/12]   group ">
-                  <Image
-                    src={product.img}
-                    alt="productsPhoto"
-                    width={300}
-                    height={100}
-                    className="h-full w-full rounded-lg object-contain "
-                  />
-                  <div className=" text-xl p-1 ">{product.title}</div>
-                  <div className="p-1">{product.price}</div>
+              <div className="group bg-white hover:scale-110  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-xl m-3 ">
+                <div className="sm:aspect-[12/12] md:aspect-[12/12] group grid grid-cols-2">
+                  <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 ">
+                    <Image
+                      src={product.img}
+                      alt="productsPhoto"
+                      width={300}
+                      height={100}
+                      className="h-[200px] w-full rounded-lg object-contain "
+                    />
+                  </div>
+                  <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 text-center m-auto">
+                    <div className=" max-sm:text-2xl sm:text-2xl md:text-xl p-1 ">
+                      {product.title}
+                    </div>
+                    <div className="p-1">{product.price}</div>
+                  </div>
                 </div>
               </div>
             </Link>
@@ -49,7 +40,7 @@ const ShopCard = () => {
                 <FontAwesomeIcon icon={faArrowRight} />
               </div>
               <div className="text-center m-auto max-sm:hidden sm:hidden lg:block ">
-                See More...
+                More
               </div>
             </div>
           </Link>

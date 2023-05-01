@@ -6,3 +6,10 @@ export interface IProduct {
   detail: String;
   quantity: Number;
 }
+export interface Iblog{
+  title:String;
+  img:String;
+  description:String;
+  publishedBy:String;
+  date:Date;
+}
