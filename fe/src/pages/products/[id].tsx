@@ -33,6 +33,8 @@ const Product = ({ product }: any) => {
     setCount(count > 1 ? -1 : -0);
   };
 
+  // Drag
+
   const dragStart = (n: any) => {
     setStart(n.clientX);
   };
@@ -40,13 +42,16 @@ const Product = ({ product }: any) => {
     let touch = n.clientX;
     setChange(start - touch);
   };
-  // const dragEnd = (n: any) => {
-  //   if (change > 0) {
-  //     slideRef.current?.scrollLeft + n;
-  //   } else {
-  //     slideRef.current?.scrollLeft - n;
-  //   }
-  // };
+
+const dragEnd=()=>{
+    // drag left chang > 0
+    // drag right chang < 0
+    if (change > 0) {
+      slideRef.current?.scrollLeft 
+    } else {
+      slideRef.current?.scrollLeft 
+    }
+  }
 
   const plusSlides = (n: number) => {
     setSlideIndex((prev) => prev + n);
@@ -83,11 +88,11 @@ const Product = ({ product }: any) => {
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
           <div className="product-page-img w-full h-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
-            <div className="big-images w-full relative">
+            <div className="big-images w-full h-3/4 relative">
               {product.imgList.map((image: any, index: number) => (
                 <div
                   key={index}
-                  className="mySlides w-full h-full"
+                  className="mySlides w-full h-full bg-red-400"
                   style={{
                     display: index + 1 === slideIndex ? "block" : "none",
                   }}
@@ -95,11 +100,12 @@ const Product = ({ product }: any) => {
                   <div className="numbertext absolute text-gray-500 font-bold m-3">
                     {index + 1}/{product.imgList.length}
                   </div>
-                  <img
+                  <Image
                     src={image.src}
+                    fill
                     alt="product_image"
-                    className="mx-auto"
-                    style={{ objectFit: "contain", display: "inline-block"}}
+                    className="mx-auto fill"
+                    // style={{ objectFit: "fill", display: "inline-block"}}
                   />
                 </div>
               ))}
@@ -121,17 +127,17 @@ const Product = ({ product }: any) => {
             </div>
 
             <div
-              className="slider-img w-full h-40 overflow-scroll overflow-y-hidden flex"
+              className="slider-img w-full h-1/4 overflow-x-scroll scrollbar-hide flex snap-x"
               draggable={true}
               ref={slideRef}
               onDragStart={dragStart}
               onDragOver={dragOver}
-              // onDragEnd={dragEnd}
+              onDragEnd={dragEnd}
             >
               {product.imgList.map((image: any, index: number) => (
                 <div
                   key={index}
-                  className={`slider-box w-1/3 bottom-0 flex-none h-full cursor-pointer inline opacity-100 ${
+                  className={`bg-blue-400 slider-box w-1/3 bottom-0 flex-none h-full cursor-pointer inline opacity-100 snap-end ${
                     index === slideIndex - 1
                       ? "border-4 border-green-500"
                       : ""
@@ -200,7 +206,7 @@ const Product = ({ product }: any) => {
               <div className="group grid grid-cols-2">
                 <div className="max-sm:col-span-1 col-span-1 md:col-span-1 xl:col-span-1 ">
                   <Image
-                    src={product.img}
+                    src={product.imgList[0].src}
                     alt="productsPhoto"
                     width={300}
                     height={100}
