@@ -32,9 +32,9 @@ required:true,
 // ref:"User"
 },
 date:{
-    type:Date,
- 
-    required:true,
+    type: Date,
+    default: Date.now, 
+    required: true,
 },
 blogCategory:{
   type:mongoose.Schema.Types.ObjectId,
@@ -42,7 +42,7 @@ blogCategory:{
   ref:"BlogCategory"
   },
 
-}, {timestamps:true} );
+});
 
 
 const Blog = model("Blog", blogSchema);
