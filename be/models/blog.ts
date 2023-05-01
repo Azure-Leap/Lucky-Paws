@@ -1,7 +1,5 @@
 import mongoose, { Schema, SchemaType, model } from "mongoose";
 import {ICategory} from "./blogCategories"
-import { timeStamp } from "console";
-
 interface IBlog {
   title:String;
   img:String;
@@ -32,9 +30,9 @@ required:true,
 // ref:"User"
 },
 date:{
-    type:Date,
- 
-    required:true,
+    type: Date,
+    default: Date.now, 
+    required: true,
 },
 blogCategory:{
   type:mongoose.Schema.Types.ObjectId,
@@ -42,7 +40,7 @@ blogCategory:{
   ref:"BlogCategory"
   },
 
-}, {timestamps:true} );
+});
 
 
 const Blog = model("Blog", blogSchema);

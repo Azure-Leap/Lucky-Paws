@@ -16,8 +16,9 @@ const ShopCard = () => {
               <div className="group bg-white hover:scale-110  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-xl m-3 ">
                 <div className="sm:aspect-[12/12] md:aspect-[12/12] group grid grid-cols-2">
                   <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 ">
+
                     <Image
-                      src={product.img}
+                      src={product.imgList[0].src.toString()}
                       alt="productsPhoto"
                       width={300}
                       height={100}
