@@ -1,8 +1,8 @@
 import { Cardo } from "next/font/google";
 import React from "react";
-import CardList from "./cardList";
-import Pagination from "./pagination";
-import SortList from "./SortList";
+import CardList from "../../components/Petlist/cardList";
+import Pagination from "../../components/Petlist/pagination";
+import SortList from "../../components/Petlist/SortList";
 
 const Section = () => {
   return (
