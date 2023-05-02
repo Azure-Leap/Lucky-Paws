@@ -10,7 +10,8 @@ import {
 import Link from "next/link";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import { useState } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
+import ShoppingCart from "../ShoppingCart/ShoppingCart";
 
 const logoImg = require("../../assets/images/NavBar/logo.png");
 const luckyPaws = require("../../assets/images/NavBar/LuckyPaws.png");
@@ -20,14 +21,18 @@ function classNames(...classes: any) {
 }
 
 export default function Navbar() {
-  const [current, setCurrent] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [dropdownOpen, setdropdownOpen] = useState(false);
-  const router= useRouter()
+  const router = useRouter();
+
+  const handleOpen = () => {
+    setIsCartOpen(!isCartOpen);
+  };
 
   const navigation = [
     { name: "Home", href: "/", current: false },
-    { name: "Pets", href: "#", current: false },
-    { name: "Shop", href: "/products", current: false }
+    { name: "Pets", href: "/petlist", current: false },
+    { name: "Shop", href: "/products", current: false },
   ];
   return (
     <Disclosure as="nav">
@@ -89,27 +94,42 @@ export default function Navbar() {
                         {item.name}
                       </Link>
                     ))}
-                   <button onClick={() => {setdropdownOpen(!dropdownOpen)}}  className="group p-2 text-center text-xl font-medium relative  group rounded-md  hover:bg-orange-500 hover:text-white ">
-                          Blog
+                    <button
+                      onClick={() => {
+                        setdropdownOpen(!dropdownOpen);
+                      }}
+                      className="group p-2 text-center text-xl font-medium relative  group rounded-md  hover:bg-orange-500 hover:text-white "
+                    >
+                      Blog
                       <div
-                            className={`${dropdownOpen ? `top-full opacity-100 visible ` : 'invisible opacity-0'} text-black text-start m-2 -ml-2 rounded-xl group-hover:block shadow-[0_8px_16px_rgba(132,74,20,0.25)] absolute left-0 z-40 mt-2 w-48 border-[.5px] border-light  shadow-card transition-all`}>
-                            <Link 
-                          
+                        className={`${
+                          dropdownOpen
+                            ? `top-full opacity-100 visible `
+                            : "invisible opacity-0"
+                        } text-black text-start m-2 -ml-2 rounded-xl group-hover:block shadow-[0_8px_16px_rgba(132,74,20,0.25)] absolute left-0 z-40 mt-2 w-48 border-[.5px] border-light  shadow-card transition-all`}
+                      >
+                        <Link
                           className="rounded-t-xl bg-white hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
-                          href="#"
-                          >Advice</Link>
-                      
-                        <Link 
+                          href="/blog"
+                        >
+                          Advice
+                        </Link>
+
+                        <Link
                           className="bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
                           href="#"
-                          >News</Link>
-                      
-                        <Link 
+                        >
+                          News
+                        </Link>
+
+                        <Link
                           className="rounded-b-xl bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
                           href="#"
-                          >Abcd</Link>
-                        </div>
-                   </button>
+                        >
+                          Abcd
+                        </Link>
+                      </div>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -124,10 +144,8 @@ export default function Navbar() {
                   type="button"
                   className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
-                  <FontAwesomeIcon icon={faShoppingCart} />
+                  <FontAwesomeIcon icon={faShoppingCart} onClick={handleOpen} />
                 </button>
-
-                
 
                 <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>
                 {/* Profile dropdown */}
@@ -156,7 +174,10 @@ export default function Navbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Your Profile
                           </a>
@@ -166,7 +187,10 @@ export default function Navbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Settings
                           </a>
@@ -176,7 +200,10 @@ export default function Navbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            className={classNames(
+                              active ? "bg-gray-100" : "",
+                              "block px-4 py-2 text-sm text-gray-700"
+                            )}
                           >
                             Sign out
                           </a>
@@ -217,7 +244,7 @@ export default function Navbar() {
               ))}
             </div>
           </Disclosure.Panel>
-          {/* <Breadcrumbs/> */}
+          <ShoppingCart open={isCartOpen} setOpen={setIsCartOpen} />
         </>
       )}
     </Disclosure>
