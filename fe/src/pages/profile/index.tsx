@@ -3,10 +3,10 @@ import React from "react";
 
 export default function Dashboard() {
   return (
-    <div className=" w-full h-full grid grid-cols-12">
+    <div className=" w-full h-full grid grid-cols-12 bg-blue-400">
       <SideBar />
 
-      <section className="bg-red-300 col-span-10">asdasd</section>
+      <section className="bg-red-300 col-span-11">asdasd</section>
     </div>
   );
 }
