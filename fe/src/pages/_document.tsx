@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Lucky Paws</title>
+        {/* <title>Lucky Paws</title> */}
       </Head>
       <body>
         <Main />
