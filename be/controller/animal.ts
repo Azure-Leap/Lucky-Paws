@@ -14,7 +14,7 @@ const getAnimal = async (req: Request, res: Response) => {
 
   const getAllAnimals = async (req:Request, res:Response) => {
     try {
-      const animal = await Animal.find({}).populate("AnimalType","User");
+      const animal = await Animal.find({}).populate("AnimalType").populate("User");
       if (!animal) {
         res.status(200).json({ message: "Animal hooson baina." });
       }
