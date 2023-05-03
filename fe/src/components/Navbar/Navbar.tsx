@@ -76,6 +76,7 @@ export default function Navbar() {
                     className="w-auto h-auto"
                   />
                 </Link>
+
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
