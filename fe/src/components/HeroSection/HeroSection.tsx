@@ -30,7 +30,7 @@ export default function HeroSection(): JSX.Element {
               alt="lines"
               width={32}
               height={30}
-              className="absolute top-[-15px] left-[-15px] w-auto h-auto scale-[2.5]"
+              className="absolute top-[-20px] left-[-20px] w-auto h-auto "
             />
             <h1
               className={` max-w-md mb-4 text-4xl font-extrabold tracking-tight leading-none lg:text-5xl xl:text-6xl ${fredokaOne.className}`}

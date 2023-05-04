@@ -5,13 +5,15 @@ import Shop from "@/components/Shop/Shop";
 import Story from "@/components/Story/Story";
 import Image from "next/image";
 
+const orangeCat = require("../assets/images/orangecat.png");
+
 export default function HomePage() {
   return (
     <section className="relative">
       <HeroSection />
       <CategoryCards />
       <Image
-        src="/orangecat.png"
+        src={orangeCat}
         alt="orange cat"
         width={200}
         height={200}
