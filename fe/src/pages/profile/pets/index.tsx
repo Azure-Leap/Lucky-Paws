@@ -2,7 +2,7 @@ import { useProducts } from "@/hooks/useProducts";
 import React from "react";
 import LayoutWithSidebar from "../profileLayout";
 
-export default function pets() {
+export default function Pets() {
   const [products] = useProducts();
   return (
     <div className="relative overflow-x-auto container grid bg-blue-300 mx-auto">
@@ -57,6 +57,6 @@ export default function pets() {
   );
 }
 
-pets.getLayout = function (page: any) {
+Pets.getLayout = function (page: any) {
   return <LayoutWithSidebar>{page}</LayoutWithSidebar>;
 };

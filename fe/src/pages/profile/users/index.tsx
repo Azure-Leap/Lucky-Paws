@@ -2,7 +2,7 @@ import { useProducts } from "@/hooks/useProducts";
 import React from "react";
 import LayoutWithSidebar from "../profileLayout";
 
-export default function users() {
+export default function Users() {
   const [products] = useProducts();
   return (
     <div className=" overflow-x-auto container grid bg-blue-300 mx-auto">
@@ -57,6 +57,6 @@ export default function users() {
   );
 }
 
-users.getLayout = function (page: any) {
+Users.getLayout = function (page: any) {
   return <LayoutWithSidebar>{page}</LayoutWithSidebar>;
 };
