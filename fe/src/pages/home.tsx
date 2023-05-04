@@ -1,8 +1,9 @@
-import CategoryCards from "@/components/CategoryCards/CategoryCards";
-import Dogs from "@/components/DogsCard/DogsCard";
-import HeroSection from "@/components/HeroSection/HeroSection";
-import Shop from "@/components/Shop/Shop";
-import Story from "@/components/Story/Story";
+import React from "react";
+import CategoryCards from "../components/CategoryCards/CategoryCards";
+import Dogs from "../components/DogsCard/DogsCard";
+import HeroSection from "../components/HeroSection/HeroSection";
+import Shop from "../components/Shop/Shop";
+import Story from "../components/Story/Story";
 import Image from "next/image";
 
 const orangeCat = require("../assets/images/orangecat.png");
