@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import { useBlogs } from "@/hooks/useBlogs";
 import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,6 +10,7 @@ export default function Blog() {
   const [blogs] = useBlogs();
   return (
     <div className=" bg-[#FFF3D3]  m-auto">
+      <Breadcrumbs/>
       <div className="bg-white container  mx-auto my-10 p-3  rounded-2xl shadow-[0_8px_16px_rgba(132,74,20,0.25)] ">
         {blogs.map((blog:any, idx:number) => (
           <div key={idx} className="grid grid-cols-2  mx-auto max-sm:p-2 m-8 pb-8  border-b-2  border-gray-200 ">

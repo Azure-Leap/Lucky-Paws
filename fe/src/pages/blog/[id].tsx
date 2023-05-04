@@ -1,8 +1,10 @@
 import React from 'react'
 import Image from 'next/image';
+import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 
 const idx = ({blog}:any) => {
   return (
+    <>
     <div className=' container bg-white mx-auto my-12 rounded-xl shadow-[0_8px_16px_rgba(132,74,20,0.25)] '>
         <div>
         <Image
@@ -21,6 +23,7 @@ const idx = ({blog}:any) => {
             </div>
         </div>
     </div>
+    </>
   )
 }
 
@@ -40,8 +43,6 @@ export async function getStaticPaths() {
       `https://lucky-paws-api.onrender.com/blog/${params.id}`
     );
     const data = await res.json();
-    console.log("data:", data);
-  
     return { props: { blog: data.blog } };
   }
 export default idx;
