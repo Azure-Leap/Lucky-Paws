@@ -1,10 +1,9 @@
 import React from 'react'
-import { useBlogs } from "../../hooks/useBlogs";
 import Image from 'next/image';
 
 const idx = ({blog}:any) => {
   return (
-    <div className=' container bg-white mx-auto my-12 rounded-xl '>
+    <div className=' container bg-white mx-auto my-12 rounded-xl shadow-[0_8px_16px_rgba(132,74,20,0.25)] '>
         <div>
         <Image
             src={blog.img}

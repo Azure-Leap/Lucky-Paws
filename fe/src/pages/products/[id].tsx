@@ -56,7 +56,7 @@ const Product = ({ product }: any) => {
     <div className="bg-[#fff3d3]">
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
-        <div className="grid grid-cols-2  bg-white m-5 rounded-3xl">
+        <div className="grid grid-cols-2  bg-white m-5 rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
           <div className="product-page-img w-full h-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
             <div className="big-images w-full h-3/4 relative">
               {product.imgList.map((image: any, index: number) => (
@@ -74,8 +74,7 @@ const Product = ({ product }: any) => {
                     src={image.src}
                     fill
                     alt="product_image"
-                    className="mx-auto fill"
-                    // style={{ objectFit: "fill", display: "inline-block"}}
+                    className="mx-auto object-fill"
                   />
                 </div>
               ))}
@@ -181,6 +180,7 @@ const Product = ({ product }: any) => {
           </div>
         </div>
         <div className=" grid grid-cols-3 m-5  ">
+          
           {products?.slice(0, 3).map((product: any, index: number) => (
             <Link key={index} href={`products/${product._id}`} passHref>
               <div

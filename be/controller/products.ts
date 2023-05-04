@@ -12,7 +12,7 @@ const getProduct = async (req: Request, res: Response) => {
 
   const getAllProducts = async (req:Request, res:Response) => {
     try {
-      const product = await Product.find({});
+      const product = await Product.find({}).populate("ProductType");
       if (!product) {
         res.status(200).json({ message: "Baraa hooson baina." });
       }

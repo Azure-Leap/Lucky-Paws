@@ -1,7 +1,7 @@
 import React from "react";
 import ShopCard from "./ShopCard";
 import Advertisement from "./Advertisement";
-import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+
 
 const Shop = () => {
   return (

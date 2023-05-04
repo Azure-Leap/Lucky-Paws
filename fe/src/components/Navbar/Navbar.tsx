@@ -76,7 +76,7 @@ export default function Navbar() {
                     className="w-auto h-auto"
                   />
                 </Link>
-                <div className="hidden lg:ml-6 lg:block">
+                <div className="hidden lg:ml-6 md:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
                       <Link
@@ -224,7 +224,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          <Disclosure.Panel className="md:hidden bg-orange-200 text-center">
+          <Disclosure.Panel className="lg:hidden bg-orange-200 text-center">
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
                 <Disclosure.Button
