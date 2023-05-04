@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { IProduct } from "@/utils/interfaces";
+import { IProduct } from "../utils/interfaces/index";
 
 export const useProducts = () => {
   const [products, setProduct] = useState<IProduct[]>([]);
