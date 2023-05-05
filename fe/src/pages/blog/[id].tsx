@@ -14,7 +14,7 @@ export default function Blog({ blog }: any) {
     <div className=" container bg-white mx-auto my-12 rounded-xl ">
       <div>
         <Image
-          src={blog.img.src}
+          src={blog.img}
           alt="blosPhoto"
           width={1000}
           height={400}

@@ -55,19 +55,19 @@ const Footer = () => {
             </p>
             <div className="flex flex-shrink-0 gap-6 items-center">
               <FontAwesomeIcon
-                className="border-2 border-black p-2 rounded-full"
+                className="border-2 border-black p-2 rounded-full text-blue-600"
                 icon={faFacebook}
               />
               <FontAwesomeIcon
-                className="border-2 border-black p-2 rounded-full"
+                className="border-2 border-black p-2 rounded-full text-red-600"
                 icon={faYoutube}
               />
               <FontAwesomeIcon
-                className="border-2 border-black p-2 rounded-full"
+                className="border-2 border-black p-2 rounded-full "
                 icon={faInstagram}
               />
               <FontAwesomeIcon
-                className="border-2 border-black p-2 rounded-full"
+                className="border-2 border-black p-2 rounded-full text-purple-500"
                 icon={faFacebookMessenger}
               />
             </div>
@@ -120,7 +120,7 @@ const Footer = () => {
                 size="1x"
                 className="mx-2 mt-3"
               />
-              maito:lucky_paws@gmail.com{" "}
+              mail: lucky_paws@gmail.com{" "}
             </p>
             <p>
               <FontAwesomeIcon
@@ -132,11 +132,11 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <hr className="m-5" />
-        <div className="mx-[120px] grid grid-cols-3 max-w-[100vw] mt-4 text-stone-200 mb-0">
-          <p className="text-xl">Copy Right @2023</p>
-          <p className="text-2xl">|</p>
-          <p className="text-xl">Lucky Paws</p>
+        <hr className="m-3" />
+        <div className="mx-auto grid grid-cols-1 max-w-[100vw] text-center text-stone-200">
+          <p className="text-base">Lucky Paws ©2023</p>
+          {/* <p className="text-2xl">|</p> */}
+          {/* <p className="text-xl">Lucky Paws</p> */}
         </div>
       </div>
       <div className="xl:hidden  grid grid-cols-3 w-[100vw] h-[10vh] bg-white">
