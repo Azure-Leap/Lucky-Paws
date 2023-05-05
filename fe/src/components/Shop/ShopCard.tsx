@@ -24,11 +24,11 @@ const ShopCard = () => {
                       className="h-[200px] w-full rounded-lg object-contain "
                     />
                   </div>
-                  <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 text-center m-auto">
-                    <div className=" max-sm:text-2xl sm:text-2xl md:text-xl p-1 ">
+                  <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2  mx-2">
+                    <div className=" max-sm:text-2xl sm:text-2xl md:text-xl">
                       {product.title}
                     </div>
-                    <div className="p-1">{product.price}</div>
+                    <div className="font-bold">₮ {product.price}</div>
                   </div>
                 </div>
               </div>

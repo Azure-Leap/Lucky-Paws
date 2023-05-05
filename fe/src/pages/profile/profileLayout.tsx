@@ -1,11 +1,11 @@
-import Sidebar from "@/components/SideBar/SideBar";
+import React from "react";
+import Sidebar from "../../components/SideBar/SideBar";
 
 export default function LayoutWithSidebar({ children }: any) {
   return (
-    <>
+    <div>
       <Sidebar />
-      <main>{children}</main>
-      {/* </Sidebar> */}
-    </>
+      <main className="mt-10">{children}</main>
+    </div>
   );
 }
