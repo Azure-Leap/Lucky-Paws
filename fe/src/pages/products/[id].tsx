@@ -12,7 +12,7 @@ import {
 
 import { useRouter } from "next/router";
 import { useProducts } from "../../hooks/useProducts";
-import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const Product = ({ product }: any) => {
   const [count, setCount] = useState(1);
