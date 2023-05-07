@@ -1,5 +1,4 @@
 import React from "react";
-import { useBlogs } from "../../hooks/useBlogs";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
