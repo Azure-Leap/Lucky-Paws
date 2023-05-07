@@ -132,7 +132,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
-        <hr className="m-3" />
+        <hr className="m-2" />
         <div className="mx-auto grid grid-cols-1 max-w-[100vw] text-center text-stone-200">
           <p className="text-base">Lucky Paws ©2023</p>
           {/* <p className="text-2xl">|</p> */}
