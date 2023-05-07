@@ -5,8 +5,9 @@ import Chart from "@/components/Chart/Chart";
 
 export default function ProfilePage() {
   return (
-    <div className="col-span-12">
+    <div className=" grid grid-cols-12 col-span-12">
       <Chart />
+      <Chart/>
     </div>
   );
 }
