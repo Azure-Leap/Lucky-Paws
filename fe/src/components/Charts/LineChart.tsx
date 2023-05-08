@@ -26,7 +26,7 @@ ChartJS.register(
 
 const labels = ["January", "February", "March", "April", "May", "June", "July","August","September","October","November","December"];
 
-export default function Chart() {
+export default function LineChart() {
   const [chartData, setChartData] = useState({ datasets: [] });
   const [chartOptions, setChartOptions] = useState({});
 
@@ -66,29 +66,29 @@ export default function Chart() {
         },
         title: {
           display: true,
-          text: "Adopt Pets",
+          text: "Adopted Pets",
         }
       },
       scales: {
-        yAxes: [
+        y: [
           {
             gridLines: {
               display: false
             }
           }
         ],
-        xAxes: [
+        x: 
           {
-            gridLines: {
+            Line: {
               display: false
             }
           }
-        ]
       }
     };
+    setChartOptions(chartOptions)
   }, []);
 
-  return <div className="bg-green-300 relative col-span-6">
+  return <div className="relative col-span-8 border-[1px] border-orange-400 rounded-3xl">
     <Line options={chartOptions} data={chartData}/>
   </div>;
 }

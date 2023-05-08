@@ -5,7 +5,7 @@ export default function LayoutWithSidebar({ children }: any) {
   return (
     <div className="bg-white w-screen h-screen grid grid-cols-12 ">
       <Sidebar />
-      <main className="col-span-11 w-full h-full ">{children}</main>
+      <main className="col-span-11 w-full h-full bg-white ">{children}</main>
     </div>
   );
 }
