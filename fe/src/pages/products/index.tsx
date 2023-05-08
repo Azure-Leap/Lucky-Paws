@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
+import ShopSort from "@/components/Shop/ShopSort";
+import Pagination from "../../components/Shop/Pagination";
 
 const Products = () => {
   const [products] = useProducts();
@@ -18,16 +20,8 @@ const Products = () => {
     <div className="bg-[#fff3d3]">
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="m-auto container grid grid-cols-5">
-        <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5">
-          <div className="xl:text-2xl text-center font-bold m-5">
-            Product list
-          </div>
-          <div className="p-2 xl:text-lg sm:text-xs">
-            <button className="font-bold">Cat</button>
-          </div>
-          <div className="p-2 xl:text-lg sm:text-xs">
-            <button className="font-bold">Dog</button>
-          </div>
+        <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
+        <ShopSort/>
         </div>
         <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {products?.map((product: any, idx: number) => (
@@ -55,6 +49,7 @@ const Products = () => {
           ))}
         </div>
       </div>
+      <Pagination/>
     </div>
   );
 };

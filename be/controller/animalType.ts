@@ -26,9 +26,9 @@ const getAnimalType = async (req: Request, res: Response) => {
   
   const createAnimalType = async (req:Request, res:Response) => {
     console.log(req.body)
-    const { title, detail, img } = req.body;
-    if (!title || !detail || !img ) {
-      res.status(400).json({ message: "Medeelliig buren oruulna uu" });
+    const { title } = req.body;
+    if (!title) {
+      res.status(400).json({ message: "Medeelliig oruulaagui baina" });
     }
     try {
       const animalType = await AnimalType.create(req.body);

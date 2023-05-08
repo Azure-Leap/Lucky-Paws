@@ -1,7 +1,7 @@
 import mongoose, { Schema, SchemaType, model } from "mongoose";
 import {IAnimalType} from "./animalType"
-interface IBlog {
-  img:string;
+interface IAnimal {
+  imgs:[{src:String}];
   age:number;
   size:string;
   gender:string;
@@ -13,11 +13,10 @@ interface IBlog {
   animaltype:{[key:string]:IAnimalType}
 }
 
-const blogSchema = new Schema<IBlog>({
-img: {
-  type: String,
-  required: true,
-},
+const animalSchema = new Schema({
+imgs: [{
+    src: {type:String, required:true}
+  }],
 age:{type:Number,
 required:true},
 size:{
@@ -56,6 +55,6 @@ animaltype:{
 });
 
 
-const Blog = model("Blog", blogSchema);
+const Animal = model("Animal", animalSchema);
 
-export default Blog;
+export default Animal;
