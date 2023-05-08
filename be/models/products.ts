@@ -13,7 +13,7 @@ interface IProduct {
   productType:{[key:string]:IProductType}
 }
 
-const productSchema = new Schema<IProduct>({ 
+const productSchema = new Schema({ 
 title: {
   type: String,
   required: true,

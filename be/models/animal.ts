@@ -13,8 +13,8 @@ interface IAnimal {
   animaltype:{[key:string]:IAnimalType}
 }
 
-const animalSchema = new Schema<IAnimal>({
-  imgs: [{
+const animalSchema = new Schema({
+imgs: [{
     src: {type:String, required:true}
   }],
 age:{type:Number,

@@ -2,15 +2,17 @@ import mongoose, { Schema, SchemaType, model } from "mongoose";
 
 export interface IAnimalType {
   title:String;
+
 }
 
-const animalTypeSchema = new Schema<IAnimalType>({
+const animalTypeSchema = new Schema({
   title: {
   type: String,
-  required: true,
+  enum:["Dog", "Cat"],
+  required: true
 }
 });
 
 
-const AnimalType = model("AnimalType", animalTypeSchema);
-export default AnimalType;
+const animalType = model("AnimalType", animalTypeSchema);
+export default animalType;

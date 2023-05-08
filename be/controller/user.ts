@@ -23,8 +23,8 @@ const getUser = async (req: Request, res: Response) => {
   };
   
   const createUser = async (req:Request, res:Response) => {
-    const { name, email, profileImg,password,role,phone  } = req.body;
-    if (name || email || profileImg || password ||role ||phone  ) {
+    const { name, email,password,role,phone  } = req.body;
+    if (name || email || password ||role ||phone  ) {
       res.status(400).json({ message: "Medeelliig buren oruulna uu" });
     }
     try {
