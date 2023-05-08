@@ -24,10 +24,9 @@ description: {
   required: true
 },
 publishedBy:{
-  type:String,
-// type:mongoose.Schema.Types.ObjectId,
+type:mongoose.Schema.Types.ObjectId,
 required:true,
-// ref:"User"
+ref:"User"
 },
 date:{
     type: Date,

@@ -1,7 +1,7 @@
 import React from "react";
-import { useBlogs } from "../../hooks/useBlogs";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 
 export default function Blog({ blog }: any) {
   const router = useRouter();
@@ -10,7 +10,13 @@ export default function Blog({ blog }: any) {
   if (router.isFallback) {
     return <div> Loading ...</div>;
   }
+  const breadCrumbs = [
+    { name: "Blog", link: "/blog" },
+    { name: blog.title, link: "" },
+  ];
   return (
+    <>
+    <Breadcrumbs breadCrumbs={breadCrumbs}/>
     <div className=" container bg-white mx-auto my-12 rounded-xl ">
       <div>
         <Image
@@ -31,6 +37,7 @@ export default function Blog({ blog }: any) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
