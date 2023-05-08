@@ -7,7 +7,6 @@ export default function ProfilePage() {
   return (
     <div className=" grid grid-cols-12 col-span-12">
       <Chart />
-      <Chart/>
     </div>
   );
 }
