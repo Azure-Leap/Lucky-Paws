@@ -1,13 +1,13 @@
 import React from "react";
 import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
         {/* <title>Lucky Paws</title> */}
-        <script src="../path/to/soft-ui-dashboard-tailwind.js"></script>
-        <script src="../path/to/chartjs.min.js"></script>
+        <Script src="../path/to/chartjs.min.js"></Script>
       </Head>
       <body>
         <Main />
