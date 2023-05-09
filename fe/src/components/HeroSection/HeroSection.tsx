@@ -97,7 +97,7 @@ export default function HeroSection(): JSX.Element {
             alt="paw_no2"
             width={184}
             height={181}
-            className="absolute right-[-170px] top-[100px]"
+            className="hidden absolute right-[-170px] top-[100px] lg:hidden xl:block"
           />
           <Image
             src={paw3}

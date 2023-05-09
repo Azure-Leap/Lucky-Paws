@@ -3,9 +3,9 @@ import Sidebar from "../../components/SideBar/SideBar";
 
 export default function LayoutWithSidebar({ children }: any) {
   return (
-    <div>
+    <div className="bg-gray-50 w-screen h-screen grid grid-cols-12 gap-2">
       <Sidebar />
-      <main className="mt-10">{children}</main>
+      <main className="col-span-11 w-full h-full ">{children}</main>
     </div>
   );
 }
