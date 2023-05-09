@@ -62,7 +62,7 @@ const Product = ({ product }: any) => {
               {product.imgList.map((image: any, index: number) => (
                 <div
                   key={index}
-                  className="mySlides w-full h-full bg-red-400"
+                  className="mySlides w-full h-full"
                   style={{
                     display: index + 1 === slideIndex ? "block" : "none",
                   }}
@@ -179,7 +179,7 @@ const Product = ({ product }: any) => {
             </div>
           </div>
         </div>
-        <div className=" grid grid-cols-3 m-5  ">
+        <div className=" mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2 ">
           
           {products?.slice(0, 3).map((product: any, index: number) => (
             <Link key={index} href={`products/${product._id}`} passHref>
@@ -201,7 +201,7 @@ const Product = ({ product }: any) => {
                     <div className=" max-sm:text-2xl sm:text-2xl md:text-xl text-center p-1 ">
                       {product.title}
                     </div>
-                    <div className="p-1">{product.price}</div>
+                    <div className=" max-sm:p-4 sm:text-2xl md:text-xl p-1 ">{product.price}</div>
                   </div>
                 </div>
               </div>

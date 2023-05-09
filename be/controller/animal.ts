@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Animal from "../models/animal";
+import animalType from "../models/animalType";
 
 
 const getAnimal = async (req: Request, res: Response) => {
@@ -14,7 +15,7 @@ const getAnimal = async (req: Request, res: Response) => {
   const getFilteredAnimal = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const animal = await Animal.findById( {animalType: `${id}`} );
+      const animal = await Animal.find( {animaltype:id} );
       res.status(200).json({ success: true, animal });
     } catch (error) {
       console.log("ERROR", error);
