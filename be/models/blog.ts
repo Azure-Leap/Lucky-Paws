@@ -10,7 +10,7 @@ interface IBlog {
   blogCategory:{[key:string]:ICategory}
 }
 
-const blogSchema = new Schema<IBlog>({
+const blogSchema = new Schema({
   title: {
   type: String,
   required: true,

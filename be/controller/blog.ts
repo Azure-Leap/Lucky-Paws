@@ -14,7 +14,7 @@ const getBlog = async (req: Request, res: Response) => {
 
   const getAllBlogs = async (req:Request, res:Response) => {
     try {
-      const blog = await Blog.find({}).sort({date:1}).populate("blogCategory");
+      const blog = await Blog.find({}).sort({date:1}).populate("blogCategory").populate("publishedBy");
       console.log(blog)
       if (!blog) {
         res.status(200).json({ message: "blog hooson baina." });

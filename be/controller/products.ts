@@ -12,7 +12,7 @@ const getProduct = async (req: Request, res: Response) => {
   const getFilteredProduct = async (req: Request, res: Response) => {
     try {
       const { productType } = req.params;
-      const animal = await Product.find( {productType} );
+      const animal = await Product.find( {productType:{$eq:productType}} );
       res.status(200).json({ success: true, animal });
     } catch (error) {
       console.log("ERROR", error);
@@ -22,7 +22,7 @@ const getProduct = async (req: Request, res: Response) => {
 
   const getAllProducts = async (req:Request, res:Response) => {
     try {
-      const product = await Product.find({}).populate("ProductType");
+      const product = await Product.find({}).populate("productType");
       if (!product) {
         res.status(200).json({ message: "Baraa hooson baina." });
       }
