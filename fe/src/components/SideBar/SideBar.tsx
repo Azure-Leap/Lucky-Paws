@@ -24,9 +24,9 @@ export default function Sidebar({ children }: any) {
   return (
     <div className="col-span-1 bg-purple-300">
       <div
-        className={`relative z-10 ${
+        className={`relative ${
           open ? "w-full" : "w-20"
-        } duration-300 h-full p-4 top-0 bg-white border-r-[1px] flex flex-col justify-between`}
+        } h-full p-4 top-0 bg-white flex flex-col justify-between duration-300`}
       >
         <FontAwesomeIcon
           icon={faChevronLeft}

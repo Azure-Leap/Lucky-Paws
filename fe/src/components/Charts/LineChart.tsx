@@ -103,11 +103,10 @@ export default function Chart() {
       labels,
       datasets: dd,
     });
-    // const chartOptions = ;
   }, []);
 
   return (
-    <div className="relative col-span-6 border-2 border-gray-300 rounded-3xl ">
+    <div className="relative col-span-8 border-[1px] border-gray-300 rounded-3xl shadow-[0_3px_12px_rgba(0,0,0,0.25)]">
       <Line options={chartOptions} data={chartData} />
     </div>
   );

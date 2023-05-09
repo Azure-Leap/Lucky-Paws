@@ -26,8 +26,8 @@ const getBlogCat = async (req: Request, res: Response) => {
   
   const createBlogCat = async (req:Request, res:Response) => {
     console.log(req.body)
-    const { title, detail, img } = req.body;
-    if (!title || !detail || !img ) {
+    const { title} = req.body;
+    if (!title ) {
       res.status(400).json({ message: "Medeelliig buren oruulna uu" });
     }
     try {

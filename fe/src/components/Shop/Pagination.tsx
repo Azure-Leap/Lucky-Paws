@@ -17,7 +17,7 @@ const Pagination = () => {
     num > 1 && setNum(--num);
   }
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center">
       <div className="flex justify-evenly  w-1/5 ">
         <button
           onClick={back}

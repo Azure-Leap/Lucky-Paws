@@ -11,10 +11,20 @@ const getAnimal = async (req: Request, res: Response) => {
       console.log("ERROR", error);
     }
   };
+  const getFilteredAnimal = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const animal = await Animal.findById( {animalType: `${id}`} );
+      res.status(200).json({ success: true, animal });
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  };
+  
 
   const getAllAnimals = async (req:Request, res:Response) => {
     try {
-      const animal = await Animal.find({}).populate("AnimalType","User");
+      const animal = await Animal.find({}).populate("animaltype").populate("publishedBy");
       if (!animal) {
         res.status(200).json({ message: "Animal hooson baina." });
       }
@@ -78,4 +88,4 @@ const getAnimal = async (req: Request, res: Response) => {
   };
 
 
-export { getAnimal,getAllAnimals,deleteAnimal,updateAnimal,createAnimal };
+export { getAnimal,getAllAnimals,deleteAnimal,updateAnimal,createAnimal,getFilteredAnimal };

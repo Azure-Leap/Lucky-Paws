@@ -9,10 +9,20 @@ const getProduct = async (req: Request, res: Response) => {
       console.log("ERROR", error);
     }
   };
+  const getFilteredProduct = async (req: Request, res: Response) => {
+    try {
+      const { productType } = req.params;
+      const animal = await Product.find( {productType} );
+      res.status(200).json({ success: true, animal });
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  };
+  
 
   const getAllProducts = async (req:Request, res:Response) => {
     try {
-      const product = await Product.find({});
+      const product = await Product.find({}).populate("ProductType");
       if (!product) {
         res.status(200).json({ message: "Baraa hooson baina." });
       }
@@ -21,6 +31,7 @@ const getProduct = async (req: Request, res: Response) => {
         console.log("ERROR", error);
     }
   };
+
   
   const createProduct = async (req:Request, res:Response) => {
     console.log(req.body)
@@ -76,4 +87,4 @@ const getProduct = async (req: Request, res: Response) => {
   };
 
 
-export { getProduct,getAllProducts,deleteProduct,updateProduct,createProduct };
+export { getProduct,getAllProducts,deleteProduct,updateProduct,createProduct,getFilteredProduct };

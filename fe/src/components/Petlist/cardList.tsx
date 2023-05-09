@@ -3,7 +3,7 @@ import Pagination from "./pagination";
 import Image from "next/image";
 
 const products = [
-  {
+  { 
     id: 1,
     name: "Earthen Bottle",
     href: "#",
