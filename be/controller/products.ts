@@ -14,9 +14,12 @@ const getProduct = async (req: Request, res: Response) => {
 
 const getFilteredProduct = async (req: Request, res: Response) => {
   try {
-    const { productType } = req.params;
-    const animal = await Product.find({ productType: { $eq: productType } });
-    res.status(200).json({ success: true, animal });
+    const { type } = req.params;
+    const product = await Product.find({ productType: type }).populate(
+      "productType",
+      "title"
+    );
+    res.status(200).json({ success: true, product });
   } catch (error) {
     console.log("ERROR", error);
   }
