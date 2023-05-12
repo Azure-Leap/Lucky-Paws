@@ -14,3 +14,12 @@ export interface Iblog {
   publishedBy: string;
   date: Date;
 }
+export interface IAnimal {
+  imgs:{src:String}[];
+  age:number;
+  size:string;
+  gender:string;
+  health:string;
+  location:string;
+  date:Date;
+}
