@@ -16,8 +16,8 @@ export const useProducts = () => {
       const res = await axios.get(
         "https://lucky-paws-api.onrender.com/productType"
       );
-      setCategory(res.data);
-      console.log("TESTTT", res);
+      setCategory(res.data.productType.title);
+      console.log("TESTTT", res.data.productType);
     } catch (error) {
       console.log("ERROR", error);
     }
@@ -33,7 +33,7 @@ export const useProducts = () => {
       // const map = result.data.product.productType.title;
       // setCategory(result.data.product.map((e: any) => e.productType.title));
       setCategory(map);
-      console.log("TeSt", products);
+      console.log("TeSt", result);
     } catch (err) {
       console.log("ERR", err);
     }
@@ -41,6 +41,7 @@ export const useProducts = () => {
 
   useEffect(() => {
     getAllPruducts();
+    getProductCategories();
   }, []);
 
   return [products, categories];
