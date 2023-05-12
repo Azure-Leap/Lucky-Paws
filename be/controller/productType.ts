@@ -14,7 +14,7 @@ const getProductType = async (req: Request, res: Response) => {
 
   const getAllProductTypes = async (req:Request, res:Response) => {
     try {
-      const productType = await ProductType.find({}).populate("StoreCategory").populate("User");
+      const productType = await ProductType.find({}).populate("storeCategory");
       if (!productType) {
         res.status(200).json({ message: "ProductType hooson baina." });
       }

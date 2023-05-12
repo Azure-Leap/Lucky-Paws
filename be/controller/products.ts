@@ -48,7 +48,7 @@ const getProduct = async (req: Request, res: Response) => {
     }
   };
   
-  const updateProduct = async (req:Request, res:Response) => {
+  const updateProduct = async (req:Request, res:Response ) => {
     const { id } = req.params;
     if (!id) {
       res.status(400).json({

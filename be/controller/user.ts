@@ -39,7 +39,7 @@ const getUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     if (!id) {
       res.status(400).json({
-        message: `${id} - tai user baihgueee`,
+        message: `${id} - tai user obso`,
       });
     }
     try {

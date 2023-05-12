@@ -4,6 +4,6 @@ import { getProduct,getAllProducts,deleteProduct,updateProduct,createProduct, ge
 const router = Router();
 
 router.route("/").get(getAllProducts).post(createProduct);
-router.route("/:productType").get(getFilteredProduct);
+// router.route("/:productType").get(getFilteredProduct);
 router.route("/:id").get(getProduct).put(updateProduct).delete(deleteProduct);
 export default router;

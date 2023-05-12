@@ -31,11 +31,9 @@ detail: {
 },
 netWeight:{
   type:String,
-  required:true,
 },
 type:{
   type:String,
-  required:true,
 },
 inStock:{
   type:Number,

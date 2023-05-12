@@ -18,7 +18,7 @@ const getStoreCategory = async (req: Request, res: Response) => {
       if (!storeCategory) {
         res.status(200).json({ message: "StoreCategory hooson baina." });
       }
-      res.status(200).json({ message: "amjilttai", StoreCategory });
+      res.status(200).json({ message: "amjilttai", storeCategory });
     } catch (error) {
         console.log("ERROR", error);
     }
@@ -26,8 +26,8 @@ const getStoreCategory = async (req: Request, res: Response) => {
   
   const createStoreCategory = async (req:Request, res:Response) => {
     console.log(req.body)
-    const { title,description } = req.body;
-    if (!title || !description) {
+    const { title} = req.body;
+    if (!title) {
       res.status(400).json({ message: "Medeelliig buren oruulna uu" });
     }
     try {
