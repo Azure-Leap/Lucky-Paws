@@ -17,6 +17,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
+  const logoImg = require("../../assets/images/NavBar/logo.png");
+  const luckyPaws = require("../../assets/images/NavBar/LuckyPaws.png");
+
   const navigation = [
     { name: "Home", href: "#", current: false },
     { name: "Pets", href: "#", current: false },
@@ -41,14 +44,9 @@ const Footer = () => {
         <div className="grid grid-cols-3 gap-24 max-w-[85vw] mx-auto sm:px-6 lg:px-8s">
           <div>
             <div className="flex flex-shrink-0 items-center">
-              <Image src="/images/logo.png" alt="logo" width={50} height={50} />
+              <Image src={logoImg} alt="logo" width={50} height={50} />
 
-              <Image
-                src="/images/LuckyPaws.png"
-                alt="logo"
-                width={120}
-                height={100}
-              />
+              <Image src={luckyPaws} alt="logo" width={120} height={100} />
             </div>
             <p className="my-3 px-2">
               We are a lorem ispum sit amet, consectetur adipiscing eli

@@ -180,7 +180,6 @@ const Product = ({ product }: any) => {
           </div>
         </div>
         <div className=" mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2 ">
-          
           {products?.slice(0, 3).map((product: any, index: number) => (
             <Link key={index} href={`products/${product._id}`} passHref>
               <div
@@ -201,7 +200,9 @@ const Product = ({ product }: any) => {
                     <div className=" max-sm:text-2xl sm:text-2xl md:text-xl text-center p-1 ">
                       {product.title}
                     </div>
-                    <div className=" max-sm:p-4 sm:text-2xl md:text-xl p-1 ">{product.price}</div>
+                    <div className=" max-sm:p-4 sm:text-2xl md:text-xl p-1 ">
+                      {product.price}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -216,6 +217,9 @@ const Product = ({ product }: any) => {
 export async function getStaticPaths() {
   const res = await fetch("https://lucky-paws-api.onrender.com/product");
   const products = await res.json();
+
+  console.log(res);
+
   const ids = products?.product?.map((product: any) => product._id);
   const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
   return {
