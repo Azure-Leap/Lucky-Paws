@@ -87,7 +87,6 @@ return(
               </div>
           </button>
         </div>
-   
       </div>
     </div>
   </div>
@@ -96,4 +95,4 @@ return(
 <SideBarDet open={open}/>
 </>
 );
-}
+    }

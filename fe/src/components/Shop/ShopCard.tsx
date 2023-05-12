@@ -2,7 +2,10 @@ import React, { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { useProducts } from "../../hooks/useProducts";
 
 const ShopCard = () => {
@@ -35,13 +38,12 @@ const ShopCard = () => {
             </Link>
           ))}
           <Link href={`products`} passHref className="m-auto">
-            <div className="max:sm:bg-orange-200  lg:bg-orange-400 md:h-48 md:w-40 rounded-full hover:bg-orange-400 text-center m-auto flex text-white text-2xl sm:h-12 max-sm:h-12">
-              <div className="text-center m-auto">
-                <FontAwesomeIcon icon={faArrowRight} />
-              </div>
-              <div className="text-center m-auto max-sm:hidden sm:hidden lg:block ">
-                More
-              </div>
+            <div className="bg-orange-400 max-sm:h-20 max-sm:w-32 md:h-32 md:w-32 text-white text-lg flex justify-center rounded-full hover:bg-orange-400">
+              <div className="self-center">View More</div>
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                className="ml-1 self-center mt-[2px]"
+              />
             </div>
           </Link>
         </div>
