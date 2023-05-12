@@ -37,7 +37,7 @@ const SortMenu = ({ data }: any) => {
       >
              <div
               onClick={() => setSubListOpen(!subListOpen)}
-              className={`hover:text-orange-300 inline-flex w-full justify-between rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ${
+              className={` inline-flex w-full justify-between rounded-xl bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ${
                 subListOpen && ""
               }`}
             >
@@ -73,7 +73,7 @@ const SortMenu = ({ data }: any) => {
 
      {/* cat eswel dog deer darah uyd garah daraagiin menu "Toy and supplies " dropdown */}
       <div
-        className={`hover:text-orange-300 flex flex-col pl-5 mb-5 text-lg rounded-lg overflow-hidden h-0 ${
+        className={` flex flex-col pl-5 mb-5 text-lg rounded-lg overflow-hidden h-0 ${
           subMenuOpen && "h-fit"
         }`}
       >
