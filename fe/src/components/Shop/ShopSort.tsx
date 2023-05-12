@@ -8,14 +8,15 @@ const fredoka = Fredoka({ subsets: ["latin"] });
 const subMenuList = [
   {
     name: "Cat",
-    menu1:"Food",
-    menu2:"Toy & Supplies",
-    detail:["...","...","...","...","..."]
+    menu1: "Food",
+    menu2: "Toy & Supplies",
+    detail: ["Toy", "Supplies"],
   },
-  { name: "Dog",   
-    menu1:"Food",
-    menu2:"Toy & Supplies" ,
-    detail:["...","...","...","...","..."]
+  {
+    name: "Dog",
+    menu1: "Food",
+    menu2: "Toy & Supplies",
+    detail: ["Toy", "Supplies"],
   },
 ];
 
