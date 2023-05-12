@@ -1,10 +1,21 @@
 export interface IProduct {
-  _id: string;
+  _id: String;
   title: String;
   price: number;
   imgList: { src: String }[];
   detail: String;
   quantity: Number;
+}
+export interface IStoreCategory {
+  _id: String;
+  title: String;
+  description: String;
+}
+
+export interface IProductType {
+  title: String;
+  storeCategoryId: { type: String };
+  storeCategory: { [key: string]: IStoreCategory };
 }
 export interface Iblog {
   _id: string;

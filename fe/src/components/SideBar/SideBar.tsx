@@ -44,6 +44,7 @@ return(
         />
       </Link>
     </div>
+    {/* profile dropdown */}
     <ProfileDropDown/>
   </div>
 </div>
@@ -51,4 +52,4 @@ return(
 <SideBarDet open={open}/>
 </>
 );
-}
+    }
