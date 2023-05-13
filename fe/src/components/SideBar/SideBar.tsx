@@ -2,77 +2,97 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBagShopping,
-  faChevronLeft,
-  faGear,
-  faPaw,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars} from "@fortawesome/free-solid-svg-icons";
+import { faTriangleCircleSquare } from "@fortawesome/free-solid-svg-icons";
+import SideBarDet from "./SideBarDet";
 
 const logoImg = require("../../assets/images/NavBar/logo.png");
 const luckyPaws = require("../../assets/images/NavBar/LuckyPaws.png");
 
-export default function Sidebar({ children }: any) {
-  const [open, setOpen] = useState(true);
-  const navigation = [
-    { title: "Users", link: "/profile/users", icon: faUser },
-    { title: "Pets", link: "/profile/pets", icon: faPaw },
-    { title: "Products", link: "/profile/products", icon: faBagShopping },
-    { title: "Settings", link: "/profile/setting", icon: faGear },
-  ];
-  return (
-    <div className="col-span-1 bg-purple-300">
-      <div
-        className={`relative ${
-          open ? "w-full" : "w-20"
-        } h-full p-4 top-0 bg-white flex flex-col justify-between duration-300`}
-      >
-        <FontAwesomeIcon
-          icon={faChevronLeft}
-          className={`absolute bg-white py-2 px-3 text-orange-400 text-2xl rounded-full top- -right-5 cursor-pointer ${
-            !open && "rotate-180"
-          } duration-300`}
-          onClick={() => setOpen(!open)}
+export default function Sidebar() {
+   
+const [dropdownOpen, setdropdownOpen] = useState(false);
+const [open, setOpen]=useState(true);
+
+const handleOpen=()=>{
+  setOpen(!open)
+}
+return(
+<> 
+<div className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+<div className="px-3 py-3 lg:px-5 lg:pl-3">
+  <div className="flex items-center justify-between">
+    {/* logo nav */}
+    <div className="flex items-center justify-start">
+      <button
+        className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        onClick={handleOpen}>
+       <FontAwesomeIcon icon={faBars} />      
+      </button>
+      
+      <Link href="/" className="flex ml-2 md:mr-24 max-sm:text-center">
+        <Image
+          src={logoImg}
+          className="h-full mr-3"
+          alt=" Logo"
         />
-        <div className="flex flex-col h-screen">
-          <Link href="/profile">
-            <div className="grid grid-flow-row justify-items-center gap-2">
-              <Image
-                src="https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt="profile_pic"
-                width={70}
-                height={70}
-                className={`rounded-full ${
-                  open ? "scale-100" : "scale-[0.9]"
-                } duration-300`}
-              />
-              <div
-                className={`grid grid-flow-row justify-items-center ${
-                  open ? "block" : "hidden"
-                }`}
+          <Image
+          src={luckyPaws}
+          className="h-full my-auto mr-3"
+          alt="Logo"
+        />
+      </Link>
+    </div>
+    {/* profile dropdown */}
+    <div className="flex items-center">
+      <div className="flex items-center ml-3">
+        <div>
+          <button
+            type="button"
+            className="flex text-smrounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            onClick={() => {
+              setdropdownOpen(!dropdownOpen);
+            }}>
+            <Image
+              className="w-8 h-8 rounded-full"
+              src={logoImg}
+              alt="user"
+            />
+            <div className={`${
+                  dropdownOpen
+                    ? `mt-12 visible `
+                    : "invisible opacity-0"
+                } duration-300 text-black text-start mr-2 rounded-xl group-hover:block shadow-[0_8px_16px_rgba(132,74,20,0.25)] absolute -right-0 z-40  w-48 border-[.5px] border-light  shadow-card `}
               >
-                <p className="text-orange-500 text-lg font-bold">
-                  Tushig Regzen
-                </p>
-                <p className="text-sm text-gray-500">Admin</p>
+                <p className="rounded-t-xl bg-white py-2 px-4 block whitespace-no-wrap">name</p>
+                <hr />
+                <Link
+                  className=" bg-white hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
+                  href="#"
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  className="bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
+                  href="#"
+                >
+                 Settings
+                </Link>
+                <Link
+                  className="rounded-b-xl bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
+                  href="#"
+                >
+                  Sign out
+                </Link>
               </div>
-            </div>
-          </Link>
-          <span className="border-b-[1px] border-gray-200 w-full p-2"></span>
-          {navigation?.map((item, idx) => (
-            <Link key={idx} href={item.link} className="flex">
-              <div className="bg-gray-300 hover:bg-orange-400 cursor-pointer my-4 py-3 px-4 rounded-lg inline-block">
-                <FontAwesomeIcon icon={item.icon} />
-              </div>
-              <h2 className={`my-auto mx-4 ${open ? "block" : "hidden"}`}>
-                {item.title}
-              </h2>
-            </Link>
-          ))}
+          </button>
         </div>
       </div>
-      {/* //   <main className="ml-20 w-full">{children}</main> */}
     </div>
-  );
-}
+  </div>
+</div>
+</div>
+<SideBarDet open={open}/>
+</>
+);
+    }
