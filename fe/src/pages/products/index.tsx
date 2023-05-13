@@ -9,7 +9,7 @@ import ShopSort from "@/components/Shop/ShopSort";
 import Pagination from "../../components/Shop/Pagination";
 
 const Products = () => {
-  const [products] = useProducts();
+  const [products,storeCategories,productType] = useProducts();
   const router = useRouter();
   const {} = useRouter();
   if (router.isFallback) {
@@ -21,7 +21,12 @@ const Products = () => {
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="m-auto container grid grid-cols-5">
         <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
-        <ShopSort/>
+        {/* <ShopSort/> */}
+        <select name="categpry-list" className="">
+          {storeCategories.map((e:any,idx:number)=>(
+            <option>{e}</option>
+          ))}
+        </select>
         </div>
         <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {products?.map((product: any, idx: number) => (
