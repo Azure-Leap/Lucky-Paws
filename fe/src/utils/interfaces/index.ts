@@ -26,11 +26,16 @@ export interface Iblog {
   date: Date;
 }
 export interface IAnimal {
+  _id: string;
   imgs:{src:String}[];
   age:number;
   size:string;
   gender:string;
   health:string;
   location:string;
-  date:Date;
+}
+
+export interface ICard {
+  userId: string,
+  items: any[]
 }

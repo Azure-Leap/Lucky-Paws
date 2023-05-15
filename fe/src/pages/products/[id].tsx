@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -217,9 +216,6 @@ const Product = ({ product }: any) => {
 export async function getStaticPaths() {
   const res = await fetch("https://lucky-paws-api.onrender.com/product");
   const products = await res.json();
-
-  console.log(res);
-
   const ids = products?.product?.map((product: any) => product._id);
   const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
   return {

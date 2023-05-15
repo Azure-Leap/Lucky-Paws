@@ -141,7 +141,7 @@ export default function ShoppingCart({ open, setOpen }: any) {
                         <p>$ {totalPrice}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
-                        Shipping and taxes calculated at checkout.
+                        Shopping and taxes calculated at checkout.
                       </p>
                       <div className="mt-6">
                         <a
