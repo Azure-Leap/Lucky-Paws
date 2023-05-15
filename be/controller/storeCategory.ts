@@ -2,46 +2,7 @@ import { Request, Response } from "express";
 import StoreCategory from "../models/storeCategory";
 
 const getStoreCategory = async (req: Request, res: Response) => {
-<<<<<<< HEAD
-    try {
-      const { id } = req.params;
-      const storeCategory = await StoreCategory.findById( {_id:id} );
-      res.status(200).json({ success: true, storeCategory });
-    } catch (error) {
-      console.log("ERROR", error);
-    }
-  };
-
-  const getAllStoreCategories = async (req:Request, res:Response) => {
-    try {
-      const storeCategory = await StoreCategory.find({});
-      if (!storeCategory) {
-        res.status(200).json({ message: "StoreCategory hooson baina." });
-      }
-      res.status(200).json({ message: "amjilttai", storeCategory });
-    } catch (error) {
-        console.log("ERROR", error);
-    }
-  };
-  
-  const createStoreCategory = async (req:Request, res:Response) => {
-    console.log(req.body)
-    const { title} = req.body;
-    if (!title) {
-      res.status(400).json({ message: "Medeelliig buren oruulna uu" });
-    }
-    try {
-      const storeCategory = await StoreCategory.create(req.body);
-      res.status(201).json({ message: "amjilttai", storeCategory});
-    } catch (error) {
-        console.log("ERROR", error);
-    }
-  };
-  
-  const updateStoreCategory = async (req:Request, res:Response) => {
-=======
   try {
->>>>>>> master
     const { id } = req.params;
     const storeCategory = await StoreCategory.findById({ _id: id });
     res.status(200).json({ success: true, storeCategory });

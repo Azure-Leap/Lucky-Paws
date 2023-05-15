@@ -3,59 +3,10 @@ import Animal from "../models/animal";
 import animalType from "../models/animalType";
 
 const getAnimal = async (req: Request, res: Response) => {
-<<<<<<< HEAD
-    try {
-      const { id } = req.params;
-      const animal = await Animal.findById( {_id:id} );
-      res.status(200).json({ success: true, animal });
-    } catch (error) {
-      console.log("ERROR", error);
-    }
-  };
-  const getFilteredAnimal = async (req: Request, res: Response) => {
-    try {
-      const { id } = req.params;
-      const animal = await Animal.find( {animaltype:id} );
-      res.status(200).json({ success: true, animal });
-    } catch (error) {
-      console.log("ERROR", error);
-    }
-  };
-  
-
-  const getAllAnimals = async (req:Request, res:Response) => {
-    try {
-      const animal = await Animal.find({}).populate("animaltype").populate("publishedBy");
-      if (!animal) {
-        res.status(200).json({ message: "Animal hooson baina." });
-      }
-      res.status(200).json({ message: "amjilttai", animal });
-    } catch (error) {
-        console.log("ERROR", error);
-    }
-  };
-  
-  const createAnimal = async (req:Request, res:Response) => {
-    console.log(req.body)
-    const {  name,img, age,size,gender,health,location, publishedBy,  animalType } = req.body;
-    if (name! || !img|| !age || !size || !gender || !health || !location
-        || !publishedBy||  !animalType) {
-      res.status(400).json({ message: "Medeelliig buren oruulna uu" });
-    }
-    try {
-      const animal = await Animal.create(req.body);
-      res.status(201).json({ message: "amjilttai", animal});
-    } catch (error) {
-        console.log("ERROR", error);
-    }
-  };
-  
-  const updateAnimal = async (req:Request, res:Response) => {
-=======
   try {
->>>>>>> master
     const { id } = req.params;
     const animal = await Animal.findById({ _id: id });
+    console.log(animal)
     res.status(200).json({ success: true, animal });
   } catch (error) {
     console.log("ERROR", error);

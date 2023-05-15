@@ -2,46 +2,7 @@ import { Request, Response } from "express";
 import ProductType from "../models/productType";
 
 const getProductType = async (req: Request, res: Response) => {
-<<<<<<< HEAD
-    try {
-      const { id } = req.params;
-      const productType = await ProductType.findById( {_id:id} );
-      res.status(200).json({ success: true, productType });
-    } catch (error) {
-      console.log("ERROR", error);
-    }
-  };
-
-  const getAllProductTypes = async (req:Request, res:Response) => {
-    try {
-      const productType = await ProductType.find({}).populate("storeCategory");
-      if (!productType) {
-        res.status(200).json({ message: "ProductType hooson baina." });
-      }
-      res.status(200).json({ message: "amjilttai", productType });
-    } catch (error) {
-        console.log("ERROR", error);
-    }
-  };
-  
-  const createProductType = async (req:Request, res:Response) => {
-    console.log(req.body)
-    const {  title ,StoreCategory } = req.body;
-    if (!title ||!StoreCategory) {
-      res.status(400).json({ message: "Medeelliig buren oruulna uu" });
-    }
-    try {
-      const productType = await ProductType.create(req.body);
-      res.status(201).json({ message: "amjilttai", productType});
-    } catch (error) {
-        console.log("ERROR", error);
-    }
-  };
-  
-  const updateProductType = async (req:Request, res:Response) => {
-=======
   try {
->>>>>>> master
     const { id } = req.params;
     const productType = await ProductType.findById({ _id: id });
     res.status(200).json({ success: true, productType });
