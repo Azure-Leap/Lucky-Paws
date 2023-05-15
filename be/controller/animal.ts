@@ -6,6 +6,7 @@ const getAnimal = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const animal = await Animal.findById({ _id: id });
+    console.log(animal)
     res.status(200).json({ success: true, animal });
   } catch (error) {
     console.log("ERROR", error);

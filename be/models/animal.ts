@@ -1,6 +1,7 @@
 import mongoose, { Schema, SchemaType, model } from "mongoose";
 import {IAnimalType} from "./animalType"
 interface IAnimal {
+  name:String;
   imgs:[{src:String}];
   age:number;
   size:string;
@@ -14,6 +15,10 @@ interface IAnimal {
 }
 
 const animalSchema = new Schema({
+ name:{
+    type:String,
+    required:true,
+  },
 imgs: [{
     src: {type:String, required:true}
   }],

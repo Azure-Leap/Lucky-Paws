@@ -15,6 +15,7 @@ const nextConfig = {
       { protocol: "https", hostname: "m.media-amazon.com", pathname: "**" },
       { protocol: "https", hostname: "tailybuddy.com", pathname: "**" },
       { protocol: "https", hostname: "media.tenor.com", pathname: "**" },
+      { protocol: "https", hostname: "images.unsplash.com", pathname: "**" },
     ],
   },
 };

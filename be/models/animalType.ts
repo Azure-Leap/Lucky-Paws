@@ -14,5 +14,5 @@ const animalTypeSchema = new Schema({
 });
 
 
-const animalType = model("AnimalType", animalTypeSchema);
-export default animalType;
+const  AnimalType = model("AnimalType", animalTypeSchema);
+export default AnimalType;
