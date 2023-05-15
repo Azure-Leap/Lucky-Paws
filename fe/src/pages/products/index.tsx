@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { filter } from "lodash";
 
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
@@ -21,6 +22,9 @@ const Products = () => {
     if (!selectedCategory) {
       return products;
     } else {
+      return filter(products,(item:any)=>{
+        item.animaltype === selectedCategory
+      })
       // return products.filter((item: any) => {
       // return item.animaltype === selectedCategory;
       // });
@@ -45,11 +49,14 @@ const Products = () => {
           {/* <ShopSort/> */}
           <select name="categpry-list" className="" onChange={handleTarget}>
             <option value={"All"}>All</option>
-            {storeCategories.map((e: any, idx: number) => (
+            <option value={"Dog"}>Dog</option>
+            <option value={"Cat"}>Cat</option>
+            <option value={"Supplies"}>Supplies</option>
+            {/* {filteredList.map((e: any, idx: number) => (
               <option key={idx} value={e}>
                 {e}
               </option>
-            ))}
+            ))} */}
           </select>
         </div>
         <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
