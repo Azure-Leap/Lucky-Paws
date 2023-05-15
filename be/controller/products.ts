@@ -19,7 +19,7 @@ const getFilteredProduct = async (req: Request, res: Response) => {
       "productType",
       "title"
     );
-    res.status(200).json({ success: true, product });
+    res.status(200).json({ success123: true, product });
   } catch (error) {
     console.log("ERROR", error);
   }
