@@ -9,20 +9,6 @@ import {
 
 export const useProducts = () => {
   const [products, setProduct] = useState<IProduct[]>([]);
-  const [storeCategories, setStoreCategories] = useState<IStoreCategory[]>([]);
-  const [productType, setProductType] = useState<IProductType[]>([]);
-
-  // const getProductCategories = async () => {
-  //   try {
-  //     const res = await axios.get(
-  //       "https://lucky-paws-api.onrender.com/productType"
-  //     );
-  //     setCategory(res.data.productType.title);
-  //     console.log("TESTTT", res.data.productType);
-  //   } catch (error) {
-  //     console.log("ERROR", error);
-  //   }
-  // };
 
   const getAllPruducts = async () => {
     try {
@@ -36,9 +22,6 @@ export const useProducts = () => {
         (e: any) => e.productType.title
       );
       setProduct(result.data.product);
-      setStoreCategories(storeCategories);
-      // setProductType(productType);
-      console.log("Check: ", storeCategories);
     } catch (err) {
       console.log("ERR", err);
     }
@@ -46,10 +29,7 @@ export const useProducts = () => {
 
   useEffect(() => {
     getAllPruducts();
-    // getProductCategories();
   }, []);
 
-  return [products, storeCategories];
+  return { products, setProduct, getAllPruducts };
 };
-
-export function filter() {}

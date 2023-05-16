@@ -8,9 +8,12 @@ import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import ShopSort from "@/components/Shop/ShopSort";
 import Pagination from "../../components/Shop/Pagination";
+import { timeStamp } from "console";
+import { IProduct } from "@/utils/interfaces";
 
 const Products = () => {
-  const [products, storeCategories, productType] = useProducts();
+  const { products, setProduct, getAllPruducts } = useProducts();
+  const [testFilter, setTestFilter] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
   const router = useRouter();
   const {} = useRouter();
@@ -19,26 +22,23 @@ const Products = () => {
   }
 
   const getFilteredList = () => {
-    if (!selectedCategory) {
+    if (selectedCategory === "645c9695d4a8fa0b9a04d3bd" || !selectedCategory) {
       return products;
-    } else {
-      return filter(products,(item:any)=>{
-        item.animaltype === selectedCategory
-      })
-      // return products.filter((item: any) => {
-      // return item.animaltype === selectedCategory;
-      // });
     }
+    return filter(products, (item: any) => {
+      return item.productType.storeCategory === selectedCategory;
+    });
   };
 
   function handleTarget(e: any) {
     setSelectedCategory(e.target.value);
-    console.log("TEST: ", selectedCategory);
   }
 
   const filteredList = useMemo(getFilteredList, [selectedCategory, products]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setProduct(getFilteredList);
+  }, []); // Provide dependency array
 
   const breadCrumbs = [{ name: "Products", link: "" }];
   return (
@@ -48,15 +48,10 @@ const Products = () => {
         <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
           {/* <ShopSort/> */}
           <select name="categpry-list" className="" onChange={handleTarget}>
-            <option value={"All"}>All</option>
-            <option value={"Dog"}>Dog</option>
-            <option value={"Cat"}>Cat</option>
-            <option value={"Supplies"}>Supplies</option>
-            {/* {filteredList.map((e: any, idx: number) => (
-              <option key={idx} value={e}>
-                {e}
-              </option>
-            ))} */}
+            <option value="645c9695d4a8fa0b9a04d3bd">All</option>
+            <option value="645c8e0ae049adbd7a7956e4">Dog</option>
+            <option value="645c8df8e049adbd7a7956e0">Cat</option>
+            <option value="645c988909354b18b57381af">Supplies</option>
           </select>
         </div>
         <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
