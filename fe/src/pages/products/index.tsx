@@ -10,6 +10,7 @@ import ShopSort from "@/components/Shop/ShopSort";
 import Pagination from "../../components/Shop/Pagination";
 import { timeStamp } from "console";
 import { IProduct } from "@/utils/interfaces";
+import { ShopFilter } from "@/components/Shop/ShopFilter";
 
 const Products = () => {
   const { products, setProduct, getAllPruducts } = useProducts();
@@ -30,15 +31,15 @@ const Products = () => {
     });
   };
 
-  function handleTarget(e: any) {
-    setSelectedCategory(e.target.value);
-  }
+  // function handleTarget(e: any) {
+  //   setSelectedCategory(e.target.value);
+  // }
 
   const filteredList = useMemo(getFilteredList, [selectedCategory, products]);
 
   useEffect(() => {
     setProduct(getFilteredList);
-  }, []); // Provide dependency array
+  }, []);
 
   const breadCrumbs = [{ name: "Products", link: "" }];
   return (
@@ -46,13 +47,14 @@ const Products = () => {
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="m-auto container grid grid-cols-5">
         <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
-          {/* <ShopSort/> */}
-          <select name="categpry-list" className="" onChange={handleTarget}>
-            <option value="645c9695d4a8fa0b9a04d3bd">All</option>
-            <option value="645c8e0ae049adbd7a7956e4">Dog</option>
-            <option value="645c8df8e049adbd7a7956e0">Cat</option>
-            <option value="645c988909354b18b57381af">Supplies</option>
-          </select>
+          <ShopSort  setSelectedCategory={setSelectedCategory}/>
+          {/* <ShopFilter /> */}
+          {/* <select name="category-list" className="" onChange={handleTarget}> */}
+            {/* <button onClick={handleTarget} value="645c9695d4a8fa0b9a04d3bd">All</button> */}
+            {/* <button onClick={handleTarget} value="645c8e0ae049adbd7a7956e4">Dog</button> */}
+            {/* <button onClick={handleTarget} value="645c8df8e049adbd7a7956e0">Cat</button> */}
+            {/* <button onClick={handleTarget} value="645c988909354b18b57381af">Supplies</button> */}
+          {/* </select> */}
         </div>
         <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {filteredList?.map((product: any, idx: number) => (
