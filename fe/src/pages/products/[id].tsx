@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,9 @@ import {
 import { useRouter } from "next/router";
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import { CardContext } from "@/context/ShoppingCardContext";
+
+import { IProduct } from "@/utils/interfaces";
 
 const Product = ({ product }: any) => {
   const [count, setCount] = useState(1);
@@ -20,6 +23,30 @@ const Product = ({ product }: any) => {
 
   const [products] = useProducts();
   const router = useRouter();
+  const {card, setCard} = useContext(CardContext)
+  const handleClick = (product: IProduct) => {
+    if (product._id) {
+      let newProduct = card?.items?.length >0 ? [...card?.items] : []
+      
+      let newFav  = {
+        products:product,
+        count: 1
+      }
+
+      const selectedProIProductIdx = newProduct?.findIndex( e=> e?.products?._id === product?._id)
+      if(selectedProIProductIdx > -1){
+        newProduct[selectedProIProductIdx].count ++
+      } else{
+        newProduct = [... newProduct, newFav]
+      }
+     
+      const cardItem = {
+        user_Id:"jhbmb",
+        items: newProduct
+      }
+      setCard(cardItem);
+    }
+  };
 
   const {} = useRouter();
   if (router.isFallback) {
@@ -45,7 +72,6 @@ const Product = ({ product }: any) => {
       setSlideIndex(product.imgList.length);
     }
   };
-
   const breadCrumbs = [
     { name: "Products", link: "/products" },
     { name: product.title, link: "" },
@@ -167,7 +193,7 @@ const Product = ({ product }: any) => {
               </button>
             </div>
             <div className="grid grid-cols-6 my-12">
-              <button className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
+              <button  onClick={() => handleClick(product)}  className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
                 Add To Card
               </button>
               <Link href={`/payment`} passHref>

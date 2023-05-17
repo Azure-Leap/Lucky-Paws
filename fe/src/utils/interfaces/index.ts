@@ -36,6 +36,18 @@ export interface IAnimal {
 }
 
 export interface ICard {
-  userId: string,
+  user_Id: string,
   items: any[]
+}
+export interface ICardContext {
+  card: ICard;
+  setCard: React.Dispatch<React.SetStateAction<ICard>>;
+}
+export interface IFavAnimal {
+  user_Id: string,
+  animals: any[]
+}
+export interface IFavAnimalContext {
+  addAnimal: IFavAnimal;
+  setAddAnimal: React.Dispatch<React.SetStateAction<IFavAnimal>>;
 }

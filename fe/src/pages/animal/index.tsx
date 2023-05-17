@@ -10,36 +10,33 @@ import { useAnimals } from "@/hooks/usePets";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import { IAnimal, ICard } from "@/utils/interfaces";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import { CardContext } from "@/context/CardContext";
+import { FavAnimalContext } from "@/context/FavAnimalContext";
 
 const Section = () => {
   const [animals] = useAnimals();
-  const {card, setCard} = useContext(CardContext)
-  console.log(card)
-
+  const {addAnimal, setAddAnimal} = useContext(FavAnimalContext)
   const handleClick = (animal: IAnimal) => {
     if (animal._id) {
-      let newItems = card?.items?.length >0 ? [...card?.items] : []
+      let newAnimal = addAnimal?.animals?.length >0 ? [...addAnimal?.animals] : []
       
       let newFav  = {
-        item: animal,
+        animals: animal,
         count: 1
       }
 
-      const selectedItemIdx = newItems?.findIndex( e=> e?.item?._id === animal?._id)
-      if(selectedItemIdx > -1){
-        newItems[selectedItemIdx].count ++
+      const selectedAnimalIdx = newAnimal?.findIndex( e=> e?.animals?._id === animal?._id)
+      if(selectedAnimalIdx > -1){
+        newAnimal[selectedAnimalIdx].count ++
       } else{
-        newItems = [... newItems, newFav]
+        newAnimal = [... newAnimal, newFav]
       }
      
-      const cardItem = {
-        userId:"jhbmb",
-        items: newItems
+      const favAnimal = {
+        user_Id:"jhbmb",
+        animals: newAnimal
       }
-      setCard(cardItem);
+      setAddAnimal(favAnimal);
     }
-    console.log(animal,"animal")
   };
   
   const router = useRouter();

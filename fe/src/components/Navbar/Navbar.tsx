@@ -12,9 +12,10 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import { useState , useContext } from "react";
 import { useRouter } from "next/router";
 
-import ShoppingCart from "../ShoppingCart/ShoppingCart";
+// import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import ProfileDropDown from "../ProfileDropDown/ProfileDropDown";
-import { CardContext } from "@/context/CardContext";
+import { FavAnimalContext } from "@/context/FavAnimalContext";
+import { CardContext } from "@/context/ShoppingCardContext";
 
 const logoImg = require("../../assets/images/NavBar/logo.png");
 const luckyPaws = require("../../assets/images/NavBar/LuckyPaws.png");
@@ -27,9 +28,10 @@ export default function Navbar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [dropdownOpen, setdropdownOpen] = useState(false);
   const router = useRouter();
-  const {card, setCard} = useContext(CardContext)
-
-  const cartCount = card?.items?.length
+  const {addAnimal, setAddAnimal} = useContext(FavAnimalContext);
+  const animalCount = addAnimal?.animals?.length
+  const {card, setCard} = useContext(CardContext);
+  const cardCount = card?.items?.length
 
   const handleOpen = () => {
     setIsCartOpen(!isCartOpen);
@@ -146,13 +148,17 @@ export default function Navbar() {
                 >
                   <FontAwesomeIcon icon={faPaw} className="text-2xl" />
                   <div className="bg-orange-300 rounded-full absolute bottom-1 text-lg text-white">
-                  {cartCount === 0 ? null : <span className="block">{cartCount}</span>}</div>
+                  {animalCount === 0 ? null : <span className="block">{animalCount}</span>}
+                  </div>
                 </Link>
                 <button
                   type="button"
                   className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
                   <FontAwesomeIcon icon={faShoppingCart} onClick={handleOpen} />
+                  <div className="bg-orange-300 rounded-full absolute bottom-1 text-lg text-white">
+                  {cardCount === 0 ? null : <span className="block">{cardCount}</span>}
+                  </div>
                 </button>
 
                 <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>
@@ -189,7 +195,7 @@ export default function Navbar() {
               ))}
             </div>
           </Disclosure.Panel>
-          <ShoppingCart open={isCartOpen} setOpen={setIsCartOpen} />
+          {/* <ShoppingCart open={isCartOpen} setOpen={setIsCartOpen} /> */}
         </>
       )}
     </Disclosure>
