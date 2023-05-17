@@ -7,8 +7,9 @@ export const FavAnimalContext = createContext<IFavAnimalContext>({} as IFavAnima
 export const FavAnimalProvider = ({ children }: { children: React.ReactNode }) => {
   const [addAnimal, setAddAnimal] = useState<IFavAnimal>({ user_Id: "", animals: [] });
 
+
   useEffect(() => {
-  // post
+  
 
   }, [addAnimal]);
 

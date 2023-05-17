@@ -12,7 +12,7 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import { useState , useContext } from "react";
 import { useRouter } from "next/router";
 
-// import ShoppingCart from "../ShoppingCart/ShoppingCart";
+import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import ProfileDropDown from "../ProfileDropDown/ProfileDropDown";
 import { FavAnimalContext } from "@/context/FavAnimalContext";
 import { CardContext } from "@/context/ShoppingCardContext";
@@ -195,7 +195,7 @@ export default function Navbar() {
               ))}
             </div>
           </Disclosure.Panel>
-          {/* <ShoppingCart open={isCartOpen} setOpen={setIsCartOpen} /> */}
+          <ShoppingCart open={isCartOpen} setOpen={setIsCartOpen} />
         </>
       )}
     </Disclosure>
