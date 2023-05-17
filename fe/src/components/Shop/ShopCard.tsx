@@ -9,7 +9,7 @@ import {
 import { useProducts } from "../../hooks/useProducts";
 
 const ShopCard = () => {
-  const [products] = useProducts();
+  const {products} = useProducts();
   return (
     <div className="bg- rounded-3xl ">
       <div className="  ">

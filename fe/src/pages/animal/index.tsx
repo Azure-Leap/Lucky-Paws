@@ -1,4 +1,4 @@
-import React, { useState , useContext} from "react";
+import React, { useState, useContext } from "react";
 import Pagination from "../../components/Petlist/pagination";
 import SortList from "../../components/Petlist/SortList";
 import Link from "next/link";
@@ -14,31 +14,34 @@ import { FavAnimalContext } from "@/context/FavAnimalContext";
 
 const Section = () => {
   const [animals] = useAnimals();
-  const {addAnimal, setAddAnimal} = useContext(FavAnimalContext)
+  const { addAnimal, setAddAnimal } = useContext(FavAnimalContext);
   const handleClick = (animal: IAnimal) => {
     if (animal._id) {
-      let newAnimal = addAnimal?.animals?.length >0 ? [...addAnimal?.animals] : []
-      
-      let newFav  = {
+      let newAnimal =
+        addAnimal?.animals?.length > 0 ? [...addAnimal?.animals] : [];
+
+      let newFav = {
         animals: animal,
-        count: 1
+        count: 1,
+      };
+
+      const selectedAnimalIdx = newAnimal?.findIndex(
+        (e) => e?.animals?._id === animal?._id
+      );
+      if (selectedAnimalIdx > -1) {
+        newAnimal[selectedAnimalIdx].count++;
+      } else {
+        newAnimal = [...newAnimal, newFav];
       }
 
-      const selectedAnimalIdx = newAnimal?.findIndex( e=> e?.animals?._id === animal?._id)
-      if(selectedAnimalIdx > -1){
-        newAnimal[selectedAnimalIdx].count ++
-      } else{
-        newAnimal = [... newAnimal, newFav]
-      }
-     
       const favAnimal = {
-        user_Id:"jhbmb",
-        animals: newAnimal
-      }
+        user_Id: "jhbmb",
+        animals: newAnimal,
+      };
       setAddAnimal(favAnimal);
     }
   };
-  
+
   const router = useRouter();
   const {} = useRouter();
   if (router.isFallback) {
@@ -47,14 +50,14 @@ const Section = () => {
   const breadCrumbs = [{ name: "Pets", link: "" }];
   return (
     <div className="bg-[#FFF3D3] p-10">
-    <Breadcrumbs breadCrumbs={breadCrumbs} />
+      <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="m-auto container grid grid-cols-6">
         <div className="lg:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-6 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
-        <SortList/>
+          <SortList />
         </div>
         <div className="gap-6 mx-auto md:col-span-5 sm:col-span-5 max-sm:col-span-6 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {animals?.map((animal: any, idx: number) => (
-            <div>
+            <div key={idx}>
               <div className="group bg-white hover:scale-110  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3">
                 <div className="group grid grid-cols-2">
                   <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 relative ">
@@ -65,18 +68,20 @@ const Section = () => {
                       height={100}
                       className="h-[400px] w-full rounded-t-3xl object-fill "
                     />
-               <button  
-                  onClick={() => handleClick(animal)}>
-               <FontAwesomeIcon icon={faPaw} className="text-black bg-gray-50 absolute z-50 top-1 right-5 text-xl border-2 border-black rounded-full p-2 hover:scale-110" />
-               </button>
+                    <button onClick={() => handleClick(animal)}>
+                      <FontAwesomeIcon
+                        icon={faPaw}
+                        className="text-black bg-gray-50 absolute z-50 top-1 right-5 text-xl border-2 border-black rounded-full p-2 hover:scale-110"
+                      />
+                    </button>
                   </div>
                   <Link key={idx} href={`animal/${animal._id}`} passHref>
-                  <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 text-center  my-auto">
-                    <div className=" max-sm:text-xl sm:text-xl md:text-lg p-1 font-bold">
-                      {animal.name}
+                    <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 text-center  my-auto">
+                      <div className=" max-sm:text-xl sm:text-xl md:text-lg p-1 font-bold">
+                        {animal.name}
+                      </div>
+                      <div className="p-1 font-medium">{animal.gender}</div>
                     </div>
-                    <div className="p-1 font-medium">{animal.gender}</div>
-                  </div>
                   </Link>
                 </div>
               </div>
@@ -84,7 +89,7 @@ const Section = () => {
           ))}
         </div>
       </div>
-      <Pagination/>
+      <Pagination />
     </div>
   );
 };

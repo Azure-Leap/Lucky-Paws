@@ -21,7 +21,7 @@ const Product = ({ product }: any) => {
 
   const [slideIndex, setSlideIndex] = useState(1);
 
-  const [products] = useProducts();
+  const { products } = useProducts();
   const router = useRouter();
   const {card, setCard} = useContext(CardContext)
   const handleClick = (product: IProduct) => {

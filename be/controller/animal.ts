@@ -6,7 +6,7 @@ const getAnimal = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const animal = await Animal.findById({ _id: id });
-    console.log(animal)
+    console.log(animal);
     res.status(200).json({ success: true, animal });
   } catch (error) {
     console.log("ERROR", error);
@@ -15,10 +15,7 @@ const getAnimal = async (req: Request, res: Response) => {
 const getFilteredAnimal = async (req: Request, res: Response) => {
   const { type } = req.params;
   try {
-    const animals = Animal.find({ animaltype: type }).populate(
-      "animaltype",
-      "title"
-    );
+    const animals = Animal.find({ animaltype: type }).populate("animaltype");
 
     res.status(200).json({ success1234: true, animals });
   } catch (error) {

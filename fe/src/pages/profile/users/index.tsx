@@ -3,7 +3,7 @@ import React from "react";
 import LayoutWithSidebar from "../profileLayout";
 
 export default function Users() {
-  const [products] = useProducts();
+  const { products } = useProducts();
   return (
     <div className=" overflow-x-auto container grid bg-blue-300 mx-auto">
       <div className="bg-red-300 justify-self-end">

@@ -2,10 +2,10 @@ import { useProducts } from "../../../hooks/useProducts";
 import React from "react";
 import LayoutWithSidebar from "../profileLayout";
 
-export default function Pets() {
+export default function Products() {
   const { products } = useProducts();
   return (
-    <div className="relative overflow-x-auto container grid bg-blue-300 mx-auto">
+    <div className=" overflow-x-auto container grid bg-blue-300 mx-auto">
       <div className="bg-red-300 justify-self-end">
         <button className="bg-orange-500 justify-self-end rounded-xl py-2 px-3 text-white">
           + Add New
@@ -15,10 +15,10 @@ export default function Pets() {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50  ">
           <tr>
             <th scope="col" className="px-6 py-3">
-              Pets name
+              Product name
             </th>
             <th scope="col" className="px-6 py-3">
-              Adopt
+              Price
             </th>
             <th scope="col" className="px-6 py-3">
               Action
@@ -57,6 +57,6 @@ export default function Pets() {
   );
 }
 
-Pets.getLayout = function (page: any) {
+Products.getLayout = function (page: any) {
   return <LayoutWithSidebar>{page}</LayoutWithSidebar>;
 };
