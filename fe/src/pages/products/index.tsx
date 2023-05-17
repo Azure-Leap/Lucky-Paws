@@ -1,21 +1,17 @@
 import React, { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { filter } from "lodash";
 
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
-import ShopSort from "@/components/Shop/ShopSort";
 import Pagination from "../../components/Shop/Pagination";
-import { timeStamp } from "console";
-import { IProduct } from "@/utils/interfaces";
 import { ShopFilter } from "@/components/Shop/ShopFilter";
 
 const Products = () => {
-  const { products, setProduct, getAllPruducts } = useProducts();
-  const [testFilter, setTestFilter] = useState([]);
+  const { products, setProduct } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedType, setSelectedType] = useState();
   const router = useRouter();
   const {} = useRouter();
   if (router.isFallback) {
@@ -25,17 +21,30 @@ const Products = () => {
   const getFilteredList = () => {
     if (selectedCategory === "645c9695d4a8fa0b9a04d3bd" || !selectedCategory) {
       return products;
+    } else if (selectedType !== undefined) {
+      return filter(products, (item: any) => {
+        return item.productType._id === selectedType;
+      });
+    } else {
+      return filter(products, (item: any) => {
+        return item.productType.storeCategory === selectedCategory;
+      });
     }
-    return filter(products, (item: any) => {
-      return item.productType.storeCategory === selectedCategory;
-    });
   };
 
-  // function handleTarget(e: any) {
-  //   setSelectedCategory(e.target.value);
-  // }
+  function handleCategory(e: any) {
+    setSelectedCategory(e.target.value);
+    setSelectedType(undefined);
+  }
+  function handleType(e: any) {
+    setSelectedType(e.target.value);
+  }
 
-  const filteredList = useMemo(getFilteredList, [selectedCategory, products]);
+  const filteredList = useMemo(getFilteredList, [
+    selectedCategory,
+    selectedType,
+    products,
+  ]);
 
   useEffect(() => {
     setProduct(getFilteredList);
@@ -47,14 +56,7 @@ const Products = () => {
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="m-auto container grid grid-cols-5">
         <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
-          <ShopSort  setSelectedCategory={setSelectedCategory}/>
-          {/* <ShopFilter /> */}
-          {/* <select name="category-list" className="" onChange={handleTarget}> */}
-            {/* <button onClick={handleTarget} value="645c9695d4a8fa0b9a04d3bd">All</button> */}
-            {/* <button onClick={handleTarget} value="645c8e0ae049adbd7a7956e4">Dog</button> */}
-            {/* <button onClick={handleTarget} value="645c8df8e049adbd7a7956e0">Cat</button> */}
-            {/* <button onClick={handleTarget} value="645c988909354b18b57381af">Supplies</button> */}
-          {/* </select> */}
+          <ShopFilter handleCategory={handleCategory} handleType={handleType} />
         </div>
         <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {filteredList?.map((product: any, idx: number) => (
