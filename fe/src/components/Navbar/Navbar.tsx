@@ -150,15 +150,15 @@ export default function Navbar() {
                 </button>
 
                 <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>
- <ProfileDropDown/>
-                {/* <Link href={"/auth"}>
+                {/* <ProfileDropDown /> */}
+                <Link href={"/auth"}>
                   <button className="font-bold text-xl m-3 hidden md:ml-6 md:block">
                     login
                   </button>
                 </Link>
                 <button className="font-bold m-3 text-xl bg-orange-500 p-2 w-32 rounded-3xl text-white hidden md:ml-6 md:block">
                   Sign Up
-                </button> */}
+                </button>
               </div>
             </div>
           </div>
