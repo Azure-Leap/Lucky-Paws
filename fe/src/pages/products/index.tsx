@@ -1,24 +1,12 @@
-<<<<<<< HEAD
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { filter } from "lodash";
-=======
-import React,{useContext} from 'react'
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router"
->>>>>>> master
 
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import Pagination from "../../components/Shop/Pagination";
-<<<<<<< HEAD
 import { ShopFilter } from "@/components/Shop/ShopFilter";
-=======
-import { IProduct } from '@/utils/interfaces';
-
->>>>>>> master
 
 const Products = () => {
   const { products, setProduct } = useProducts();
@@ -26,9 +14,6 @@ const Products = () => {
   const [selectedType, setSelectedType] = useState();
   const router = useRouter();
   const {} = useRouter();
-  if (router.isFallback) {
-    return <div> Loading ...</div>;
-  }
 
   const getFilteredList = () => {
     if (selectedCategory === "645c9695d4a8fa0b9a04d3bd" || !selectedCategory) {
@@ -43,6 +28,11 @@ const Products = () => {
       });
     }
   };
+  const filteredList = useMemo(getFilteredList, [
+    selectedCategory,
+    selectedType,
+    products,
+  ]);
 
   function handleCategory(e: any) {
     setSelectedCategory(e.target.value);
@@ -52,35 +42,22 @@ const Products = () => {
     setSelectedType(e.target.value);
   }
 
-  const filteredList = useMemo(getFilteredList, [
-    selectedCategory,
-    selectedType,
-    products,
-  ]);
-
   useEffect(() => {
     setProduct(getFilteredList);
-  }, []);
-
+  }, [getFilteredList, setProduct]);
   const breadCrumbs = [{ name: "Products", link: "" }];
+  if (router.isFallback) {
+    return <div> Loading ...</div>;
+  }
   return (
     <div className="bg-[#fff3d3]">
       <Breadcrumbs breadCrumbs={breadCrumbs} />
-<<<<<<< HEAD
       <div className="m-auto container grid grid-cols-5">
         <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
           <ShopFilter handleCategory={handleCategory} handleType={handleType} />
         </div>
         <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {filteredList?.map((product: any, idx: number) => (
-=======
-      <div className="m-auto container grid grid-cols-6">
-        <div className="lg:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-6 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
-        <ShopSort/>
-        </div>
-        <div className="gap-6 mx-auto md:col-span-5 sm:col-span-5 max-sm:col-span-6 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
-          {products?.map((product: any, idx: number) => (
->>>>>>> master
             <Link key={idx} href={`products/${product._id}`} passHref>
               <div className="group bg-white hover:scale-110  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3">
                 <div className="group grid grid-cols-2">
