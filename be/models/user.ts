@@ -1,4 +1,5 @@
-import { Schema, model } from "mongoose";
+import mongoose,{ Schema, model } from "mongoose";
+import { IAnimal } from "./animal";
 
 export interface IUser {
   name:String;
@@ -8,7 +9,7 @@ export interface IUser {
   profileImg:String;
   role:string;
   createdAt:Date;
-
+  favAnimal:[{[key:string]:IAnimal}]
 }
 
 const userSchema = new Schema<IUser>({
@@ -34,8 +35,13 @@ const userSchema = new Schema<IUser>({
         type: Date,
         default: Date.now(),
         required: false,
-      }
-    });
+      },
+      favAnimal: [{
+        type:mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:"Animal"
+      }],
+  });
 
 
 const User = model("User", userSchema);

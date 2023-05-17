@@ -1,6 +1,6 @@
 import mongoose, { Schema, SchemaType, model } from "mongoose";
 import {IAnimalType} from "./animalType"
-interface IAnimal {
+export interface IAnimal {
   name:String;
   imgs:[{src:String}];
   age:number;
