@@ -5,14 +5,14 @@ export interface IStoreCategory {
   description:String;
 }
 
-const storeCategorySchema = new Schema<IStoreCategory>({
+const storeCategorySchema = new Schema({
 title: {
   type: String,
   required: true,
 },
 description:{
     type:String,
-    required:true,
+    required:false,
 }});
 
 

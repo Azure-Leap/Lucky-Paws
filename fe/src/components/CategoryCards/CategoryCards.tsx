@@ -16,8 +16,8 @@ export default function CategoryCards(): any {
   const categoryItems = [
     { icon: faDog, link: "#", title: "Dogs" },
     { icon: faCat, link: "#", title: "Cats" },
-    { icon: faShoppingCart, link: "#", title: "Shopping" },
-    { icon: faPaw, link: "#", title: "Blogs" },
+    { icon: faShoppingCart, link: "/products", title: "Shopping" },
+    { icon: faPaw, link: "/blog", title: "Blogs" },
   ];
   return (
     <div className="container mx-auto p-5  mb-24 grid grid-flow-row gap-12 text-neutral-600 max-sm:grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

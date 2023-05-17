@@ -9,11 +9,14 @@ import product from "./routes/product";
 import blog from "./routes/blog";
 import blogCategory from "./routes/blogCategory";
 import user from "./routes/user";
+import card from "./routes/card";
 import animal from "./routes/animal";
 import animalType from "./routes/animalType";
 import productType from "./routes/productType";
 import storeCategory from "./routes/storeCategory";
 import { upload } from "./middlewares/upload";
+import logger from "./middlewares/logger";
+import error from "./middlewares/error";
 
 const app = express();
 
@@ -22,6 +25,8 @@ const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
+app.use(logger);
+app.use(error);
 
 app.use("/uploads", express.static("uploads"));
 
@@ -32,6 +37,7 @@ app.use("/productType", productType);
 app.use("/storeCategory", storeCategory);
 app.use("/product", product);
 app.use("/blog", blog);
+app.use("/card", card);
 app.use("/blogCategory", blogCategory);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello Express");

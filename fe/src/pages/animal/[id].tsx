@@ -1,63 +1,26 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
-  faAngleRight,
-  faCheck,
-  faX,
+  faAngleRight
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useRouter } from "next/router";
-import { useProducts } from "../../hooks/useProducts";
+import { useAnimals } from "../../hooks/usePets";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-import { CardContext } from "@/context/ShoppingCardContext";
 
-import { IProduct } from "@/utils/interfaces";
-
-const Product = ({ product }: any) => {
-  const [count, setCount] = useState(1);
-
+const Animal = ({ animal }: any) => {
   const [slideIndex, setSlideIndex] = useState(1);
 
-  const { products } = useProducts();
+  const [animals] = useAnimals();
   const router = useRouter();
-  const {card, setCard} = useContext(CardContext)
-  const handleClick = (product: IProduct) => {
-    if (product._id) {
-      let newProduct = card?.items?.length >0 ? [...card?.items] : []
-      
-      let newFav  = {
-        products:product,
-        count: 1
-      }
-
-      const selectedProIProductIdx = newProduct?.findIndex( e=> e?.products?._id === product?._id)
-      if(selectedProIProductIdx > -1){
-        newProduct[selectedProIProductIdx].count ++
-      } else{
-        newProduct = [... newProduct, newFav]
-      }
-     
-      const cardItem = {
-        user_Id:"jhbmb",
-        items: newProduct
-      }
-      setCard(cardItem);
-    }
-  };
 
   const {} = useRouter();
   if (router.isFallback) {
     return <div> Loading ...</div>;
   }
-  const addCount = () => {
-    setCount(count + 1);
-  };
-  const subCount = () => {
-    setCount(count > 1 ? -1 : -0);
-  };
 
   const plusSlides = (n: number) => {
     setSlideIndex((prev) => prev + n);
@@ -65,16 +28,17 @@ const Product = ({ product }: any) => {
   };
 
   const slideShow = (n: number) => {
-    if (n > product.imgList.length) {
+    if (n > animal.imgs.length) {
       setSlideIndex(1);
     }
     if (n < 1) {
-      setSlideIndex(product.imgList.length);
+      setSlideIndex(animal.imgs.length);
     }
   };
+
   const breadCrumbs = [
-    { name: "Products", link: "/products" },
-    { name: product.title, link: "" },
+    { name: "animal", link: "/animal" },
+    { name: animal.title, link: "" },
   ];
 
   return (
@@ -82,9 +46,9 @@ const Product = ({ product }: any) => {
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className=" container mx-auto my-10 p-5 mt-7 rounded-xl">
         <div className="grid grid-cols-2  bg-white m-5 rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
-          <div className="product-page-img w-full h-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
+          <div className="animal-page-img w-full h-auto xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
             <div className="big-images w-full h-3/4 relative">
-              {product.imgList.map((image: any, index: number) => (
+              {animal.imgs.map((image: any, index: number) => (
                 <div
                   key={index}
                   className="mySlides w-full h-full"
@@ -93,13 +57,13 @@ const Product = ({ product }: any) => {
                   }}
                 >
                   <div className="numbertext absolute text-gray-500 font-bold m-3">
-                    {index + 1}/{product.imgList.length}
+                    {index + 1}/{animal.imgs.length}
                   </div>
                   <Image
                     src={image.src}
                     fill
-                    alt="product_image"
-                    className="mx-auto object-fill"
+                    alt="animal_image"
+                    className="mx-auto object-fill "
                   />
                 </div>
               ))}
@@ -128,7 +92,7 @@ const Product = ({ product }: any) => {
               className="slider-img w-full h-1/4 overflow-x-scroll scrollbar-hide flex snap-x"
               draggable={true}
             >
-              {product.imgList.map((image: any, index: number) => (
+              {animal.imgs.map((image: any, index: number) => (
                 <div
                   key={index}
                   className={`bg-blue-400 slider-box w-1/3 bottom-0 flex-none h-full cursor-pointer inline opacity-100 snap-end ${
@@ -152,61 +116,35 @@ const Product = ({ product }: any) => {
           </div>
 
           <div className="m-6  xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
-            <div className=" text-3xl p-1 font-bold ">{product.title}</div>
-            <div className="mt-6">{product.detail}</div>
-            <div className="mt-6 flex">
-              <h3 className="font-bold">Price :</h3> {product.price}
+            <div className="mb-5 text-4xl p-1 font-bold my-2 ">{animal.name}</div>
+            <div className="mt-2 text-3xl p-1 font-bold">Gender</div>
+            <div className="mt-2 p-1 text-xl">{animal.gender}</div>
+            <div className="mt-2 text-3xl p-1 font-bold">Age</div>
+            <div className="mt-2 flex p-1">
+            {animal.age}
             </div>
-            <div className="text-lg mt-6">
-              In Stock{" "}
-              {product.inStock === 0 ? (
-                <FontAwesomeIcon icon={faX} className="text-red-500 text-xl" />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faCheck}
-                  className="text-green-500 text-xl"
-                />
-              )}
+            <div className="mt-2 text-3xl p-1 font-bold">Size</div>
+            <div className="mt-2 p-1 text-xl">{animal.size}</div>
+            <div className="text-3xl p-1 font-bold">Health</div>
+            <div className="mt-2 text-xl p-1">
+              {animal.health}
             </div>
-            <div className="mt-6 text-lg">
-              <h2 className="text-2xl font-bold mb-3">Description:</h2>{" "}
-              {product.detail}
-            </div>
-            <div className="font-bold text-2xl mt-6">Net Weight</div>
-            <div className="mt-2 text-lg"> {product.netWeight}</div>
-            <div className="font-bold text-2xl mt-6">Type </div>
-            <div className="mt-2 text-lg">{product.type}</div>
-            <h3 className="mt-6 font-bold text-2xl">Quantity</h3>
-            <div className="mt-4 w-24 border-2 border-orange-400 border-opacity-75 md:border-opacity-50 grid grid-cols-3 rounded-full">
-              <button
-                onClick={subCount}
-                className=" p-2 text-xl  font-bold text-orange-400 "
-              >
-                <FontAwesomeIcon icon={faAngleLeft} />
+            <div className="grid grid-cols-6 my-16">
+              <button className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
+               
               </button>
-              <h2 className="p-2 text-center text-lg">{count}</h2>
-              <button
-                onClick={addCount}
-                className=" p-2 text-xl  font-bold text-orange-400 "
-              >
-                <FontAwesomeIcon icon={faAngleRight} />
-              </button>
-            </div>
-            <div className="grid grid-cols-6 my-12">
-              <button  onClick={() => handleClick(product)}  className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
-                Add To Card
-              </button>
-              <Link href={`/payment`} passHref>
+              <Link href={`#`} passHref>
                 <button className="bg-white rounded-lg mx-8 w-28 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
-                  Buy
+                 
                 </button>
               </Link>
             </div>
           </div>
         </div>
         <div className=" mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2 ">
-          {products?.slice(0, 3).map((product: any, index: number) => (
-            <Link key={index} href={`products/${product._id}`} passHref>
+          
+          {animals?.slice(0, 3).map((animal: any, index: number) => (
+            <Link key={index} href={`animal/${animal._id}`} passHref>
               <div
                 key={index}
                 className="group bg-white hover:scale-105 shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-xl mx-6 mt-16 max-sm:col-span-3 sm:col-span-3  md:col-span-3 lg:col-span-1 "
@@ -214,8 +152,8 @@ const Product = ({ product }: any) => {
                 <div className="group grid grid-cols-2">
                   <div className="max-sm:col-span-1 col-span-1 md:col-span-1 xl:col-span-1 ">
                     <Image
-                      src={product.imgList[0].src}
-                      alt="productsPhoto"
+                      src={animal.imgs[0].src}
+                      alt="animalPhoto"
                       width={300}
                       height={100}
                       className="h-[200px] w-full rounded-lg object-contain "
@@ -223,11 +161,9 @@ const Product = ({ product }: any) => {
                   </div>
                   <div className="max-sm:col-span-1 sm:col-span-1 md:col-span-1 xl:col-span-1 m-auto">
                     <div className=" max-sm:text-2xl sm:text-2xl md:text-xl text-center p-1 ">
-                      {product.title}
+                      {animal.title}
                     </div>
-                    <div className=" max-sm:p-4 sm:text-2xl md:text-xl p-1 ">
-                      {product.price}
-                    </div>
+                    <div className=" max-sm:p-4 sm:text-2xl md:text-xl p-1 ">{animal.price}</div>
                   </div>
                 </div>
               </div>
@@ -240,9 +176,9 @@ const Product = ({ product }: any) => {
 };
 
 export async function getStaticPaths() {
-  const res = await fetch("https://lucky-paws-api.onrender.com/product");
-  const products = await res.json();
-  const ids = products?.product?.map((product: any) => product._id);
+  const res = await fetch("https://lucky-paws-api.onrender.com/animal");
+  const animals = await res.json();
+  const ids = animals?.animal?.map((animal: any) => animal._id);
   const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
   return {
     paths: paths,
@@ -252,12 +188,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: any) {
   const res = await fetch(
-    `https://lucky-paws-api.onrender.com/product/${params.id}`
+    `https://lucky-paws-api.onrender.com/animal/${params.id}`
   );
   const data = await res.json();
   console.log("data:", data);
 
-  return { props: { product: data.baraa } };
+  return { props: { animal: data.animal } };
 }
 
-export default Product;
+export default Animal;

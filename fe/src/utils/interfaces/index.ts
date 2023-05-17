@@ -25,3 +25,29 @@ export interface Iblog {
   publishedBy: string;
   date: Date;
 }
+export interface IAnimal {
+  _id: string;
+  imgs:{src:String}[];
+  age:number;
+  size:string;
+  gender:string;
+  health:string;
+  location:string;
+}
+
+export interface ICard {
+  user_Id: string,
+  items: any[]
+}
+export interface ICardContext {
+  card: ICard;
+  setCard: React.Dispatch<React.SetStateAction<ICard>>;
+}
+export interface IFavAnimal {
+  user_Id: string,
+  animals: any[]
+}
+export interface IFavAnimalContext {
+  addAnimal: IFavAnimal;
+  setAddAnimal: React.Dispatch<React.SetStateAction<IFavAnimal>>;
+}
