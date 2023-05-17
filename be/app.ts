@@ -25,6 +25,8 @@ const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
+app.use(logger);
+app.use(error);
 
 app.use("/uploads", express.static("uploads"));
 

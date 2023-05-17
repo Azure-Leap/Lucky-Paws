@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-// import bcrypt from "bcrypt";
-// import jwt from "jsonwebtoken";
 import User from "../models/user";
+
+
+// Хэрэглэгчийн CRUD хэсэг.
 
 const getUser = async (
   req: Request,
@@ -87,48 +88,8 @@ const getUser = async (
     }
   };
 
-//  const updateUserPassword = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const { id } = req.params;
-//   if (!id) {
-//     res.status(400).json({ message: `ID хоосон байна` });
-//   }
-//   try {
-//     const user = (await User.findById(id)) as any;
-
-//     if (!user) {
-//       return res
-//         .status(400)
-//         .json({ message: `${id} ID-тэй хэрэглэгч олдсонгүй.` });
-//     }
-
-//     if (req?.body?.newPassword) {
-//       const compare = await bcrypt.compare(req.body.oldPassword, user.password);
-//       if (!compare) {
-//         throw new Error("Huuchin Pass buruu bna");
-//       }
-
-//       const hashedPassword = bcrypt.hashSync(
-//         req.body.newPassword.toString(),
-//         10
-//       );
-//       user.password = hashedPassword;
-//       await user.save();
-//     }
-
-//     res.status(200).json({
-//       message: `Таны мэдээлэл шинэчлэгдлээ`,
-//       user,
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
-export const getFavoritesUser = async (
+// Хэрэглэгч дуртай амьтныг нэмэх хасах хэсэг.
+export const getFavAnimal = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -155,7 +116,7 @@ export const getFavoritesUser = async (
     next(error);
   }
 };
-  export const addFavoritesUser = async (
+  export const addFavAnimal = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -172,13 +133,13 @@ export const getFavoritesUser = async (
       if (!user) {
         return res
           .status(400)
-          .json({ message: `${id} ID-тэй хэрэглэгч олдсонгүй.` });
+          .json({ message: `${id} олдсонгүй.` });
       }
       user.favAnimal.push(favoriteId);
       await user?.save();
   
       res.status(200).json({
-        message: `${id} IDтай хэрэглэгчийн мэдээлэл шинэчлэгдлээ`,
+        message: `${id} амжилттай нэмэгдлээ.`,
         user,
       });
     } catch (error) {
@@ -186,7 +147,7 @@ export const getFavoritesUser = async (
     }
   };
   
-  export const removeFavoritesUser = async (
+  export const removeFavAnimal = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -207,14 +168,14 @@ export const getFavoritesUser = async (
       const idx = user.favAnimal.indexOf(favoriteId);
       if (idx < 0)
         return res.status(200).json({
-          message: `${id} IDтай мэдээлэл олдсонгүй`,
+          message: `${id} ID-тай мэдээлэл олдсонгүй`,
           user,
         });
   
       user.favAnimal.splice(idx, 1);
       await user?.save();
       res.status(200).json({
-        message: `${id} IDтай мэдээлэл шинэчлэгдлээ`,
+        message: `${id} ID-тай мэдээлэл шинэчлэгдлээ`,
         user,
       });
     } catch (error) {
@@ -222,59 +183,100 @@ export const getFavoritesUser = async (
     }
   };
 
-//   export const signup = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const { userName, email, password, phoneNumber } = req.body;
-//     const hashedPassword = bcrypt.hashSync(password.toString(), 10);
-//     const user = await User.create({
-//       userName,
-//       email,
-//       password: hashedPassword,
-//       phoneNumber,
-//     });
-//     const { _id } = user;
-//     const token = jwt.sign({ _id }, secretKey, {
-//       expiresIn: 1200,
-//     });
+  // Сагсанд бараа нэмэх хасах хэсэг.
 
-//     res.status(200).json({ message: `Амжилттай бүртгэгдлээ`, user, token });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
-// export const signin = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   try {
-//     const user = await User.findOne({ email: req.body.email }).select(
-//       "+password"
-//     );
-//     if (!user) {
-//       res.status(400).json({ message: `Имэйл эсвэл нууц үг буруу байна` });
-//     } else {
-//       const checkPass = bcrypt.compareSync(
-//         req.body.password,
-//         user.password.toString()
-//       );
-//       if (!checkPass) {
-//         res.status(400).json({ message: `Имэйл эсвэл нууц үг буруу байна` });
-//       }
-//       const { _id } = user;
-//       const token = jwt.sign({ _id }, secretKey, {
-//         expiresIn: 1200,
-//       });
-//       res.status(200).json({ message: `Амжилттай нэвтэрлээ`, user, token });
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+  export const getShoppingProduct = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ message: `ID хоосон байна` });
+    }
+    try {
+      const user = await User.findById(id).populate({
+        path: "productList",
+      });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: `${id} ID-тэй хэрэглэгч олдсонгүй.` });
+      }
+      const favorites = user.favAnimal;
+      res.status(200).json({
+        message: `${id} oлдлоо`,
+        favorites,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+    export const addShoppingProduct = async (
+      req: Request,
+      res: Response,
+      next: NextFunction
+    ) => {
+      const { id } = req.params;
+      const { productListId } = req.body;
+    
+      if (!id) {
+        return res.status(400).json({ message: `ID хоосон байна` });
+      }
+    
+      try {
+        const user = await User.findById(id);
+        if (!user) {
+          return res
+            .status(400)
+            .json({ message: `${id} олдсонгүй.` });
+        }
+        user.productList.push(productListId);
+        await user?.save();
+    
+        res.status(200).json({
+          message: `${id} амжилттай нэмэгдлээ.`,
+          user,
+        });
+      } catch (error) {
+        next(error);
+      }
+    };
+    
+    export const removeShoppingProduct = async (
+      req: Request,
+      res: Response,
+      next: NextFunction
+    ) => {
+      const { id } = req.params;
+      const { productListId } = req.body;
+      if (!id) {
+        return res.status(400).json({ message: `ID хоосон байна` });
+      }
+    
+      try {
+        const user = await User.findById(id);
+        if (!user) {
+          return res
+            .status(400)
+            .json({ message: `${id} ID-тэй хэрэглэгч олдсонгүй.` });
+        }
+        const idx = user.productList.indexOf(productListId);
+        if (idx < 0)
+          return res.status(200).json({
+            message: `${id} ID-тай мэдээлэл олдсонгүй`,
+            user,
+          });
+    
+        user.productList.splice(idx, 1);
+        await user?.save();
+        res.status(200).json({
+          message: `${id} ID-тай мэдээлэл шинэчлэгдлээ`,
+          user,
+        });
+      } catch (error) {
+        next(error);
+      }
+    };
 
 export { getUser,getAllUsers,deleteUser,updateUser,createUser };
