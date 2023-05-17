@@ -9,11 +9,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import { useState } from "react";
+import { useState , useContext } from "react";
 import { useRouter } from "next/router";
 
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import ProfileDropDown from "../ProfileDropDown/ProfileDropDown";
+import { FavAnimalContext } from "@/context/FavAnimalContext";
+import { CardContext } from "@/context/ShoppingCardContext";
 
 const logoImg = require("../../assets/images/NavBar/logo.png");
 const luckyPaws = require("../../assets/images/NavBar/LuckyPaws.png");
@@ -26,6 +28,10 @@ export default function Navbar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [dropdownOpen, setdropdownOpen] = useState(false);
   const router = useRouter();
+  const {addAnimal, setAddAnimal} = useContext(FavAnimalContext);
+  const animalCount = addAnimal?.animals?.length
+  const {card, setCard} = useContext(CardContext);
+  const cardCount = card?.items?.length
 
   const handleOpen = () => {
     setIsCartOpen(!isCartOpen);
@@ -33,7 +39,7 @@ export default function Navbar() {
 
   const navigation = [
     { name: "Home", href: "/", current: false },
-    { name: "Pets", href: "/petlist", current: false },
+    { name: "Pets", href: "/animal", current: false },
     { name: "Shop", href: "/products", current: false },
   ];
   return (
@@ -136,17 +142,23 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6  sm:pr-0">
-                <button
-                  type="button"
+                <Link
+                href={"/favAnimals"}
                   className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
-                  <FontAwesomeIcon icon={faPaw} />
-                </button>
+                  <FontAwesomeIcon icon={faPaw} className="text-2xl" />
+                  <div className="bg-orange-300 rounded-full absolute bottom-1 text-lg text-white">
+                  {animalCount === 0 ? null : <span className="block">{animalCount}</span>}
+                  </div>
+                </Link>
                 <button
                   type="button"
                   className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
                   <FontAwesomeIcon icon={faShoppingCart} onClick={handleOpen} />
+                  <div className="bg-orange-300 rounded-full absolute bottom-1 text-lg text-white">
+                  {cardCount === 0 ? null : <span className="block">{cardCount}</span>}
+                  </div>
                 </button>
 
                 <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>

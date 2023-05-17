@@ -1,12 +1,14 @@
-import React from "react";
+import React,{useContext} from 'react'
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"
 
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import ShopSort from "@/components/Shop/ShopSort";
 import Pagination from "../../components/Shop/Pagination";
+import { IProduct } from '@/utils/interfaces';
+
 
 const Products = () => {
   const [products] = useProducts();

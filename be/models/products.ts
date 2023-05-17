@@ -1,7 +1,7 @@
 import mongoose,{ Schema, model } from "mongoose";
 import { IProductType } from "./productType";
 
-interface IProduct {
+ export interface IProduct {
   title:String;
   price:Number;
   imgList:[{src:String}];

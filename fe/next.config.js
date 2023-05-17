@@ -6,6 +6,7 @@ const nextConfig = {
       { protocol: "https", hostname: "cdn.zochil.shop", pathname: "**" },
       { protocol: "https", hostname: "tailwindui.com", pathname: "**" },
       { protocol: "https", hostname: "images.pexels.com", pathname: "**" },
+      {protocol: "https", hostname: "dl5zpyw5k3jeb.cloudfront.net", pathname: "**"},
       {
         protocol: "https",
         hostname: "cdn.royalcanin-weshare-online.io",
