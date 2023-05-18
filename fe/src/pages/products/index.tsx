@@ -45,7 +45,9 @@ const Products = () => {
   useEffect(() => {
     setProduct(getFilteredList);
   }, [getFilteredList, setProduct]);
+
   const breadCrumbs = [{ name: "Products", link: "" }];
+
   if (router.isFallback) {
     return <div> Loading ...</div>;
   }

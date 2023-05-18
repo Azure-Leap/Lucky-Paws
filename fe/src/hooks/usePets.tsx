@@ -4,7 +4,7 @@ import axios from "axios";
 import { IAnimal } from "../utils/interfaces/index";
 
 export const useAnimals = () => {
-  const [animal, setAnimal] = useState<IAnimal[]>([]);
+  const [animals, setAnimal] = useState<IAnimal[]>([]);
 
   const getAllAnimals = async () => {
     try {
@@ -22,5 +22,5 @@ export const useAnimals = () => {
     getAllAnimals();
   }, []);
 
-  return [animal];
+  return { animals };
 };
