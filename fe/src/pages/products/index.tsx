@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { filter } from "lodash";
+import _ from "lodash";
 
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
@@ -24,7 +24,7 @@ const Products = () => {
 
   function handleCategory(e: any) {
     setSelectedCategory(e.target.value);
-    const newFilter = filter(products, (item: any) => {
+    const newFilter = _.filter(products, (item: any) => {
       return item.productType.storeCategory === selectedCategory;
     });
     setFilteredList(newFilter);
@@ -33,15 +33,15 @@ const Products = () => {
 
   function handleType(e: any) {
     setSelectedType(e.target.value);
-    const newFilter = filter(products, (item: any) => {
+    const newFilter = _.filter(products, (item: any) => {
       return item.productType._id === selectedType;
     });
     setFilteredList(newFilter);
-    console.log("Type: ");
+    console.log("Type: ", newFilter);
   }
 
   // useEffect(() => {
-  //   const newFilter = filter(products, (item: any) => {
+  //   const newFilter = _.filter(products, (item: any) => {
   //     if (selectedCategory && selectedType) {
   //       return (
   //         item.productType.storeCategory === selectedCategory &&
