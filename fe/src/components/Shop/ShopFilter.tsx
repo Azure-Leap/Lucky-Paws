@@ -3,11 +3,32 @@ import { Button } from "@material-tailwind/react";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const ShopFilter = ({ handleCategory, handleType }: any) => {
+const menus = [
+  {
+    type: "all",
+    text: "All",
+    value: "123",
+    subMenu: [{ type: "food", text: "Food", value: "12" }],
+  },
+  {
+    type: "dog",
+    text: "Dog",
+    value: "321",
+    subMenu: [{ type: "food", text: "Food", value: "12" }],
+  },
+  {
+    type: "cat",
+    text: "Cat",
+    value: "123",
+    subMenu: [{ type: "food", text: "Food", value: "12" }],
+  },
+];
+
+export const ShopFilter = ({ handleCategory, handleType, handleAll }: any) => {
   return (
     <div className=" m-3 ">
       <Button
-        onClick={handleCategory}
+        onClick={handleAll}
         className="hover:text-orange-400 focus:text-orange-400 inline-flex w-full justify-between rounded-xl bg-white px-3 py-2 text-base font-semibold text-gray-900 shadow-none hover:bg-gray-50 my-1"
         value="645c9695d4a8fa0b9a04d3bd"
       >
