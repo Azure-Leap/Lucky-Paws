@@ -12,7 +12,7 @@ export const useAnimals = () => {
         "https://lucky-paws-api.onrender.com/animal"
       );
       setAnimal(result.data.animal);
-      console.log(result);
+      // console.log(result);
     } catch (err) {
       console.log("ERR", err);
     }
@@ -22,5 +22,5 @@ export const useAnimals = () => {
     getAllAnimals();
   }, []);
 
-  return { animals };
+  return { animals,setAnimal };
 };

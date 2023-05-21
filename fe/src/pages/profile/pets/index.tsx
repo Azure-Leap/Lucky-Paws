@@ -1,13 +1,18 @@
-import { useProducts } from "../../../hooks/useProducts";
-import React from "react";
+import React,{useState} from "react";
 import LayoutWithSidebar from "../profileLayout";
+import { useAnimals } from "@/hooks/usePets";
+import PetModal from "@/components/Dashboard/PetsModal/Modal";
 
 export default function Pets() {
-  const { products } = useProducts();
+  const { animals } = useAnimals();
+
+  const [open, setOpen] = useState(false);
+ 
+  const handleOpen = () => setOpen(!open);
   return (
     <div className="relative overflow-x-auto container grid bg-blue-300 mx-auto">
       <div className="bg-red-300 justify-self-end">
-        <button className="bg-orange-500 justify-self-end rounded-xl py-2 px-3 text-white">
+        <button onClick={handleOpen} className="bg-orange-500 justify-self-end rounded-xl py-2 px-3 text-white">
           + Add New
         </button>
       </div>
@@ -18,7 +23,13 @@ export default function Pets() {
               Pets name
             </th>
             <th scope="col" className="px-6 py-3">
-              Adopt
+              Type
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Size
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Age
             </th>
             <th scope="col" className="px-6 py-3">
               Action
@@ -26,33 +37,36 @@ export default function Pets() {
           </tr>
         </thead>
         <tbody>
-          {products?.map((product: any, idx: number) => (
+          {animals?.map((animal: any, idx: number) => (
             <tr key={idx} className="bg-white border-b  ">
               <th
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
               >
-                {product.title}
+                {animal.name}
               </th>
-              <td className="px-6 py-4">{product.price}</td>
+              <td className="px-6 py-4">{animal.animaltype.title}</td>
+              <td className="px-6 py-4">{animal.size}</td>
+              <td className="px-6 py-4">{animal.age}</td>
               <td className="px-6 py-4">
-                <a
-                  href="#"
+                <button
+                  
                   className="mx-2 font-medium text-blue-600  hover:underline"
                 >
                   Edit
-                </a>
-                <a
-                  href="#"
+                </button>
+                <button
+                  
                   className="mx-2 font-medium text-red-600  hover:underline"
                 >
                   Delete
-                </a>
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <PetModal open={open} setOpen={setOpen}/>
     </div>
   );
 }

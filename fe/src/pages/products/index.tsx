@@ -11,53 +11,41 @@ import { ShopFilter } from "@/components/Shop/ShopFilter";
 const Products = () => {
   const { products } = useProducts();
   const [filteredList, setFilteredList] = useState(products);
-  const [selectedCategory, setSelectedCategory] = useState();
-  const [selectedType, setSelectedType] = useState();
   const router = useRouter();
+
+  useEffect(() => {
+    setFilteredList(products);
+  }, [products]);
 
   function handleAll(e: any) {
     setFilteredList(products);
-    // setSelectedCategory(undefined);
-    // setSelectedType(undefined);
-    // console.log("All");
+    console.log("All: ", filteredList );
   }
 
   function handleCategory(e: any) {
-    setSelectedCategory(e.target.value);
+    const categoryValue = e.target.value;
+    
     const newFilter = _.filter(products, (item: any) => {
-      return item.productType.storeCategory === selectedCategory;
+      return item.productType.storeCategory === categoryValue;
     });
+    
     setFilteredList(newFilter);
-    console.log("Category: ", products);
   }
 
+  
   function handleType(e: any) {
-    setSelectedType(e.target.value);
+    const categoryValue = e.target.name;
+    const typeValue = e.target.value;
+
     const newFilter = _.filter(products, (item: any) => {
-      return item.productType._id === selectedType;
+      return (
+        item.productType._id === typeValue &&
+        item.productType.storeCategory === categoryValue
+      );
     });
+
     setFilteredList(newFilter);
-    console.log("Type: ", newFilter);
   }
-
-  // useEffect(() => {
-  //   const newFilter = _.filter(products, (item: any) => {
-  //     if (selectedCategory && selectedType) {
-  //       return (
-  //         item.productType.storeCategory === selectedCategory &&
-  //         item.productType._id === selectedType
-  //       );
-  //     } else if (selectedCategory) {
-  //       return item.productType.storeCategory === selectedCategory;
-  //     } else if (selectedType) {
-  //       setSelectedCategory(item.productType.storeCategory);
-  //       return item.productType._id === selectedType;
-  //     }
-  //     return true;
-  //   });
-
-  //   setFilteredList(newFilter);
-  // }, [products, selectedCategory, selectedType]);
 
   const breadCrumbs = [{ name: "Products", link: "" }];
 
