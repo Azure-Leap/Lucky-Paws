@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import Pagination from "../../components/Petlist/pagination";
 import SortList from "../../components/Petlist/SortList";
 import Link from "next/link";
+import Image from "next/image"
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
@@ -61,7 +62,7 @@ const Section = () => {
               <div className="group bg-white hover:scale-110  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3">
                 <div className="group grid grid-cols-2">
                   <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 relative ">
-                    <img
+                    <Image
                       src={animal.imgs[0].src}
                       alt="animalsPhoto"
                       width={400}

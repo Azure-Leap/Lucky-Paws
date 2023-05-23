@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext ,useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,6 +18,7 @@ import { IProduct } from "@/utils/interfaces";
 
 const Product = ({ product }: any) => {
   const [count, setCount] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const [slideIndex, setSlideIndex] = useState(1);
 
@@ -48,16 +49,33 @@ const Product = ({ product }: any) => {
     }
   };
 
-  const {} = useRouter();
-  if (router.isFallback) {
-    return <div> Loading ...</div>;
-  }
+  
   const addCount = () => {
     setCount(count + 1);
   };
+  
   const subCount = () => {
-    setCount(count > 1 ? -1 : -0);
+    setCount(count > 1 ? count - 1 : 1);
   };
+  
+  useEffect(() => {
+    const updatedTotalPrice = count * priceTotal();
+    setTotalPrice(updatedTotalPrice);
+  }, [count]);
+  
+  const ShoppingCart = card?.items;
+  const priceTotal = () => {
+    if (!ShoppingCart) return 0;
+  
+    return ShoppingCart.reduce(function (total: number, item: any) {
+      const itemPrice = item.products.price;
+      const itemQuantity = item.quantity;
+      const itemTotalPrice = itemPrice * itemQuantity;
+      return setTotalPrice(totalPrice + itemTotalPrice);
+    }, 0);
+  };
+  
+  const price: number = priceTotal();
 
   const plusSlides = (n: number) => {
     setSlideIndex((prev) => prev + n);
@@ -72,6 +90,12 @@ const Product = ({ product }: any) => {
       setSlideIndex(product.imgList.length);
     }
   };
+
+  const {} = useRouter();
+  if (router.isFallback) {
+    return <div> Loading ...</div>;
+  }
+
   const breadCrumbs = [
     { name: "Products", link: "/products" },
     { name: product.title, link: "" },

@@ -19,5 +19,5 @@ export const useCard = () => {
     addAnimalToFav();
   }, []);
 
-  return [addAnimal];
+  return {addAnimal};
 };

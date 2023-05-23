@@ -3,14 +3,18 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { CardContext } from '@/context/ShoppingCardContext';
 import { products } from '@/utils/routes';
+import Link from 'next/link';
+import Image from 'next/image';
 
 
 export default function ShoppingCart({ open, setOpen }: any) {
-  const {card, setCard} = useContext(CardContext);
-  const ShoppingCart = card?.items
-//   const totalPrice: number = ShoppingCart?.map((el) => el.products.price).reduce(function (a, b) {
-//     return a + b;
-//   });
+const { card, setCard } = useContext(CardContext);
+const [totalPrice, setTotalPrice] = useState(0);
+const ShoppingCart = card?.items;
+const priceArray: number[] = ShoppingCart?.map((el) => el.products.price);
+const priceTotal: number = priceArray?.reduce(function (a: number, b: number) {
+  return a + b;
+}, 0);
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -66,9 +70,11 @@ export default function ShoppingCart({ open, setOpen }: any) {
                             {ShoppingCart?.map((el) => (
                               <li key={el.products._id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                  <img
+                                  <Image
                                     src={el.products.imgList[0].src}
                                     alt="zurag"
+                                    width={200}
+                                    height={200}
                                     className="h-full w-full object-cover object-center"
                                   />
                                 </div>
@@ -112,18 +118,18 @@ export default function ShoppingCart({ open, setOpen }: any) {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$ </p>
+                        <p>$ {priceTotal}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shopping and taxes calculated at checkout.
                       </p>
                       <div className="mt-6">
-                        <a
-                          href="#"
+                        <Link 
+                          href="/payment"
                           className="flex items-center justify-center rounded-md border border-transparent bg-orange-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-700"
                         >
                           Checkout
-                        </a>
+                        </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
