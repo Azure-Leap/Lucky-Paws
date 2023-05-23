@@ -1,18 +1,32 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import LayoutWithSidebar from "../profileLayout";
 import { useAnimals } from "@/hooks/usePets";
 import PetModal from "@/components/Dashboard/PetsModal/Modal";
+import { data } from "autoprefixer";
 
 export default function Pets() {
   const { animals } = useAnimals();
 
   const [open, setOpen] = useState(false);
- 
+  const [addNew, setAddNew] = useState(true);
+  const [dataPass, setDataPass] = useState({
+    name: "",
+    age: "",
+    type: "",
+    size: "",
+  });
+
   const handleOpen = () => setOpen(!open);
   return (
     <div className="relative overflow-x-auto container grid bg-blue-300 mx-auto">
       <div className="bg-red-300 justify-self-end">
-        <button onClick={handleOpen} className="bg-orange-500 justify-self-end rounded-xl py-2 px-3 text-white">
+        <button
+          onClick={() => {
+            handleOpen();
+            setAddNew(true);
+          }}
+          className="bg-orange-500 justify-self-end rounded-xl py-2 px-3 text-white"
+        >
           + Add New
         </button>
       </div>
@@ -50,13 +64,25 @@ export default function Pets() {
               <td className="px-6 py-4">{animal.age}</td>
               <td className="px-6 py-4">
                 <button
-                  
+                  onClick={() => {
+                    handleOpen();
+                    setAddNew(false);
+                    setDataPass({
+                      name: animal.name,
+                      age: animal.age,
+                      type: animal.animaltype.title,
+                      size: animal.size,
+                    });
+                    console.log("Check: ", animal.name);
+                  }}
                   className="mx-2 font-medium text-blue-600  hover:underline"
                 >
                   Edit
                 </button>
                 <button
-                  
+                  onClick={() => {
+                    console.log(dataPass);
+                  }}
                   className="mx-2 font-medium text-red-600  hover:underline"
                 >
                   Delete
@@ -66,7 +92,13 @@ export default function Pets() {
           ))}
         </tbody>
       </table>
-      <PetModal open={open} setOpen={setOpen}/>
+      <PetModal
+        open={open}
+        setOpen={setOpen}
+        addNew={addNew}
+        animals={animals}
+        dataPass={dataPass}
+      />
     </div>
   );
 }
