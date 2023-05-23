@@ -6,6 +6,12 @@ const logoImg = require("../../assets/images/NavBar/logo.png");
 
 const ProfileDropDown = () => {
   const [dropdownOpen, setdropdownOpen] = useState(false);
+  const userName = localStorage.getItem("name");
+  const profile = String(localStorage.getItem("profile"));
+  // const img = profile
+  //   ? profile
+  //   : "https://vaumc.org/wp-content/uploads/2021/06/PicturePlaceholder-1.jpg";
+
   return (
     <div className="flex items-center">
       <div className="flex items-center ml-3">
@@ -17,14 +23,24 @@ const ProfileDropDown = () => {
               setdropdownOpen(!dropdownOpen);
             }}
           >
-            <Image className="w-8 h-8 rounded-full" src={logoImg} alt="user" />
+            <Image
+              className="w-8 h-8 rounded-full"
+              src={
+                !profile
+                  ? "https://vaumc.org/wp-content/uploads/2021/06/PicturePlaceholder-1.jpg"
+                  : profile
+              }
+              alt="user"
+              width={300}
+              height={300}
+            />
             <div
               className={`${
                 dropdownOpen ? `mt-12 visible ` : "invisible opacity-0"
               } duration-300 text-black text-start mr-2 rounded-xl group-hover:block shadow-[0_8px_16px_rgba(132,74,20,0.25)] absolute -right-0 z-40  w-48 border-[.5px] border-light  shadow-card `}
             >
               <p className="rounded-t-xl bg-white py-2 px-4 block whitespace-no-wrap">
-                name
+                {userName}
               </p>
               <hr />
               <Link
@@ -46,7 +62,10 @@ const ProfileDropDown = () => {
                 <div
                   onClick={() => {
                     localStorage.removeItem("token");
-                    alert("Bye!!!");
+                    localStorage.removeItem("name");
+                    localStorage.removeItem("user");
+
+                    // alert("Bye!!!");
                   }}
                 >
                   Sign out

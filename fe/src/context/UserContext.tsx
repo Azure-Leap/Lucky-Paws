@@ -18,7 +18,7 @@ export const UserContextProvider = ({ children }: any) => {
   const [state, setState] = useState("");
 
   const success = () => {
-    return toast("🦄 Wow Success!", {
+    return toast.success("🦄 Wow Success!", {
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: false,
@@ -30,7 +30,7 @@ export const UserContextProvider = ({ children }: any) => {
     });
   };
   const errorAlert = () => {
-    return toast("🦄 Oops!!! ERROR!", {
+    return toast.error("🦄 Oops!!! ERROR!", {
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: false,
@@ -42,7 +42,7 @@ export const UserContextProvider = ({ children }: any) => {
     });
   };
   const warningAlert = () => {
-    return toast("Хэрэглэгчийн мэдээлэл хоосон байна.", {
+    return toast.warn("Хэрэглэгчийн мэдээлэл хоосон байна.", {
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: false,
@@ -54,7 +54,7 @@ export const UserContextProvider = ({ children }: any) => {
     });
   };
   const Resuccess = () => {
-    return toast.success("🦄 Wow Success!", {
+    return toast.success("🦄 Wow Success! Now CLICK SIGNIN!!!", {
       position: "top-center",
       autoClose: 3000,
       hideProgressBar: false,
@@ -93,16 +93,23 @@ export const UserContextProvider = ({ children }: any) => {
   };
   const login = async (email: string, password: string) => {
     try {
-      const result = await axios.post(`http://localhost:8008/users/signin`, {
+      const result = await axios.post(`http://localhost:8011/user/signin`, {
         email,
         password,
       });
       const data = await result.data;
       const token = await data.token;
+      const name = await data.user.name;
+
       console.log("SUCCESS", await data.user);
       console.log("TOKEN", await token);
+      console.log("name", await name);
 
-      localStorage.setItem("user", String(data.data));
+      localStorage.setItem("user", String(data.user));
+
+      localStorage.setItem("name", String(data.user.name));
+
+      localStorage.setItem("profile", String(data.user.profileImg));
 
       // console.log(localStorage.getItem("user"));
 
@@ -111,13 +118,16 @@ export const UserContextProvider = ({ children }: any) => {
       // console.log(localStorage.getItem("token"));
 
       if (String(data.status) === "ok") {
-        // success();
+        success();
         setState("success");
         setUser(data.user);
         console.log(data.user);
-        alert("success");
-
+        // alert("success");
+        localStorage.setItem("user", String(data.user.email));
         localStorage.setItem("token", String(data.token));
+        localStorage.setItem("name", String(data.user.name));
+        localStorage.setItem("profile", String(data.user.profileImg));
+
         setTimeout(() => {
           router.push("/");
         }, 3000);
@@ -128,15 +138,15 @@ export const UserContextProvider = ({ children }: any) => {
       console.log(error);
       setState("error");
 
-      //   errorAlert();
-      alert("Hello error");
+      errorAlert();
+      // alert("Hello error");
     }
   };
   const handleLogin = async () => {
     if (email === "" || password === "") {
-      alert("Хэрэглэгчийн мэдээлэл хоосон байна.");
+      // alert("Хэрэглэгчийн мэдээлэл хоосон байна.");
 
-      //   warningAlert();
+      warningAlert();
       setState("warning");
 
       console.log("Хэрэглэгчийн мэдээлэл хоосон байнаа.");
@@ -147,7 +157,7 @@ export const UserContextProvider = ({ children }: any) => {
   <ToastContainer />;
   const signup = async (name: string, email: string, password: string) => {
     try {
-      const res = await axios.post("http://localhost:8008/users/signup", {
+      const res = await axios.post("http://localhost:8011/user/signup", {
         name,
         email,
         password,
@@ -164,20 +174,20 @@ export const UserContextProvider = ({ children }: any) => {
     }
   };
   const handleRegister = async () => {
-    if (!email || !name || !password || !rePassword) {
+    if (!email || !name || !password) {
       ReerrorAlert();
       // setIsAlert(true);
       console.log("Medeelel aldaatai baina");
 
       return;
     }
-    if (password !== rePassword) {
-      RewarningAlert();
+    // if (password !== rePassword) {
+    //   RewarningAlert();
 
-      console.log("Нууц үг хоорондоо таарахгүй байна. !!!");
+    //   console.log("Нууц үг хоорондоо таарахгүй байна. !!!");
 
-      return;
-    }
+    //   return;
+    // }
     signup(name, email, password);
   };
   return (
