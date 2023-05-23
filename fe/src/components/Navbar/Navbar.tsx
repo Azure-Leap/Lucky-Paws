@@ -33,7 +33,6 @@ export default function Navbar() {
   const { card, setCard } = useContext(CardContext);
   const cardCount = card?.items?.length;
   const [local, setLocal] = useState<any>();
-  const [logout, setLogout] = useState<any>();
   useEffect(() => {
     const a = localStorage.getItem("token");
     setLocal(a);
@@ -188,8 +187,8 @@ export default function Navbar() {
                 ) : (
                   <div>
                     <ProfileDropDown />
-                    <Link href="#">
-                      {/* <button
+
+                    {/* <button
                         onClick={() => {
                           localStorage.removeItem("token");
                           alert("BYE!!!");
@@ -198,7 +197,6 @@ export default function Navbar() {
                       >
                         Logout
                       </button> */}
-                    </Link>
                   </div>
                 )}
               </div>
