@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { Fredoka } from "next/font/google";
@@ -7,97 +7,109 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { UserContext } from "@/context/UserContext";
 
 const fredoka = Fredoka({ subsets: ["latin"] });
 
 const SignupForm = () => {
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [rePassword, setRePassword] = useState("");
-  const [open, setOpen] = useState(false);
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    rePassword,
+    setRePassword,
+    handleRegister,
+    name,
+    setName,
+  }: any = useContext(UserContext);
+  // const router = useRouter();
+  // const [email, setEmail] = useState("");
+  // const [name, setName] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [rePassword, setRePassword] = useState("");
+  // const [open, setOpen] = useState(false);
 
-  const [state, setState] = useState("");
+  // const [state, setState] = useState("");
 
-  const success = () => {
-    return toast.success("🦄 Wow Success! Sign in deer darj nevterne uu", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
+  // const success = () => {
+  //   return toast.success("🦄 Wow Success! Sign in deer darj nevterne uu", {
+  //     position: "top-center",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //   });
+  // };
 
-  const errorAlert = () => {
-    return toast.error("infomartion wrong!!!", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
+  // const errorAlert = () => {
+  //   return toast.error("infomartion wrong!!!", {
+  //     position: "top-center",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //   });
+  // };
 
-  const warningAlert = () => {
-    return toast.warn("Нууц үг хоорондоо таарахгүй байна. !!!", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
-  const handleClose = () => setOpen(false);
+  // const warningAlert = () => {
+  //   return toast.warn("Нууц үг хоорондоо таарахгүй байна. !!!", {
+  //     position: "top-center",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //   });
+  // };
+  // const handleClose = () => setOpen(false);
 
-  const handleClick = async () => {
-    if (!email || !name || !password) {
-      errorAlert();
-      // setIsAlert(true);
-      console.log("Medeelel aldaatai baina");
+  // const handleClick = async () => {
+  //   if (!email || !name || !password) {
+  //     errorAlert();
+  //     // setIsAlert(true);
+  //     console.log("Medeelel aldaatai baina");
 
-      return;
-    }
-    // if (password !== rePassword) {
-    //   warningAlert();
+  //     return;
+  //   }
+  //   // if (password !== rePassword) {
+  //   //   warningAlert();
 
-    //   console.log("Нууц үг хоорондоо таарахгүй байна. !!!");
+  //   //   console.log("Нууц үг хоорондоо таарахгүй байна. !!!");
 
-    //   return;
-    // }
-    signup(name, email, password);
-  };
+  //   //   return;
+  //   // }
+  //   signup(name, email, password);
+  // };
 
-  const signup = async (name: string, email: string, password: string) => {
-    try {
-      const res = await axios.post("http://localhost:8008/user/signup", {
-        name,
-        email,
-        password,
-      });
-      console.log("res", res);
-      setState("success");
-      // alert(res.data.message);
-      success();
-      setTimeout(() => {
-        router.push("/auth");
-        handleClose();
-      }, 5000);
-      handleClose();
-    } catch (error) {
-      console.log("Error", error);
-    }
-  };
+  // const signup = async (name: string, email: string, password: string) => {
+  //   try {
+  //     const res = await axios.post("http://localhost:8008/user/signup", {
+  //       name,
+  //       email,
+  //       password,
+  //     });
+  //     console.log("res", res);
+  //     setState("success");
+  //     // alert(res.data.message);
+  //     success();
+  //     setTimeout(() => {
+  //       router.push("/auth");
+  //       handleClose();
+  //     }, 5000);
+  //     handleClose();
+  //   } catch (error) {
+  //     console.log("Error", error);
+  //   }
+  // };
 
   return (
     <div className="selection:bg-indigo-500 selection:text-white">
@@ -169,7 +181,7 @@ const SignupForm = () => {
                 </div>
 
                 <button
-                  onClick={handleClick}
+                  onClick={handleRegister}
                   className={` ${fredoka.className} mt-20 px-8 py-4 uppercase rounded-full bg-orange-500 hover:bg-indigo-500 text-white font-semibold text-center block w-full focus:outline-none focus:ring focus:ring-offset-2 focus:ring-indigo-500 focus:ring-opacity-80 cursor-pointer`}
                 >
                   Sign up
