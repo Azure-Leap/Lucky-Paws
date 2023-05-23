@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
@@ -10,95 +10,96 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 import axios from "axios";
+import { UserContext } from "@/context/UserContext";
 
 const fredoka = Fredoka({ subsets: ["latin"] });
 
 const SigninForm = () => {
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const [user, setUser] = useState();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [status, setStatus] = useState("error");
-  const [isSignIn, setisSignIn] = useState(false);
+  const { email, setEmail, password, setPassword, handleLogin }: any =
+    useContext(UserContext);
+  // const [open, setOpen] = useState(false);
+  // const router = useRouter();
+  // const [user, setUser] = useState();
+  // const [status, setStatus] = useState("error");
+  // const [isSignIn, setisSignIn] = useState(false);
 
-  const success = () => {
-    return toast.success("🦄 Wow Success!", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
-  const errorAlert = () => {
-    return toast.error("🦄 Oops!!! ERROR!", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
-  const warningAlert = () => {
-    return toast.warn("Хэрэглэгчийн мэдээлэл хоосон байна.", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };
-  const handleClose = () => setOpen(false);
+  // const success = () => {
+  //   return toast.success("🦄 Wow Success!", {
+  //     position: "top-center",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //   });
+  // };
+  // const errorAlert = () => {
+  //   return toast.error("🦄 Oops!!! ERROR!", {
+  //     position: "top-center",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //   });
+  // };
+  // const warningAlert = () => {
+  //   return toast.warn("Хэрэглэгчийн мэдээлэл хоосон байна.", {
+  //     position: "top-center",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //   });
+  // };
+  // const handleClose = () => setOpen(false);
 
-  const login = async (email: string, password: string) => {
-    try {
-      const result = await axios.post(`http://localhost:8008/user/signin`, {
-        email,
-        password,
-      });
-      const data = await result.data;
-      console.log("SUCCESS", await data.data);
-      localStorage.setItem("user", JSON.stringify(data.data));
+  // const login = async (email: string, password: string) => {
+  //   try {
+  //     const result = await axios.post(`http://localhost:8008/user/signin`, {
+  //       email,
+  //       password,
+  //     });
+  //     const data = await result.data;
+  //     console.log("SUCCESS", await data.data);
+  //     localStorage.setItem("user", JSON.stringify(data.data));
 
-      if (String(data.status) === "ok") {
-        success();
-        setUser(data.data.user);
-      } else {
-        console.log(data);
-      }
-      setTimeout(() => {
-        router.push("/home");
-        handleClose();
-      }, 3000);
-      handleClose();
-    } catch (error: any) {
-      console.log(error);
-      setStatus("error");
-      errorAlert();
-      // alert(error.response.data.error);
-    }
-  };
-  const handleClick = async () => {
-    if (email === "" || password === "") {
-      // alert("Хэрэглэгчийн мэдээлэл хоосон байна.");
-      warningAlert();
-      console.log("Хэрэглэгчийн мэдээлэл хоосон байнаа.");
+  //     if (String(data.status) === "ok") {
+  //       success();
+  //       setUser(data.data.user);
+  //     } else {
+  //       console.log(data);
+  //     }
+  //     setTimeout(() => {
+  //       router.push("/home");
+  //       handleClose();
+  //     }, 3000);
+  //     handleClose();
+  //   } catch (error: any) {
+  //     console.log(error);
+  //     setStatus("error");
+  //     errorAlert();
+  //     // alert(error.response.data.error);
+  //   }
+  // };
+  // const handleClick = async () => {
+  //   if (email === "" || password === "") {
+  //     // alert("Хэрэглэгчийн мэдээлэл хоосон байна.");
+  //     warningAlert();
+  //     console.log("Хэрэглэгчийн мэдээлэл хоосон байнаа.");
 
-      return;
-    }
+  //     return;
+  //   }
 
-    login(email, password);
-  };
+  //   login(email, password);
+  // };
 
   return (
     <div className="selection:bg-indigo-500 selection:text-white">
@@ -159,7 +160,7 @@ const SigninForm = () => {
                 <input
                   type="submit"
                   value="Sign in"
-                  onClick={handleClick}
+                  onClick={handleLogin}
                   className="mt-20 px-8 py-4 uppercase rounded-full bg-orange-500 hover:bg-indigo-500 text-white font-semibold text-center block w-full focus:outline-none focus:ring focus:ring-offset-2 focus:ring-indigo-500 focus:ring-opacity-80 cursor-pointer"
                 />
               </div>
