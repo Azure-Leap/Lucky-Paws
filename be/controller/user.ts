@@ -19,9 +19,9 @@ const getAllUsers = async (req: Request, res: Response) => {
   try {
     const user = await User.find({});
     if (!user) {
-      res.status(200).json({ message: "Baraa hooson baina." });
+      res.status(200).json({ message: `хэрэглэгчийн мэдээлэл хоосон байна.`});
     }
-    res.status(200).json({ message: "amjilttai", user });
+    res.status(200).json({ message: "хэрэглэгчид олдлоо`", user });
   } catch (error) {
     console.log("ERROR", error);
   }
@@ -103,7 +103,7 @@ const updateUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   if (!id) {
     res.status(400).json({
-      message: `${id} - tai user obso`,
+      message: `${id} - олдохгүй байна.` ,
     });
   }
   try {
@@ -111,10 +111,10 @@ const updateUser = async (req: Request, res: Response) => {
       new: true,
     });
     if (!user) {
-      res.status(400).json({ message: `${id} - олдохгүй байна.` });
+      res.status(400).json({ message: `${id} Ийм хэрэглэнгчийн мэдээлэл олдсонгүй` });
     }
     res.status(201).json({
-      message: `${id} - tai usernii medeelel amjilttai soligdloo`,
+      message: `Таны мэдээлэл шинэчлэгдлээ`,
       user,
     });
   } catch (error) {
@@ -126,15 +126,207 @@ const deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   if (!id) {
     res.status(400).json({
-      message: `${id} - tai user oldsongui`,
+      message: `${id} Ийм хэрэглэнгчийн мэдээлэл олдсонгүй`,
     });
   }
   try {
     const user = await User.findByIdAndDelete(id);
-    res.status(201).json({ message: `${id} - tai user ustlaa`, user });
+    res.status(201).json({ message: `${id} - тай хэрэглэгч устлаа`, user });
   } catch (error) {
     console.log("ERROR", error);
   }
 };
+
+// Хэрэглэгч дуртай амьтныг нэмэх хасах хэсэг.
+export const getFavAnimal = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({ message: `ID хоосон байна` });
+  }
+  try {
+    const user = await User.findById(id).populate({
+      path: "favAnimal",
+    });
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: `${id} ID-тэй хэрэглэгч олдсонгүй.` });
+    }
+    const favorites = user.favAnimal;
+    res.status(200).json({
+      message: `${id} oлдлоо`,
+      favorites,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+  export const addFavAnimal = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.params;
+    const { favoriteId } = req.body;
+
+    if (!id) {
+      return res.status(400).json({ message: `ID хоосон байна` });
+    }
+
+    try {
+      const user = await User.findById(id);
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: `${id} олдсонгүй.` });
+      }
+      user.favAnimal.push(favoriteId);
+      await user?.save();
+
+      res.status(200).json({
+        message: `${id} амжилттай нэмэгдлээ.`,
+        user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  export const removeFavAnimal = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.params;
+    const { favoriteId } = req.body;
+    if (!id) {
+      return res.status(400).json({ message: `ID хоосон байна` });
+    }
+
+    try {
+      const user = await User.findById(id);
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: `${id} ID-тэй хэрэглэгч олдсонгүй.` });
+      }
+      const idx = user.favAnimal.indexOf(favoriteId);
+      if (idx < 0)
+        return res.status(200).json({
+          message: `${id} ID-тай мэдээлэл олдсонгүй`,
+          user,
+        });
+
+      user.favAnimal.splice(idx, 1);
+      await user?.save();
+      res.status(200).json({
+        message: `${id} ID-тай мэдээлэл шинэчлэгдлээ`,
+        user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  // Сагсанд бараа нэмэх хасах хэсэг.
+
+  export const getShoppingProduct = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ message: `ID хоосон байна` });
+    }
+    try {
+      const user = await User.findById(id).populate({
+        path: "productList",
+      });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: `${id} ID-тэй хэрэглэгч олдсонгүй.` });
+      }
+      const productList = user.productList;
+      res.status(200).json({
+        message: `${id} oлдлоо`,
+        productList,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+    export const addShoppingProduct = async (
+      req: Request,
+      res: Response,
+      next: NextFunction
+    ) => {
+      const { id } = req.params;
+      const { productListId } = req.body;
+
+      if (!id) {
+        return res.status(400).json({ message: `ID хоосон байна` });
+      }
+
+      try {
+        const user = await User.findById(id);
+        if (!user) {
+          return res
+            .status(400)
+            .json({ message: `${id} олдсонгүй.` });
+        }
+        user.productList.push(productListId);
+        await user?.save();
+
+        res.status(200).json({
+          message: `${id} амжилттай нэмэгдлээ.`,
+          user,
+        });
+      } catch (error) {
+        next(error);
+      }
+    };
+
+    export const removeShoppingProduct = async (
+      req: Request,
+      res: Response,
+      next: NextFunction
+    ) => {
+      const { id } = req.params;
+      const { productListId } = req.body;
+      if (!id) {
+        return res.status(400).json({ message: `ID хоосон байна` });
+      }
+
+      try {
+        const user = await User.findById(id);
+        if (!user) {
+          return res
+            .status(400)
+            .json({ message: `${id} ID-тэй хэрэглэгч олдсонгүй.` });
+        }
+        const idx = user.productList.indexOf(productListId);
+        if (idx < 0)
+          return res.status(200).json({
+            message: `${id} ID-тай мэдээлэл олдсонгүй`,
+            user,
+          });
+
+        user.productList.splice(idx, 1);
+        await user?.save();
+        res.status(200).json({
+          message: `${id} ID-тай мэдээлэл шинэчлэгдлээ`,
+          user,
+        });
+      } catch (error) {
+        next(error);
+      }
+    };
 
 export { getUser, getAllUsers, deleteUser, updateUser, signUp, signIn };

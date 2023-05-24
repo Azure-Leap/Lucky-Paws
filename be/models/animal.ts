@@ -5,7 +5,7 @@ export interface IAnimal {
   imgs:[{src:String}];
   age:number;
   size:string;
-  gender:string;
+  gender:string;    
   health:string;
   location:string;
   date:Date;
