@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { filter } from "lodash";
+import _ from "lodash";
 
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
@@ -9,43 +9,46 @@ import Pagination from "../../components/Shop/Pagination";
 import { ShopFilter } from "@/components/Shop/ShopFilter";
 
 const Products = () => {
-  const { products, setProduct } = useProducts();
-  const [selectedCategory, setSelectedCategory] = useState();
-  const [selectedType, setSelectedType] = useState();
+  const { products } = useProducts();
+  const [filteredList, setFilteredList] = useState(products);
   const router = useRouter();
-  const {} = useRouter();
-
-  const getFilteredList = () => {
-    if (selectedCategory === "645c9695d4a8fa0b9a04d3bd" || !selectedCategory) {
-      return products;
-    } else if (selectedType !== undefined) {
-      return filter(products, (item: any) => {
-        return item.productType._id === selectedType;
-      });
-    } else {
-      return filter(products, (item: any) => {
-        return item.productType.storeCategory === selectedCategory;
-      });
-    }
-  };
-  const filteredList = useMemo(getFilteredList, [
-    selectedCategory,
-    selectedType,
-    products,
-  ]);
-
-  function handleCategory(e: any) {
-    setSelectedCategory(e.target.value);
-    setSelectedType(undefined);
-  }
-  function handleType(e: any) {
-    setSelectedType(e.target.value);
-  }
 
   useEffect(() => {
-    setProduct(getFilteredList);
-  }, [getFilteredList, setProduct]);
+    setFilteredList(products);
+  }, [products]);
+
+  function handleAll(e: any) {
+    setFilteredList(products);
+    console.log("All: ", filteredList );
+  }
+
+  function handleCategory(e: any) {
+    const categoryValue = e.target.value;
+    
+    const newFilter = _.filter(products, (item: any) => {
+      return item.productType.storeCategory === categoryValue;
+    });
+    
+    setFilteredList(newFilter);
+  }
+
+  
+  function handleType(e: any) {
+    const categoryValue = e.target.name;
+    const typeValue = e.target.value;
+
+    const newFilter = _.filter(products, (item: any) => {
+      return (
+        item.productType._id === typeValue &&
+        item.productType.storeCategory === categoryValue
+      );
+    });
+
+    setFilteredList(newFilter);
+  }
+
   const breadCrumbs = [{ name: "Products", link: "" }];
+
   if (router.isFallback) {
     return <div> Loading ...</div>;
   }
@@ -54,7 +57,11 @@ const Products = () => {
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="m-auto container grid grid-cols-5">
         <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
-          <ShopFilter handleCategory={handleCategory} handleType={handleType} />
+          <ShopFilter
+            handleCategory={handleCategory}
+            handleType={handleType}
+            handleAll={handleAll}
+          />
         </div>
         <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {filteredList?.map((product: any, idx: number) => (

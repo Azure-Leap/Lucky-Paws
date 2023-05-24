@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { useAddBlogs } from "../../../hooks/useAddBlog";
+import { useAddBlogs } from "@/hooks/useAddBlog";
 import Image from 'next/image';
 import axios from 'axios';
 

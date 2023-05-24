@@ -4,7 +4,7 @@ import axios from "axios";
 import { IAnimal } from "../utils/interfaces/index";
 
 export const useAnimals = () => {
-  const [animal, setAnimal] = useState<IAnimal[]>([]);
+  const [animals, setAnimal] = useState<IAnimal[]>([]);
 
   const getAllAnimals = async () => {
     try {
@@ -12,7 +12,7 @@ export const useAnimals = () => {
         "https://lucky-paws-api.onrender.com/animal"
       );
       setAnimal(result.data.animal);
-      console.log(result);
+      // console.log(result);
     } catch (err) {
       console.log("ERR", err);
     }
@@ -22,5 +22,5 @@ export const useAnimals = () => {
     getAllAnimals();
   }, []);
 
-  return [animal];
+  return { animals,setAnimal };
 };

@@ -2,10 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleLeft,
-  faAngleRight
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 import { useRouter } from "next/router";
 import { useAnimals } from "../../hooks/usePets";
@@ -14,7 +11,7 @@ import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 const Animal = ({ animal }: any) => {
   const [slideIndex, setSlideIndex] = useState(1);
 
-  const [animals] = useAnimals();
+  const { animals } = useAnimals();
   const router = useRouter();
 
   const {} = useRouter();
@@ -116,33 +113,26 @@ const Animal = ({ animal }: any) => {
           </div>
 
           <div className="m-6  xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
-            <div className="mb-5 text-4xl p-1 font-bold my-2 ">{animal.name}</div>
+            <div className="mb-5 text-4xl p-1 font-bold my-2 ">
+              {animal.name}
+            </div>
             <div className="mt-2 text-3xl p-1 font-bold">Gender</div>
             <div className="mt-2 p-1 text-xl">{animal.gender}</div>
             <div className="mt-2 text-3xl p-1 font-bold">Age</div>
-            <div className="mt-2 flex p-1">
-            {animal.age}
-            </div>
+            <div className="mt-2 flex p-1">{animal.age}</div>
             <div className="mt-2 text-3xl p-1 font-bold">Size</div>
             <div className="mt-2 p-1 text-xl">{animal.size}</div>
             <div className="text-3xl p-1 font-bold">Health</div>
-            <div className="mt-2 text-xl p-1">
-              {animal.health}
-            </div>
+            <div className="mt-2 text-xl p-1">{animal.health}</div>
             <div className="grid grid-cols-6 my-16">
-              <button className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
-               
-              </button>
+              <button className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2"></button>
               <Link href={`#`} passHref>
-                <button className="bg-white rounded-lg mx-8 w-28 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
-                 
-                </button>
+                <button className="bg-white rounded-lg mx-8 w-28 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2"></button>
               </Link>
             </div>
           </div>
         </div>
         <div className=" mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2 ">
-          
           {animals?.slice(0, 3).map((animal: any, index: number) => (
             <Link key={index} href={`animal/${animal._id}`} passHref>
               <div
@@ -163,7 +153,9 @@ const Animal = ({ animal }: any) => {
                     <div className=" max-sm:text-2xl sm:text-2xl md:text-xl text-center p-1 ">
                       {animal.title}
                     </div>
-                    <div className=" max-sm:p-4 sm:text-2xl md:text-xl p-1 ">{animal.price}</div>
+                    <div className=" max-sm:p-4 sm:text-2xl md:text-xl p-1 ">
+                      {animal.price}
+                    </div>
                   </div>
                 </div>
               </div>
