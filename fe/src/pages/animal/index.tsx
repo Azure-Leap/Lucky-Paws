@@ -10,12 +10,13 @@ import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import { useAnimals } from "@/hooks/usePets";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import { IAnimal, ICard } from "@/utils/interfaces";
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { FavAnimalContext } from "@/context/FavAnimalContext";
+import  {AnimalFilter}  from "@/components/Animal/AnimalFilter";
 
 const Section = () => {
-  const [animals] = useAnimals();
+  const { animals } = useAnimals();
   const { addAnimal, setAddAnimal } = useContext(FavAnimalContext);
+  const [filteredList,setFilteredList]= useState(animals)
   const handleClick = (animal: IAnimal) => {
     if (animal._id) {
       let newAnimal =
@@ -53,11 +54,12 @@ const Section = () => {
     <div className="bg-[#FFF3D3] p-10">
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="m-auto container grid grid-cols-6">
-        <div className="lg:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-6 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
-          <SortList />
+        <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
+          {/* <SortList /> */}
+          <AnimalFilter animals={animals}  setFilteredList={setFilteredList} />
         </div>
         <div className="gap-6 mx-auto md:col-span-5 sm:col-span-5 max-sm:col-span-6 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
-          {animals?.map((animal: any, idx: number) => (
+          {filteredList?.map((animal: any, idx: number) => (
             <div key={idx}>
               <div className="group bg-white hover:scale-110  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3">
                 <div className="group grid grid-cols-2">
