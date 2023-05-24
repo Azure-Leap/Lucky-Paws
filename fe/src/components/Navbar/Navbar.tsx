@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import { useState , useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
@@ -28,10 +28,20 @@ export default function Navbar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [dropdownOpen, setdropdownOpen] = useState(false);
   const router = useRouter();
-  const {addAnimal, setAddAnimal} = useContext(FavAnimalContext);
-  const animalCount = addAnimal?.animals?.length
-  const {card, setCard} = useContext(CardContext);
-  const cardCount = card?.items?.length
+  const { addAnimal, setAddAnimal } = useContext(FavAnimalContext);
+  const animalCount = addAnimal?.animals?.length;
+  const { card, setCard } = useContext(CardContext);
+  const cardCount = card?.items?.length;
+  const [local, setLocal] = useState<any>();
+  useEffect(() => {
+    const a = localStorage.getItem("token");
+    setLocal(a);
+    if (!localStorage.getItem("token")) {
+      setTimeout(() => {}, 5000);
+    } else if (localStorage.getItem("token") === " ") {
+      router.push("/auth/login");
+    }
+  });
 
   const handleOpen = () => {
     setIsCartOpen(!isCartOpen);
@@ -143,12 +153,14 @@ export default function Navbar() {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6  sm:pr-0">
                 <Link
-                href={"/favAnimals"}
+                  href={"/favAnimals"}
                   className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
                   <FontAwesomeIcon icon={faPaw} className="text-2xl" />
                   <div className="bg-orange-300 rounded-full absolute bottom-1 text-lg text-white">
-                  {animalCount === 0 ? null : <span className="block">{animalCount}</span>}
+                    {animalCount === 0 ? null : (
+                      <span className="block">{animalCount}</span>
+                    )}
                   </div>
                 </Link>
                 <button
@@ -157,20 +169,36 @@ export default function Navbar() {
                 >
                   <FontAwesomeIcon icon={faShoppingCart} onClick={handleOpen} />
                   <div className="bg-orange-300 rounded-full absolute bottom-1 text-lg text-white">
-                  {cardCount === 0 ? null : <span className="block">{cardCount}</span>}
+                    {cardCount === 0 ? null : (
+                      <span className="block">{cardCount}</span>
+                    )}
                   </div>
                 </button>
 
                 <p className="p-4  text-3xl hidden xl:ml-6 xl:block">|</p>
-                {/* <ProfileDropDown /> */}
-                <Link href={"/auth"}>
-                  <button className="font-bold text-xl m-3 hidden md:ml-6 md:block">
-                    login
-                  </button>
-                </Link>
-                <button className="font-bold m-3 text-xl bg-orange-500 p-2 w-32 rounded-3xl text-white hidden md:ml-6 md:block">
-                  Sign Up
-                </button>
+                {!local ? (
+                  <div>
+                    <Link href={"/auth"}>
+                      <button className="font-bold text-xl m-3 hidden md:ml-6 md:block">
+                        Login
+                      </button>
+                    </Link>
+                  </div>
+                ) : (
+                  <div>
+                    <ProfileDropDown />
+
+                    {/* <button
+                        onClick={() => {
+                          localStorage.removeItem("token");
+                          alert("BYE!!!");
+                        }}
+                        className="font-bold m-3 text-xl bg-orange-500 p-2 w-32 rounded-3xl text-white hidden md:ml-6 md:block"
+                      >
+                        Logout
+                      </button> */}
+                  </div>
+                )}
               </div>
             </div>
           </div>

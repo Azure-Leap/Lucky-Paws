@@ -40,7 +40,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 //   }
 // };
 const signUp = async (req: Request, res: Response) => {
-  const { name, email, password: plainTextPassword } = req.body;
+  const { name, email, password: plainTextPassword, profileImg } = req.body;
   if (!name || typeof name !== "string") {
     return res.json({ status: "error", error: "invalid username" });
   }
@@ -57,7 +57,7 @@ const signUp = async (req: Request, res: Response) => {
   console.log(password);
 
   try {
-    const user = await User.create({ name, email, password });
+    const user = await User.create({ name, email, password, profileImg });
     res.status(201).json({ message: "amjilttai burtgegdlee", user });
     console.log(user, "user");
   } catch (error: any) {
@@ -77,10 +77,10 @@ const signIn = async (req: Request, res: Response) => {
 
   const user = await User.findOne({ email });
   console.log(user, "user");
-  console.log(user?.password);
+  // console.log(user.password);
 
   if (!user) {
-    return res.json({ status: "error", error: "Invalid /password" });
+    return res.json({ status: "error", error: "Invalid password" });
   }
   if (bcrypt.compareSync(password, String(user.password))) {
     console.log("iishee orloo");
@@ -91,9 +91,9 @@ const signIn = async (req: Request, res: Response) => {
       },
       JWT_SECRET
     );
-    return res.json({ status: "ok", data: { user, token } });
+    return res.json({ status: "ok", user: user, token: token });
   } else {
-    res.status(400).json({ error: "Invalid email/password" });
+    res.status(400).json({ error: "Invalid email & password" });
   }
   //   // res.json({ status: "success", password: user.password });
   //   // console.log("user", user);

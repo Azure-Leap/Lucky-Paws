@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
-      { protocol: "http", hostname: "**", pathname: "**" },
       { protocol: "https", hostname: "**", pathname: "**" },
+      { protocol: "http", hostname: "**", pathname: "**" },
 
       // { protocol: "https", hostname: "cdn.zochil.shop", pathname: "**" },
       // { protocol: "https", hostname: "tailwindui.com", pathname: "**" },
