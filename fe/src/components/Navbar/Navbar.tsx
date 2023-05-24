@@ -41,6 +41,7 @@ export default function Navbar() {
     { name: "Home", href: "/", current: false },
     { name: "Pets", href: "/animal", current: false },
     { name: "Shop", href: "/products", current: false },
+    { name: "Blog", href: "/blog", current: false },
   ];
   return (
     <Disclosure as="nav">
@@ -102,42 +103,6 @@ export default function Navbar() {
                         {item.name}
                       </Link>
                     ))}
-                    <button
-                      onClick={() => {
-                        setdropdownOpen(!dropdownOpen);
-                      }}
-                      className="group p-2 text-center text-xl font-medium relative  group rounded-md  hover:bg-orange-500 hover:text-white "
-                    >
-                      Blog
-                      <div
-                        className={`${
-                          dropdownOpen
-                            ? `top-full opacity-100 visible `
-                            : "invisible opacity-0"
-                        } text-black text-start m-2 -ml-2 rounded-xl group-hover:block shadow-[0_8px_16px_rgba(132,74,20,0.25)] absolute left-0 z-40 mt-2 w-48 border-[.5px] border-light  shadow-card transition-all`}
-                      >
-                        <Link
-                          className="rounded-t-xl bg-white hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
-                          href="/blog"
-                        >
-                          Advice
-                        </Link>
-
-                        <Link
-                          className="bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
-                          href="#"
-                        >
-                          News
-                        </Link>
-
-                        <Link
-                          className="rounded-b-xl bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
-                          href="/blogWrite"
-                        >
-                          Add new 
-                        </Link>
-                      </div>
-                    </button>
                   </div>
                 </div>
               </div>

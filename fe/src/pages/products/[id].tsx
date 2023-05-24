@@ -19,7 +19,6 @@ import { IProduct } from "@/utils/interfaces";
 const Product = ({ product }: any) => {
   const [count, setCount] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-
   const [slideIndex, setSlideIndex] = useState(1);
 
   const { products } = useProducts();
@@ -29,7 +28,7 @@ const Product = ({ product }: any) => {
     if (product._id) {
       let newProduct = card?.items?.length >0 ? [...card?.items] : []
       
-      let newFav  = {
+      const newFav  = {
         products:product,
         count: 1
       }
@@ -75,7 +74,7 @@ const Product = ({ product }: any) => {
     }, 0);
   };
   
-  const price: number = priceTotal();
+  // const price: number = priceTotal();
 
   const plusSlides = (n: number) => {
     setSlideIndex((prev) => prev + n);

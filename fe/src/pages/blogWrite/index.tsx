@@ -2,15 +2,12 @@ import React, {useState} from 'react'
 import { useAddBlogs } from "../../hooks/useAddBlog";
 import Image from 'next/image';
 import axios from 'axios';
-import { IBlog } from '@/utils/interfaces';
 
 const BlogWrite = () => {
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescripton] = useState("");
   const { createBlog, setNewBlog}  = useAddBlogs();
-  // const [imgList,setImgList]=useState(newBlog.imgList)
-
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
