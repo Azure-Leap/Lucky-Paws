@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Radio } from "@material-tailwind/react";
 import { add, initial } from "lodash";
 
 export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
   const initialType = addNew ? "" : dataPass.type;
+  const initialGender = addNew ? "" : dataPass.gender;
+  const initialAge = addNew ? undefined : dataPass.age;
+  const initialSize = addNew ? "" : dataPass.size;
+  const initialHealth = addNew ? "" : dataPass.health;
+
   const [type, setType] = useState(initialType);
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
-  const [size, setSize] = useState("");
+  const [gender, setGender] = useState(initialGender);
+  const [age, setAge] = useState(initialAge);
+  const [size, setSize] = useState(initialSize);
+  const [health, setHealth] = useState(initialHealth);
 
   const typeMenu = [{ text: "Dog" }, { text: "Cat" }];
-  // const checkType = addNew ? type === type : type === dataPass.type;
   const genderMenu = [{ text: "Male" }, { text: "Female" }];
   const ageMenu = [
     { text: "0-1", value: 0 },
@@ -25,6 +30,8 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
     { text: "Large" },
     { text: "Extra Large" },
   ];
+
+  useEffect(() => {}, [dataPass]);
 
   return (
     <>
@@ -72,20 +79,14 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                         <div className="flex items-center" key={idx}>
                           <input
                             name="animalType"
-                            id="default-checkbox"
                             type="radio"
                             checked={
                               addNew
                                 ? type === item.text
-                                : item.text === dataPass.type
+                                : item.text === initialType
                             }
-                            onChange={
-                              addNew
-                                ? () => setType(item.text)
-                                : () => setType(dataPass.type)
-                              // () => setType(item.text)
-                            }
-                            value={item.text}
+                            onChange={() => setType(item.text)}
+                            value={type}
                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                           />
                           <label className="ml-2 text-sm font-medium text-gray-900 ">
@@ -103,12 +104,16 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                       {genderMenu.map((item: any, idx: number) => (
                         <div className="flex items-center" key={idx}>
                           <input
-                            id="default-checkbox"
-                            type="checkbox"
-                            checked={gender === item.text}
+                            name="gender"
+                            type="radio"
+                            checked={
+                              addNew
+                                ? gender === item.text
+                                : item.text === initialGender
+                            }
                             onChange={() => setGender(item.text)}
-                            value={item.text}
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
+                            value={gender}
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                           />
                           <label className="ml-2 text-sm font-medium text-gray-900 ">
                             {item.text}
@@ -125,11 +130,15 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                       {ageMenu.map((item: any, idx: number) => (
                         <div className="flex items-center" key={idx}>
                           <input
-                            id="default-checkbox"
-                            type="checkbox"
-                            checked={age === item.text}
+                            name="age"
+                            type="radio"
+                            checked={
+                              addNew
+                                ? age === item.value
+                                : item.value === initialAge
+                            }
                             onChange={() => setAge(item.text)}
-                            value={item.value}
+                            value={age}
                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                           />
                           <label className="ml-2 text-sm font-medium text-gray-900 ">
@@ -147,11 +156,15 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                       {sizeMenu.map((item: any, idx: number) => (
                         <div className="flex items-center" key={idx}>
                           <input
-                            id="default-checkbox"
-                            type="checkbox"
-                            checked={size === item.text}
+                            name="size"
+                            type="radio"
+                            checked={
+                              addNew
+                                ? size === item.text
+                                : item.text === initialSize
+                            }
                             onChange={() => setSize(item.text)}
-                            value={item.text}
+                            value={size}
                             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                           />
                           <label className="ml-2 text-sm font-medium text-gray-900 ">
@@ -168,6 +181,10 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                     <input
                       type="text"
                       className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5"
+                      onChange={(e: any) => {
+                        setHealth(e.target.value);
+                      }}
+                      value={initialHealth}
                       placeholder="Vaccinated..."
                     />
                   </div>
@@ -186,7 +203,16 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                   <button
                     className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => setOpen(false)}
+                    onClick={
+                      addNew
+                        ? () => {
+                            console.log("Add New");
+                          }
+                        : () => {
+                            setOpen(false);
+                            console.log(dataPass.health);
+                          }
+                    }
                   >
                     {addNew ? "Add" : "Save Changes"}
                   </button>

@@ -13,7 +13,9 @@ export default function Pets() {
     name: "",
     age: "",
     type: "",
+    gender: "",
     size: "",
+    health: "",
   });
 
   const handleOpen = () => setOpen(!open);
@@ -40,10 +42,16 @@ export default function Pets() {
               Type
             </th>
             <th scope="col" className="px-6 py-3">
+              Gender
+            </th>
+            <th scope="col" className="px-6 py-3">
               Size
             </th>
             <th scope="col" className="px-6 py-3">
               Age
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Health
             </th>
             <th scope="col" className="px-6 py-3">
               Action
@@ -60,8 +68,10 @@ export default function Pets() {
                 {animal.name}
               </th>
               <td className="px-6 py-4">{animal.animaltype.title}</td>
+              <td className="px-6 py-4">{animal.gender}</td>
               <td className="px-6 py-4">{animal.size}</td>
               <td className="px-6 py-4">{animal.age}</td>
+              <td className="px-6 py-4">{animal.health}</td>
               <td className="px-6 py-4">
                 <button
                   onClick={() => {
@@ -72,6 +82,8 @@ export default function Pets() {
                       age: animal.age,
                       type: animal.animaltype.title,
                       size: animal.size,
+                      health: animal.health,
+                      gender: animal.gender,
                     });
                     console.log("Check: ", animal.name);
                   }}
