@@ -8,12 +8,8 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-<<<<<<< HEAD
-import { useState , useContext } from "react";
-=======
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import { useState, useContext, useEffect } from "react";
->>>>>>> master
 import { useRouter } from "next/router";
 
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
