@@ -5,6 +5,8 @@ import Left03 from "./Left03";
 import Right02 from "./Right02";
 import RightLeft01 from "./RightLeft01";
 import Image from "next/image";
+import Link from "next/link";
+
 
 
 const CardPayment = () => {
@@ -55,7 +57,7 @@ const CardPayment = () => {
   };
   const handlePayNowClick = () => {};
   return (
-    <div className="w-10/12 shadow-xl h-5/6 container mx-auto rounded-xl mt-10 bg-gradient-to-b from-yellow-50 to-orange-50">
+    <div className="w-10/12 shadow-xl h-5/6 container mx-auto rounded-xl mt-10 bg-gradient-to-b from-white to-yellow-50">
       <RightLeft01 />
       <div className="grid grid-cols-4 space-x-14 p-8">
         <div className="col-span-2 my-auto">
@@ -185,12 +187,13 @@ const CardPayment = () => {
           </div>
           <div className="mt-8">
             <div className="bg-transparent border-2 border-gray-300 text-center rounded-xl ">
-              <button
+              <Link
+              href={"/tran"}
                 className="text-black text-base font-bold py-4 "
                 onClick={handlePayNowClick}
               >
                 Pay Now
-              </button>
+              </Link>
             </div>
           </div>
         </div>

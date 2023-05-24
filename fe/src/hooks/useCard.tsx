@@ -9,7 +9,7 @@ export const useCard = () => {
   const createCard = async () => {
     try {
       const result = await axios.post(
-        "https://lucky-paws-api.onrender.com/card"
+        "https://lucky-paws-api.onrender.com/shoppingProduct"
       );
       setCard(result.data.card);
     } catch (err) {
@@ -20,5 +20,5 @@ export const useCard = () => {
     createCard();
   }, []);
 
-  return [card];
+  return {card,createCard};
 };

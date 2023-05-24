@@ -11,19 +11,18 @@ export interface IStoreCategory {
   title: String;
   description: String;
 }
-
 export interface IProductType {
   title: String;
   storeCategoryId: { type: String };
   storeCategory: { [key: string]: IStoreCategory };
 }
-export interface Iblog {
-  _id: string;
+export interface IBlog {
+  _id?: string;
   title: string;
-  imgList: string;
+  imgList: string[];
   description: string;
   publishedBy: string;
-  date: Date;
+  date?: Date;
 }
 export interface IAnimal {
   _id: string;
