@@ -20,5 +20,5 @@ export const useCard = () => {
     createCard();
   }, []);
 
-  return [card];
+  return {card};
 };

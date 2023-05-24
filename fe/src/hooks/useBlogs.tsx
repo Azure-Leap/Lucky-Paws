@@ -23,5 +23,5 @@ export const useBlogs = () => {
     getAllBlogs();
   }, []);
 
-  return [blogs];
+  return {blogs};
 };
