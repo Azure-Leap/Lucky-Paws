@@ -111,6 +111,7 @@ export const UserContextProvider = ({ children }: any) => {
 
       localStorage.setItem("profile", String(data.user.profileImg));
 
+      
       // console.log(localStorage.getItem("user"));
 
       localStorage.setItem("token", String(data.token));
