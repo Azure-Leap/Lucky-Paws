@@ -27,9 +27,9 @@ const getBlog = async (req: Request, res: Response) => {
   
   const createBlog = async (req:Request, res:Response) => {
     console.log(req.body)
-    const { title, description, img, publishedBy,  blogCategory } = req.body;
-    if (!title || !description || !img || !blogCategory || !publishedBy) {
-      res.status(400).json({ message: "Medeelliig buren oruulna uu" });
+    const { title, description, imgList} = req.body;
+    if (!title || !description || !imgList) {
+      res.status(400).json({ message: "Medeelliig buren oruulna uu",title,description,imgList });
     }
     try {
       const blog = await Blog.create(req.body);

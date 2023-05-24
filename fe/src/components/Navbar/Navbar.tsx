@@ -26,7 +26,6 @@ function classNames(...classes: any) {
 
 export default function Navbar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [dropdownOpen, setdropdownOpen] = useState(false);
   const router = useRouter();
   const { addAnimal, setAddAnimal } = useContext(FavAnimalContext);
   const animalCount = addAnimal?.animals?.length;

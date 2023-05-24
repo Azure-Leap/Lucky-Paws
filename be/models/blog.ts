@@ -15,27 +15,25 @@ const blogSchema = new Schema({
   type: String,
   required: true,
 },
-img: {
+imgList: [{
   type: String,
   required: true,
-},
+}],
 description: {
   type: String,
   required: true
 },
 publishedBy:{
 type:mongoose.Schema.Types.ObjectId,
-required:true,
 ref:"User"
 },
 date:{
     type: Date,
     default: Date.now, 
-    required: true,
+    // required: true,
 },
 blogCategory:{
   type:mongoose.Schema.Types.ObjectId,
-  required:true,
   ref:"BlogCategory"
   },
 
