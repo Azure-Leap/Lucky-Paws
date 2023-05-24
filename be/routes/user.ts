@@ -8,6 +8,12 @@ import {
   updateUser,
   signUp,
   signIn,
+  getFavAnimal,
+  addFavAnimal,
+  removeFavAnimal,
+  addShoppingProduct, 
+  removeShoppingProduct, 
+  getShoppingProduct
 } from "../controller/user";
 
 const router = Router();
@@ -17,5 +23,10 @@ router.route("/").get(getAllUsers);
 router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
 router.route("/signin").post(jsonParser, signIn);
 router.route("/signup").post(jsonParser, signUp);
+
+router.route("/favroties").post(addFavAnimal).get(getFavAnimal)
+router.route("/favorites/:id").put(removeFavAnimal);
+router.route("/shoppingProduct").post(addShoppingProduct).get(getShoppingProduct)
+router.route("/shoppingProduct/:id").put(removeShoppingProduct);
 
 export default router;
