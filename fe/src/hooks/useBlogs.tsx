@@ -12,12 +12,11 @@ export const useBlogs = () => {
         "https://lucky-paws-api.onrender.com/blog"
       );
       setBlog(result.data.blog);
-      console.log(result);
     } catch (err) {
       console.log("ERR", err);
     }
   };
-  console.log(blogs)
+  // console.log(blogs)
 
   useEffect(() => {
     getAllBlogs();

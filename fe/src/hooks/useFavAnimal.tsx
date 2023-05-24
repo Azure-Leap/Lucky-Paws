@@ -13,6 +13,12 @@ export const useFavAnimal = () => {
         "https://lucky-paws-api.onrender.com/favAnimal"
       );
       setAddAnimal(result.data.favAnimal);
+      const favAnimal = await result.data.favAnimal;
+
+      console.log("SUCCESS", favAnimal);
+
+      // localStorage.setItem("user", String(data.user));
+
     } catch (err) {
       console.log("ERR", err);
     }

@@ -7,6 +7,7 @@ const logoImg = require("../../assets/images/NavBar/logo.png");
 const ProfileDropDown = () => {
   const [dropdownOpen, setdropdownOpen] = useState(false);
   const userName = localStorage.getItem("name");
+  const userEmail = localStorage.getItem("user");
   const profile = String(localStorage.getItem("profile"));
   // const img = profile
   //   ? profile
@@ -39,21 +40,18 @@ const ProfileDropDown = () => {
                 dropdownOpen ? `mt-12 visible ` : "invisible opacity-0"
               } duration-300 text-black text-start mr-2 rounded-xl group-hover:block shadow-[0_8px_16px_rgba(132,74,20,0.25)] absolute -right-0 z-40  w-48 border-[.5px] border-light  shadow-card `}
             >
-              <p className="rounded-t-xl bg-white py-2 px-4 block whitespace-no-wrap">
+              <p className="rounded-t-xl bg-white pt-2 px-4 block text-orange-500 font-bold whitespace-no-wrap">
                 {userName}
+              </p>
+              <p className=" bg-white pb-2 px-4 text-gray-600 block whitespace-no-wrap">
+                {userEmail}
               </p>
               <hr />
               <Link
-                className=" bg-white hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
+                className=" bg-white hover:bg-orange-500 hover:text-white pt-2 px-4 block whitespace-no-wrap"
                 href="/profile"
               >
-                Dashboard
-              </Link>
-              <Link
-                className="bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
-                href="#"
-              >
-                Settings
+               Profile
               </Link>
               <Link
                 className="rounded-b-xl bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"

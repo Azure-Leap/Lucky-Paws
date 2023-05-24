@@ -2,12 +2,14 @@ import React, {useState} from 'react'
 import { useAddBlogs } from "@/hooks/useAddBlog";
 import Image from 'next/image';
 import axios from 'axios';
-
-const BlogWrite = () => {
+import LayoutWithSidebar from "../profileLayout";
+import { useBlogs } from "@/hooks/useBlogs";
+export default function BlogWrite (){
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+  const {blogs} = useBlogs();
   const [title, setTitle] = useState("");
   const [description, setDescripton] = useState("");
-  const { createBlog, setNewBlog}  = useAddBlogs();
+  const { createBlog, setNewBlog,newBlog}  = useAddBlogs();
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -141,8 +143,36 @@ const BlogWrite = () => {
 
 
     </div>
+    <tbody className='bg-blue-300 mx-auto border-2 border-black container  '>
+    {blogs?.map((blog: any, idx: number) => (
+            <tr key={idx} className="bg-white border-b ">
+              <th
+                scope="row"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+              >
+                {blog.title}
+              </th>
+              <td className="px-6 py-4">{}</td>
+              <td className="px-6 py-4">
+                <button
+                  className="mx-2 font-medium text-blue-600  hover:underline"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => {
+                  }}
+                  className="mx-2 font-medium text-red-600  hover:underline"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+      </tbody>
     </div>
   );
 }
-
-export default BlogWrite
+BlogWrite.getLayout = function (page: any) {
+  return <LayoutWithSidebar>{page}</LayoutWithSidebar>;
+};
