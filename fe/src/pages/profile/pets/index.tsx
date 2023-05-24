@@ -5,7 +5,7 @@ import PetModal from "@/components/Dashboard/PetsModal/Modal";
 import { data } from "autoprefixer";
 
 export default function Pets() {
-  const { animals } = useAnimals();
+  const { animals, deleteAnimal } = useAnimals();
 
   const [open, setOpen] = useState(false);
   const [addNew, setAddNew] = useState(true);
@@ -13,9 +13,12 @@ export default function Pets() {
     name: "",
     age: "",
     type: "",
+    typeId: "",
     gender: "",
     size: "",
     health: "",
+    location: "",
+    imgs: [],
   });
 
   const handleOpen = () => setOpen(!open);
@@ -51,6 +54,9 @@ export default function Pets() {
               Age
             </th>
             <th scope="col" className="px-6 py-3">
+              Location
+            </th>
+            <th scope="col" className="px-6 py-3">
               Health
             </th>
             <th scope="col" className="px-6 py-3">
@@ -71,6 +77,7 @@ export default function Pets() {
               <td className="px-6 py-4">{animal.gender}</td>
               <td className="px-6 py-4">{animal.size}</td>
               <td className="px-6 py-4">{animal.age}</td>
+              <td className="px-6 py-4">{animal.location}</td>
               <td className="px-6 py-4">{animal.health}</td>
               <td className="px-6 py-4">
                 <button
@@ -81,9 +88,12 @@ export default function Pets() {
                       name: animal.name,
                       age: animal.age,
                       type: animal.animaltype.title,
+                      typeId: animal.animaltype._id,
                       size: animal.size,
                       health: animal.health,
                       gender: animal.gender,
+                      location: animal.location,
+                      imgs: animal.imgs,
                     });
                     console.log("Check: ", animal.name);
                   }}
@@ -93,7 +103,8 @@ export default function Pets() {
                 </button>
                 <button
                   onClick={() => {
-                    console.log(dataPass);
+                    // setAnimalId(animal._id);
+                    deleteAnimal(animal._id);
                   }}
                   className="mx-2 font-medium text-red-600  hover:underline"
                 >
