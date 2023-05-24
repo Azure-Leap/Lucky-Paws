@@ -7,7 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Blog() {
-  const [blogs] = useBlogs();
+  const {blogs} = useBlogs();
   const breadCrumbs = [{ name: "Blog", link: "" }];
   return (
     <div className=" bg-[#FFF3D3]  m-auto">

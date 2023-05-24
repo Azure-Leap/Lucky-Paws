@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Iblog } from "@/utils/interfaces";
+import { IBlog } from "@/utils/interfaces";
 
 export const useBlogs = () => {
-  const [blogs, setBlog] = useState<Iblog[]>([]);
+  const [blogs, setBlog] = useState<IBlog[]>([]);
 
   const getAllBlogs = async () => {
     try {
@@ -23,5 +23,5 @@ export const useBlogs = () => {
     getAllBlogs();
   }, []);
 
-  return [blogs];
+  return {blogs};
 };

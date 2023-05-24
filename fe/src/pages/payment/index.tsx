@@ -1,10 +1,11 @@
+import CardPayment from '@/components/cardPayment'
 import React from 'react'
 
 const index = () => {
   return (
-    <div className='bg-white container mx-auto'>
-      
-    </div>
+    <>
+      <CardPayment/>
+    </>
   )
 }
 
