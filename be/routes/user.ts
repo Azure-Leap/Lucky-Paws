@@ -24,8 +24,8 @@ router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
 router.route("/signin").post(jsonParser, signIn);
 router.route("/signup").post(jsonParser, signUp);
 
-router.route("/favorites").get(getFavAnimal)
-router.route("/favorites/:id").post(addFavAnimal).delete(removeFavAnimal);
+router.route("/favorites").get(getFavAnimal).post(addFavAnimal)
+router.route("/favorites/:id").delete(removeFavAnimal);
 router.route("/shoppingProduct").post(addShoppingProduct).get(getShoppingProduct)
 router.route("/shoppingProduct/:id").put(removeShoppingProduct);
 
