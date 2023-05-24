@@ -15,7 +15,8 @@ export const useProducts = () => {
       const result = await axios.get(
         "https://lucky-paws-api.onrender.com/product"
       );
-      setProduct(result.data.product);
+      const product = result.data.product;
+      setProduct(product);
     } catch (err) {
       console.log("ERR", err);
     }
@@ -25,5 +26,5 @@ export const useProducts = () => {
     getAllPruducts();
   }, []);
 
-  return { products, setProduct, getAllPruducts };
+  return { products, setProduct };
 };
