@@ -7,8 +7,8 @@ import { data } from "autoprefixer";
 export default function Pets() {
   const { animals, deleteAnimal } = useAnimals();
 
-  const [open, setOpen] = useState(false);
-  const [addNew, setAddNew] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [addNew, setAddNew] = useState(false);
   const [dataPass, setDataPass] = useState({
     name: "",
     age: "",
@@ -19,26 +19,31 @@ export default function Pets() {
     health: "",
     location: "",
     imgs: [{}],
-    publishedBy:"",
-    date:""
+    publishedBy: "",
+    date: "",
   });
 
   const handleOpen = () => {
-    setOpen(!open);
+    setModalOpen(!modalOpen);
     setAddNew(true);
-    setDataPass({
-      name: "",
-      age: "",
-      animaltype: "",
-      typeId: "",
-      gender: "",
-      size: "",
-      health: "",
-      location: "",
-      imgs: [{}],
-      publishedBy:"",
-      date:""
-    });
+
+    if (addNew) {
+      setDataPass({
+        name: "",
+        age: "",
+        animaltype: "",
+        typeId: "",
+        gender: "",
+        size: "",
+        health: "",
+        location: "",
+        imgs: [{}],
+        publishedBy: "",
+        date: "",
+      });
+    } else {
+      dataPass;
+    }
   };
   return (
     <div className="relative overflow-x-auto container grid bg-blue-300 mx-auto">
@@ -102,7 +107,7 @@ export default function Pets() {
                   onClick={() => {
                     handleOpen();
                     setAddNew(false);
-                    console.log(animal)
+                    console.log("EDIT BTN:", animal);
                     setDataPass({
                       name: animal.name,
                       age: animal.age,
@@ -113,10 +118,9 @@ export default function Pets() {
                       gender: animal.gender,
                       location: animal.location,
                       imgs: animal.imgs,
-                      publishedBy:animal.publishedBy,
-                      date:animal.date
+                      publishedBy: animal.publishedBy,
+                      date: animal.date,
                     });
-                    console.log("Check: ", animal.name);
                   }}
                   className="mx-2 font-medium text-blue-600  hover:underline"
                 >
@@ -137,8 +141,8 @@ export default function Pets() {
         </tbody>
       </table>
       <PetModal
-        open={open}
-        setOpen={setOpen}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
         addNew={addNew}
         animals={animals}
         dataPass={dataPass}

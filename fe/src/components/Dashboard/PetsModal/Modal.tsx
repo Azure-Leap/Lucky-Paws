@@ -1,39 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Radio } from "@material-tailwind/react";
-import { add, initial } from "lodash";
+import { add, initial, set } from "lodash";
 import { useAnimals } from "@/hooks/usePets";
 
-export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
-  const { addAnimal,updateAnimal } = useAnimals();
-
+export default function PetModal({
+  modalOpen,
+  setModalOpen,
+  addNew,
+  dataPass,
+}: any) {
+  const { addAnimal, updateAnimal } = useAnimals();
 
   const initialName = addNew ? "" : dataPass.name;
-  const initialAnimalType = addNew ? "" : dataPass.typeId;
-  const initialType = addNew ? "" : dataPass.type;
+  const initialTypeId = addNew ? "" : dataPass.typeId;
+  const initialType = addNew ? "" : dataPass.animaltype;
   const initialGender = addNew ? "" : dataPass.gender;
   const initialAge = addNew ? undefined : dataPass.age;
   const initialSize = addNew ? "" : dataPass.size;
-  const initialHealth = addNew ? undefined : dataPass.health;
-  const initialLocation = addNew ? undefined : dataPass.location;
+  const initialHealth = addNew ? "" : dataPass.health;
+  const initialLocation = addNew ? "" : dataPass.location;
+  // name: animal.name,
+  // age: animal.age,
+  // animaltype: animal.animaltype.title,
+  // typeId: animal.animaltype._id,
+  // size: animal.size,
+  // health: animal.health,
+  // gender: animal.gender,
+  // location: animal.location,
+  // imgs: animal.imgs,
+  // publishedBy: animal.publishedBy,
+  // date: animal.date,
 
   const [name, setName] = useState(initialName);
-  const [animaltype, setAnimalType] = useState(initialAnimalType);
+  const [typeId, setTypeId] = useState(initialTypeId);
   const [type, setType] = useState(initialType);
   const [gender, setGender] = useState(initialGender);
   const [age, setAge] = useState(initialAge);
   const [size, setSize] = useState(initialSize);
   const [health, setHealth] = useState(initialHealth);
   const [location, setLocation] = useState(initialLocation);
-
-//   const newAnimal = { name: String,
-//   age: Number,
-//   type: String ,
-//   gender: String,
-//   size: String,
-//   health: String,
-//   location: String,
-//     imgs: [{String}]
-// };
 
   const typeMenu = [
     { text: "Dog", value: "6454a1a4a4948f1874896b8f" },
@@ -54,41 +59,53 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
     { text: "Extra Large" },
   ];
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    const userId = localStorage.getItem("userId")
-  
+    const userId = localStorage.getItem("userId");
+
     const newAnimal = {
       name,
       age,
-      animaltype: animaltype,
-      publishedBy:userId,
+      animaltype: typeId,
+      publishedBy: userId,
       gender,
       size,
       health,
       location,
-      date:new Date(),
-      imgs: [{src:"https://images.unsplash.com/photo-1618826411640-d6df44dd3f7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2F0fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"}],
+      date: new Date(),
+      imgs: [
+        {
+          src: "https://images.unsplash.com/photo-1618826411640-d6df44dd3f7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2F0fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+        },
+      ],
     };
-    console.log("NEW: ",newAnimal)
-    if(addNew){
+
+    if (addNew) {
       addAnimal(newAnimal);
-      setOpen(false);
-    }else{
-      updateAnimal(newAnimal)
+      setModalOpen(false);
+      console.log("NEW: ", newAnimal);
+    } else {
+      updateAnimal(newAnimal);
+      console.log("UPDATE: ", newAnimal);
     }
   };
 
-  useEffect(() => {}, [dataPass]);
+  const handleClose = () => {
+    setModalOpen(false);
+    // console.log(initialName);
+  };
 
   return (
     <>
-      {open ? (
+      {modalOpen ? (
         <div className="bg-opacity-50 bg-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
           <div className="relative w-2/3 my-6 mx-auto max-w-3xl">
             {/*content*/}
-            <form onSubmit={handleSubmit} className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <form
+              onSubmit={handleSubmit}
+              className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+            >
               {/*header*/}
               <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                 <h3 className="text-3xl font-semibold">
@@ -96,7 +113,7 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                 </h3>
                 <button
                   className="p-1 ml-auto bg-transparent border-0 text-black  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                  onClick={() => setOpen(false)}
+                  onClick={handleClose}
                 >
                   <span className=" text-black h-6 w-6 text-2xl block outline-none focus:outline-none">
                     ×
@@ -114,7 +131,7 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                     onChange={(e) => {
                       setName(e.target.value);
                     }}
-                    defaultValue={name}
+                    value={name}
                     className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 "
                   />
                 </div>
@@ -128,17 +145,13 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                         <input
                           name="animalType"
                           type="radio"
-                          checked={
-                            addNew
-                              ? animaltype === item.value
-                              : item.text === initialType
-                          }
-                          onChange={
-                            addNew
-                              ? () => setAnimalType(item.value)
-                              : () => setType(item.text)
-                          }
-                          value={addNew ? animaltype : type}
+                          checked={type === item.text}
+                          onChange={() => {
+                            console.log("TEXT", item.text);
+                            console.log("TYPE", dataPass.animaltype);
+                            setTypeId(item.value);
+                          }}
+                          value={type}
                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                         />
                         <label className="ml-2 text-sm font-medium text-gray-900 ">
@@ -158,13 +171,12 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                         <input
                           name="gender"
                           type="radio"
-                          checked={
-                            addNew
-                              ? gender === item.text
-                              : item.text === initialGender
-                          }
-                          onChange={() => setGender(item.text)}
-                          value={gender}
+                          checked={gender === item.text}
+                          onChange={() => {
+                            setGender(item.text);
+                            console.log(gender);
+                          }}
+                          value={initialGender}
                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                         />
                         <label className="ml-2 text-sm font-medium text-gray-900 ">
@@ -184,13 +196,9 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                         <input
                           name="age"
                           type="radio"
-                          checked={
-                            addNew
-                              ? age === item.value
-                              : item.value === initialAge
-                          }
+                          checked={age === item.value}
                           onChange={() => setAge(item.value)}
-                          value={age}
+                          value={initialAge}
                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                         />
                         <label className="ml-2 text-sm font-medium text-gray-900 ">
@@ -210,13 +218,9 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                         <input
                           name="size"
                           type="radio"
-                          checked={
-                            addNew
-                              ? size === item.text
-                              : item.text === initialSize
-                          }
+                          checked={size === item.text}
                           onChange={() => setSize(item.text)}
-                          value={size}
+                          value={initialSize}
                           className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                         />
                         <label className="ml-2 text-sm font-medium text-gray-900 ">
@@ -236,7 +240,7 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                     onChange={(e: any) => {
                       setLocation(e.target.value);
                     }}
-                    value={location}
+                    value={initialHealth}
                     placeholder="Vaccinated..."
                   />
                 </div>
@@ -250,7 +254,7 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                     onChange={(e: any) => {
                       setHealth(e.target.value);
                     }}
-                    value={health}
+                    value={initialHealth}
                     placeholder="Vaccinated..."
                   />
                 </div>
@@ -271,10 +275,12 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                   type="submit"
                   // onClick={
                   //   addNew
-                  //     ? () => {                     }
+                  //     ? () => {
+                  //         console.log(dataPass);
+                  //       }
                   //     : () => {
-                  //         setOpen(false);
-                  //         console.log(dataPass.health);
+                  //         // setOpen(false);
+                  //         console.log("CHECKING", health);
                   //       }
                   // }
                 >
