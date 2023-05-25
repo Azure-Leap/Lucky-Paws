@@ -16,8 +16,8 @@ export default function HomePage() {
       <Image
         src={orangeCat}
         alt="orange cat"
-        width={200}
-        height={200}
+        width={80}
+        height={80}
         priority={true}
         className="fixed w-auto h-auto right-0 top-1/2 -translate-y-1/2 z-[1] orange-cat"
       />

@@ -12,16 +12,34 @@ export default function Pets() {
   const [dataPass, setDataPass] = useState({
     name: "",
     age: "",
-    type: "",
+    animaltype: "",
     typeId: "",
     gender: "",
     size: "",
     health: "",
     location: "",
-    imgs: [],
+    imgs: [{}],
+    publishedBy:"",
+    date:""
   });
 
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {
+    setOpen(!open);
+    setAddNew(true);
+    setDataPass({
+      name: "",
+      age: "",
+      animaltype: "",
+      typeId: "",
+      gender: "",
+      size: "",
+      health: "",
+      location: "",
+      imgs: [{}],
+      publishedBy:"",
+      date:""
+    });
+  };
   return (
     <div className="relative overflow-x-auto container grid bg-blue-300 mx-auto">
       <div className="bg-red-300 justify-self-end">
@@ -84,16 +102,19 @@ export default function Pets() {
                   onClick={() => {
                     handleOpen();
                     setAddNew(false);
+                    console.log(animal)
                     setDataPass({
                       name: animal.name,
                       age: animal.age,
-                      type: animal.animaltype.title,
+                      animaltype: animal.animaltype.title,
                       typeId: animal.animaltype._id,
                       size: animal.size,
                       health: animal.health,
                       gender: animal.gender,
                       location: animal.location,
                       imgs: animal.imgs,
+                      publishedBy:animal.publishedBy,
+                      date:animal.date
                     });
                     console.log("Check: ", animal.name);
                   }}

@@ -4,7 +4,10 @@ import { add, initial } from "lodash";
 import { useAnimals } from "@/hooks/usePets";
 
 export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
-  const { addAnimal, setNewAnimal } = useAnimals();
+  const { addAnimal,updateAnimal } = useAnimals();
+
+
+  const initialName = addNew ? "" : dataPass.name;
   const initialAnimalType = addNew ? "" : dataPass.typeId;
   const initialType = addNew ? "" : dataPass.type;
   const initialGender = addNew ? "" : dataPass.gender;
@@ -13,6 +16,7 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
   const initialHealth = addNew ? undefined : dataPass.health;
   const initialLocation = addNew ? undefined : dataPass.location;
 
+  const [name, setName] = useState(initialName);
   const [animaltype, setAnimalType] = useState(initialAnimalType);
   const [type, setType] = useState(initialType);
   const [gender, setGender] = useState(initialGender);
@@ -21,7 +25,15 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
   const [health, setHealth] = useState(initialHealth);
   const [location, setLocation] = useState(initialLocation);
 
-  const newAnimal = { animaltype, gender, age, size, health };
+//   const newAnimal = { name: String,
+//   age: Number,
+//   type: String ,
+//   gender: String,
+//   size: String,
+//   health: String,
+//   location: String,
+//     imgs: [{String}]
+// };
 
   const typeMenu = [
     { text: "Dog", value: "6454a1a4a4948f1874896b8f" },
@@ -42,6 +54,32 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
     { text: "Extra Large" },
   ];
 
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
+
+    const userId = localStorage.getItem("userId")
+  
+    const newAnimal = {
+      name,
+      age,
+      animaltype: animaltype,
+      publishedBy:userId,
+      gender,
+      size,
+      health,
+      location,
+      date:new Date(),
+      imgs: [{src:"https://images.unsplash.com/photo-1618826411640-d6df44dd3f7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2F0fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"}],
+    };
+    console.log("NEW: ",newAnimal)
+    if(addNew){
+      addAnimal(newAnimal);
+      setOpen(false);
+    }else{
+      updateAnimal(newAnimal)
+    }
+  };
+
   useEffect(() => {}, [dataPass]);
 
   return (
@@ -50,7 +88,7 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
         <div className="bg-opacity-50 bg-black justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
           <div className="relative w-2/3 my-6 mx-auto max-w-3xl">
             {/*content*/}
-            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            <form onSubmit={handleSubmit} className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
               {/*header*/}
               <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                 <h3 className="text-3xl font-semibold">
@@ -73,10 +111,10 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                   </label>
                   <input
                     type="text"
-                    defaultValue={addNew ? "" : dataPass.name}
                     onChange={(e) => {
-                      console.log(e.target.value);
+                      setName(e.target.value);
                     }}
+                    defaultValue={name}
                     className="bg-gray-50 text-gray-900 text-sm block w-full p-2.5 "
                   />
                 </div>
@@ -198,7 +236,7 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                     onChange={(e: any) => {
                       setLocation(e.target.value);
                     }}
-                    value={initialLocation}
+                    value={location}
                     placeholder="Vaccinated..."
                   />
                 </div>
@@ -212,7 +250,7 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
                     onChange={(e: any) => {
                       setHealth(e.target.value);
                     }}
-                    value={initialHealth}
+                    value={health}
                     placeholder="Vaccinated..."
                   />
                 </div>
@@ -230,24 +268,20 @@ export default function PetModal({ open, setOpen, addNew, dataPass }: any) {
               <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                 <button
                   className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={
-                    addNew
-                      ? () => {
-                          // setNewAnimal();
-                          // addAnimal();
-                          console.log(newAnimal);
-                        }
-                      : () => {
-                          setOpen(false);
-                          console.log(dataPass.health);
-                        }
-                  }
+                  type="submit"
+                  // onClick={
+                  //   addNew
+                  //     ? () => {                     }
+                  //     : () => {
+                  //         setOpen(false);
+                  //         console.log(dataPass.health);
+                  //       }
+                  // }
                 >
                   {addNew ? "Add" : "Save Changes"}
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       ) : null}
