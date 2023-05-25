@@ -19,17 +19,6 @@ export default function PetModal({
   const initialSize = addNew ? "" : dataPass.size;
   const initialHealth = addNew ? "" : dataPass.health;
   const initialLocation = addNew ? "" : dataPass.location;
-  // name: animal.name,
-  // age: animal.age,
-  // animaltype: animal.animaltype.title,
-  // typeId: animal.animaltype._id,
-  // size: animal.size,
-  // health: animal.health,
-  // gender: animal.gender,
-  // location: animal.location,
-  // imgs: animal.imgs,
-  // publishedBy: animal.publishedBy,
-  // date: animal.date,
 
   const [name, setName] = useState(initialName);
   const [typeId, setTypeId] = useState(initialTypeId);
@@ -76,7 +65,7 @@ export default function PetModal({
       date: new Date(),
       imgs: [
         {
-          src: "https://images.unsplash.com/photo-1618826411640-d6df44dd3f7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2F0fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+          src: "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1336&q=80",
         },
       ],
     };
@@ -93,7 +82,6 @@ export default function PetModal({
 
   const handleClose = () => {
     setModalOpen(false);
-    // console.log(initialName);
   };
 
   return (
@@ -145,10 +133,10 @@ export default function PetModal({
                         <input
                           name="animalType"
                           type="radio"
-                          checked={type === item.text}
+                          checked={typeId === item.value}
                           onChange={() => {
                             console.log("TEXT", item.text);
-                            console.log("TYPE", dataPass.animaltype);
+                            console.log("TYPE", typeId);
                             setTypeId(item.value);
                           }}
                           value={type}
@@ -240,7 +228,7 @@ export default function PetModal({
                     onChange={(e: any) => {
                       setLocation(e.target.value);
                     }}
-                    value={initialHealth}
+                    value={location}
                     placeholder="Vaccinated..."
                   />
                 </div>
@@ -254,7 +242,7 @@ export default function PetModal({
                     onChange={(e: any) => {
                       setHealth(e.target.value);
                     }}
-                    value={initialHealth}
+                    value={health}
                     placeholder="Vaccinated..."
                   />
                 </div>
