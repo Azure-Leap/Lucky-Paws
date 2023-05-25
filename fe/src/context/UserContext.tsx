@@ -93,7 +93,7 @@ export const UserContextProvider = ({ children }: any) => {
   };
   const login = async (email: string, password: string) => {
     try {
-      const result = await axios.post(`http://localhost:8011/user/signin`, {
+      const result = await axios.post(`http://localhost:8080/user/signin`, {
         email,
         password,
       });
@@ -157,7 +157,7 @@ export const UserContextProvider = ({ children }: any) => {
   <ToastContainer />;
   const signup = async (name: string, email: string, password: string) => {
     try {
-      const res = await axios.post("http://localhost:8011/user/signup", {
+      const res = await axios.post("http://localhost:8080/user/signup", {
         name,
         email,
         password,

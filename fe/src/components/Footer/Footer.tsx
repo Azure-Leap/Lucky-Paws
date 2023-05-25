@@ -118,7 +118,7 @@ const Footer = () => {
                 size="1x"
                 className="mx-2 mt-3"
               />
-              mail: lucky_paws@gmail.com{" "}
+              : lucky_paws@gmail.com{" "}
             </p>
             <p>
               <FontAwesomeIcon

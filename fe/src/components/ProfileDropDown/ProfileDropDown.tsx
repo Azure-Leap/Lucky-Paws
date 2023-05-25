@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ToastContainer, toast } from "react-toastify";
 
 const logoImg = require("../../assets/images/NavBar/logo.png");
 
@@ -8,6 +9,19 @@ const ProfileDropDown = () => {
   const [dropdownOpen, setdropdownOpen] = useState(false);
   const userName = localStorage.getItem("name");
   const profile = String(localStorage.getItem("profile"));
+
+  const LogoutAlert = () => {
+    return toast.warn("Loggin Out. PEACE!!!", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
   // const img = profile
   //   ? profile
   //   : "https://vaumc.org/wp-content/uploads/2021/06/PicturePlaceholder-1.jpg";
@@ -61,13 +75,11 @@ const ProfileDropDown = () => {
               >
                 <div
                   onClick={() => {
-                    localStorage.removeItem("token");
-                    localStorage.removeItem("name");
-                    localStorage.removeItem("user");
-
+                    // logOut();
                     // alert("Bye!!!");
                   }}
                 >
+                  <ToastContainer />
                   Sign out
                 </div>
               </Link>

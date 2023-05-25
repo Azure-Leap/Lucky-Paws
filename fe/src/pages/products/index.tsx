@@ -8,31 +8,39 @@ import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import Pagination from "../../components/Shop/Pagination";
 import { ShopFilter } from "@/components/Shop/ShopFilter";
 
+interface PaginationOptions {
+  currentPage: number;
+  itemsPerPage: number;
+}
+
 const Products = () => {
   const { products } = useProducts();
+  const [displayData1, setDisplayData1] = useState<any>();
   const [filteredList, setFilteredList] = useState(products);
+  const [pagination, setPagination] = useState<PaginationOptions>({
+    currentPage: 1,
+    itemsPerPage: 3,
+  });
   const router = useRouter();
 
-  useEffect(() => {
-    setFilteredList(products);
-  }, [products]);
+  const totalItems = products.length || filteredList.length;
+  const totalPages = Math.ceil(totalItems / pagination.itemsPerPage);
 
   function handleAll(e: any) {
     setFilteredList(products);
-    console.log("All: ", filteredList );
+    console.log("All: ", filteredList);
   }
 
   function handleCategory(e: any) {
     const categoryValue = e.target.value;
-    
+
     const newFilter = _.filter(products, (item: any) => {
       return item.productType.storeCategory === categoryValue;
     });
-    
+
     setFilteredList(newFilter);
   }
 
-  
   function handleType(e: any) {
     const categoryValue = e.target.name;
     const typeValue = e.target.value;
@@ -47,11 +55,29 @@ const Products = () => {
     setFilteredList(newFilter);
   }
 
+  const handlePageChange = (page: number) => {
+    setPagination((prevPagination) => ({
+      ...prevPagination,
+      currentPage: page,
+    }));
+  };
+  const startIndex = (pagination.currentPage - 1) * pagination.itemsPerPage;
+  const endIndex = startIndex + pagination.itemsPerPage;
+
+  // const displayedData = useMemo(() => {
+  //   return products.slice(startIndex, endIndex);
+  // }, [startIndex, endIndex]);
+
   const breadCrumbs = [{ name: "Products", link: "" }];
 
   if (router.isFallback) {
     return <div> Loading ...</div>;
   }
+
+  useEffect(() => {
+    setDisplayData1(products.slice(startIndex, endIndex));
+    setFilteredList(products);
+  }, [products, displayData1]);
   return (
     <div className="bg-[#fff3d3]">
       <Breadcrumbs breadCrumbs={breadCrumbs} />
@@ -64,7 +90,7 @@ const Products = () => {
           />
         </div>
         <div className="mx-auto md:col-span-4 sm:col-span-5 max-sm:col-span-5 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
-          {filteredList?.map((product: any, idx: number) => (
+          {displayData1?.map((product: any, idx: number) => (
             <Link key={idx} href={`products/${product._id}`} passHref>
               <div className="group bg-white hover:scale-110  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3">
                 <div className="group grid grid-cols-2">
@@ -89,7 +115,11 @@ const Products = () => {
           ))}
         </div>
       </div>
-      <Pagination />
+      <Pagination
+        currentPage={pagination.currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
