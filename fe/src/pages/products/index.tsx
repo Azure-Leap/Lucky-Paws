@@ -118,8 +118,9 @@ const Products = () => {
             whileHover="hover"
             whileTap="pressed"
             variants={hoverVariant}
+            key={idx}
             >
-              <Link key={idx} href={`products/${product._id}`} passHref>
+              <Link  href={`products/${product._id}`} passHref>
               <div className="group bg-white shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3">
                 <div className="group grid grid-cols-2">
                   <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 ">

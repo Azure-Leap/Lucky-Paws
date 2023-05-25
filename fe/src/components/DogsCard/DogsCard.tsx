@@ -52,9 +52,10 @@ const Dogs = () => {
           whileHover="hover"
           whileTap="pressed"
           variants={hoverVariant}
+          key={idx}
         >
           <Link
-          key={idx}
+          
           href={e.link}
           className="bg-white text-center rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)]  grid grid-cols-2"
         >

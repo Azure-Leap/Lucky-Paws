@@ -58,10 +58,11 @@ export default function CategoryCards(): any {
           whileHover="hover"
           whileTap="pressed"
           variants={hoverVariant}
+          key={index}
         >
 
           <Link
-            key={index}
+            
             href={e.link}
             className="pt-10 pb-6 flex flex-col gap-10 text-center justify-center rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)] hover:scale-105"
           >
