@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.ts",
-    "build": "tsc",
+    "dev": "nodemon app.ts",
+    "start": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
