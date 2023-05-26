@@ -22,32 +22,39 @@ export const useAnimals = () => {
       const result = await axios.get(
         "https://lucky-paws-api.onrender.com/animal"
       );
-      setAnimal(result.data.animal);
+      const res = result.data.animal;
+      setAnimal(res);
       // console.log(result);
     } catch (err) {
       console.log("ERR", err);
     }
   };
 
-  const addAnimal = async (newAnimal:any) => {
+  const addAnimal = async (newAnimal: any) => {
     try {
-      const response = await axios.post("https://lucky-paws-api.onrender.com/animal", newAnimal);
+      const response = await axios.post(
+        "https://lucky-paws-api.onrender.com/animal",
+        newAnimal
+      );
       const createdAnimal = response.data.animal;
       // Update the animals state to include the newly created animal
       setAnimal([...animals, createdAnimal]);
     } catch (error) {
-      console.error("Error adding animal:", error,newAnimal);
+      console.error("Error adding animal:", error, newAnimal);
     }
   };
 
-  const updateAnimal = async ({animalId,dataPass}:any)=>{
+  const updateAnimal = async ({ animalId, dataPass }: any) => {
     try {
-      const response = await axios.put(`https://lucky-paws-api.onrender.com/animal/${animalId}`,dataPass)
-      console.log("Updated animal: ",response.data)
+      const response = await axios.put(
+        `https://lucky-paws-api.onrender.com/animal/${animalId}`,
+        dataPass
+      );
+      console.log("Updated animal: ", response.data);
     } catch (error) {
-      console.log("Error: ", error)
+      console.log("Error: ", error);
     }
-  }
+  };
   // const addAnimal = async (newAnimal:any) => {
   //   try {
   //     const result = await axios.post(
@@ -63,7 +70,7 @@ export const useAnimals = () => {
   //       health: "",
   //       location: "",
   //       imgs: [],
-  //     });     
+  //     });
   //   } catch (err) {
   //     console.log("ERR", err,newAnimal);
   //   }
@@ -86,5 +93,5 @@ export const useAnimals = () => {
     getAllAnimals();
   }, [deleteAnimal]);
 
-  return { animals, setAnimal, deleteAnimal, addAnimal , updateAnimal};
+  return { animals, setAnimal, addAnimal, updateAnimal, deleteAnimal };
 };

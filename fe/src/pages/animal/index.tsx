@@ -1,23 +1,33 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Pagination from "../../components/Petlist/pagination";
 import SortList from "../../components/Petlist/SortList";
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
-import {motion} from "framer-motion"
-
+import { motion } from "framer-motion";
 import { useAnimals } from "@/hooks/usePets";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
 import { IAnimal, ICard } from "@/utils/interfaces";
 import { FavAnimalContext } from "@/context/FavAnimalContext";
-import  {AnimalFilter}  from "@/components/Animal/AnimalFilter";
+import { AnimalFilter } from "@/components/Animal/AnimalFilter";
+
+interface PaginationOptions {
+  currentPage: number;
+  itemsPerPage: number;
+}
 
 const Section = () => {
   const { animals } = useAnimals();
+  const [displayData1, setDisplayData1] = useState<any>();
+
   const { addAnimal, setAddAnimal } = useContext(FavAnimalContext);
-  const [filteredList,setFilteredList]= useState(animals)
+  const [filteredList, setFilteredList] = useState(animals);
+  const [pagination, setPagination] = useState<PaginationOptions>({
+    currentPage: 1,
+    itemsPerPage: 3,
+  });
   const handleClick = (animal: IAnimal) => {
     if (animal._id) {
       let newAnimal =
@@ -44,76 +54,104 @@ const Section = () => {
       setAddAnimal(favAnimal);
     }
   };
+  const totalItems = animals.length || filteredList.length;
+  const totalPages = Math.ceil(totalItems / pagination.itemsPerPage);
+  const handlePageChange = (page: number) => {
+    setPagination((prevPagination: any) => ({
+      ...prevPagination,
+      currentPage: page,
+    }));
+  };
+  const startIndex = (pagination.currentPage - 1) * pagination.itemsPerPage;
+  const endIndex = startIndex + pagination.itemsPerPage;
 
-  const hoverVariant = {
-    hover: {
-      scale: 1.05,  
-    },
-    pressed: {
-      scale: 0.98,  
-    },
-  }
+  // const displayedData = useMemo(() => {
+  //   return data.slice(startIndex, endIndex);
+  // }, [startIndex, endIndex]);
+  // console.log(displayedData);
+  // console.log(animals);
+  // console.log(filteredList);
 
   const containerLeft = {
     hidden: {
-      opacity: 0,  
-      x: '-100vw',  
+      opacity: 0,
+      x: "-100vw",
     },
     visible: {
-      opacity: 1,  
-      x: 0,  
+      opacity: 1,
+      x: 0,
       transition: {
-        duration: 1,  
-        ease: 'easeInOut',  
+        duration: 1,
+        ease: "easeInOut",
       },
     },
   };
 
   const containerRight = {
     hidden: {
-      opacity: 0,  // Starts with opacity 0
-      x: '100vw',  // Starts outside the right edge of the screen
+      opacity: 0, // Starts with opacity 0
+      x: "100vw", // Starts outside the right edge of the screen
     },
     visible: {
-      opacity: 1,  // Fades in with opacity 1
-      x: 0,  // Moves to the center of the screen
+      opacity: 1, // Fades in with opacity 1
+      x: 0, // Moves to the center of the screen
       transition: {
-        duration: 1,  // Duration of the animation (in seconds)
-        ease: 'easeInOut',  // Easing function for a smooth animation
+        duration: 1, // Duration of the animation (in seconds)
+        ease: "easeInOut", // Easing function for a smooth animation
       },
     },
-  }
+  };
+
+  const hoverVariant = {
+    hover: {
+      scale: 1.05,
+    },
+    pressed: {
+      scale: 0.98,
+    },
+  };
 
   const router = useRouter();
   const {} = useRouter();
+
+  const breadCrumbs = [{ name: "Pets", link: "" }];
+
+  useEffect(() => {
+    setDisplayData1(animals.slice(startIndex, endIndex));
+    setFilteredList(animals);
+  }, [animals, displayData1]);
+
   if (router.isFallback) {
     return <div> Loading ...</div>;
   }
-  const breadCrumbs = [{ name: "Pets", link: "" }];
+
   return (
     <div className="bg-[#FFF3D3] p-10">
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="m-auto container grid grid-cols-6">
-        <motion.div 
-        initial="hidden"
-        animate="visible"
-        variants={containerLeft}
-        className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerLeft}
+          className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]"
+        >
           {/* <SortList /> */}
-          <AnimalFilter animals={animals}  setFilteredList={setFilteredList} />
+          <AnimalFilter animals={animals} setFilteredList={setFilteredList} />
         </motion.div>
         <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerRight}
-        className="gap-6 mx-auto md:col-span-5 sm:col-span-5 max-sm:col-span-6 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
-          {filteredList?.map((animal: any, idx: number) => (
-            <motion.div 
-            whileHover="hover"
-            whileTap="pressed"
-            variants={hoverVariant}
-            key={idx}>
-              <div className="group bg-white  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3">
+          initial="hidden"
+          animate="visible"
+          variants={containerRight}
+          className="gap-6 mx-auto md:col-span-5 sm:col-span-5 max-sm:col-span-6 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2"
+        >
+          {displayData1?.map((animal: any, idx: number) => (
+            <motion.div
+              whileHover="hover"
+              whileTap="pressed"
+              variants={hoverVariant}
+              key={idx}
+            >
+              <div className="group bg-white shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3 ">
                 <div className="group grid grid-cols-2">
                   <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 relative ">
                     <Image
@@ -144,10 +182,12 @@ const Section = () => {
           ))}
         </motion.div>
       </div>
-      <motion.div initial="hidden"
-        animate="visible"
-        variants={containerRight} >
-        <Pagination />
+      <motion.div initial="hidden" animate="visible" variants={containerRight}>
+        <Pagination
+          currentPage={pagination.currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </motion.div>
     </div>
   );
