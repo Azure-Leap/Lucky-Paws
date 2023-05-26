@@ -93,7 +93,7 @@ export const UserContextProvider = ({ children }: any) => {
   };
   const login = async (email: string, password: string) => {
     try {
-      const result = await axios.post(`http://localhost:8000/user/signin`, {
+      const result = await axios.post(`https://lucky-paws-api.onrender.com/user/signin`, {
         email,
         password,
       });
@@ -163,7 +163,7 @@ export const UserContextProvider = ({ children }: any) => {
   <ToastContainer />;
   const signup = async (name: string, email: string, password: string) => {
     try {
-      const res = await axios.post("http://localhost:8000/user/signup", {
+      const res = await axios.post("https://lucky-paws-api.onrender.com/user/signup", {
         name,
         email,
         password,
