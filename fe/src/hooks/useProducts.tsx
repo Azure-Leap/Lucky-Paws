@@ -13,7 +13,7 @@ export const useProducts = () => {
   const getAllPruducts = async () => {
     try {
       const result = await axios.get(
-        "https://lucky-paws-api.onrender.com/product"
+        "https://lucky-paws-g5kgwvgpn-luckypaws.vercel.app/product"
       );
       const product = result.data.product;
       setProduct(product);

@@ -9,7 +9,7 @@ export const useBlogs = () => {
   const getAllBlogs = async () => {
     try {
       const result = await axios.get(
-        "https://lucky-paws-api.onrender.com/blog"
+        "https://lucky-paws-g5kgwvgpn-luckypaws.vercel.app/blog"
       );
       setBlog(result.data.blog);
     } catch (err) {

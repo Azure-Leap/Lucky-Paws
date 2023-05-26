@@ -9,7 +9,7 @@ export const useCard = () => {
   const createCard = async () => {
     try {
       const result = await axios.post(
-        "https://lucky-paws-api.onrender.com/shoppingProduct"
+        "https://lucky-paws-g5kgwvgpn-luckypaws.vercel.app/shoppingProduct"
       );
       setCard(result.data.card);
     } catch (err) {
@@ -20,5 +20,5 @@ export const useCard = () => {
     createCard();
   }, []);
 
-  return {card,createCard};
+  return { card, createCard };
 };

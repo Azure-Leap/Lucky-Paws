@@ -94,7 +94,7 @@ export const UserContextProvider = ({ children }: any) => {
   const login = async (email: string, password: string) => {
     try {
       const result = await axios.post(
-        `https://lucky-paws-api.onrender.com/user/signin`,
+        `https://lucky-paws-g5kgwvgpn-luckypaws.vercel.app/user/signin`,
         {
           email,
           password,
@@ -165,7 +165,7 @@ export const UserContextProvider = ({ children }: any) => {
   const signup = async (name: string, email: string, password: string) => {
     try {
       const res = await axios.post(
-        "https://lucky-paws-api.onrender.com/user/signup",
+        "https://lucky-paws-g5kgwvgpn-luckypaws.vercel.app/user/signup",
         {
           name,
           email,

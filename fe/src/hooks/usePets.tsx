@@ -20,7 +20,7 @@ export const useAnimals = () => {
   const getAllAnimals = async () => {
     try {
       const result = await axios.get(
-        "https://lucky-paws-api.onrender.com/animal"
+        "https://lucky-paws-g5kgwvgpn-luckypaws.vercel.app/animal"
       );
       const res = result.data.animal;
       setAnimal(res);
@@ -33,7 +33,7 @@ export const useAnimals = () => {
   const addAnimal = async (newAnimal: any) => {
     try {
       const response = await axios.post(
-        "https://lucky-paws-api.onrender.com/animal",
+        "https://lucky-paws-g5kgwvgpn-luckypaws.vercel.app/animal",
         newAnimal
       );
       const createdAnimal = response.data.animal;
@@ -47,7 +47,7 @@ export const useAnimals = () => {
   const updateAnimal = async ({ animalId, dataPass }: any) => {
     try {
       const response = await axios.put(
-        `https://lucky-paws-api.onrender.com/animal/${animalId}`,
+        `https://lucky-paws-g5kgwvgpn-luckypaws.vercel.app/animal/${animalId}`,
         dataPass
       );
       console.log("Updated animal: ", response.data);
@@ -79,7 +79,7 @@ export const useAnimals = () => {
   const deleteAnimal = async (animalId: string) => {
     try {
       await axios.delete(
-        `https://lucky-paws-api.onrender.com/animal/${animalId}`
+        `https://lucky-paws-g5kgwvgpn-luckypaws.vercel.app/animal/${animalId}`
       );
       // setAnimal(result.data.animal);
       console.log(animalId);
