@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { Fredoka_One } from "next/font/google";
+import {motion} from "framer-motion"
 
 const fredokaOne = Fredoka_One({ subsets: ["latin"], weight: ["400"] });
 
@@ -29,14 +30,34 @@ const dogs = [
   },
 ];
 
+const hoverVariant = {
+  hover: {
+    scale: 1.05,  
+    transition: {
+      duration: 1,  
+      
+    },
+  },
+  pressed: {
+    scale: 0.98,
+      
+  },
+}
+
 const Dogs = () => {
   return (
     <div className="container p-5 mx-auto my-48 grid grid-flow-row gap-12 text-white max-sm:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {dogs.map((e, idx) => (
-        <Link
+        <motion.div
+          whileHover="hover"
+          whileTap="pressed"
+          variants={hoverVariant}
           key={idx}
+        >
+          <Link
+          
           href={e.link}
-          className="bg-white text-center rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)] hover:scale-105 grid grid-cols-2"
+          className="bg-white text-center rounded-3xl shadow-[0_8px_16px_rgba(132,74,20,0.25)]  grid grid-cols-2"
         >
           <div className="relative w-full h-52 max-sm:col-span-1 sm:col-span-1 md:col-span-2">
             <Image
@@ -47,11 +68,12 @@ const Dogs = () => {
             />
           </div>
           <div
-            className={`text-4xl font-bold my-auto text-orange-500 max-sm:col-span-1 sm:col-span-1 md:col-span-2 ${fredokaOne.className}`}
+            className={`text-4xl font-bold h-20 pt-5  text-orange-500 max-sm:col-span-1 sm:col-span-1 md:col-span-2 ${fredokaOne.className}`}
           >
             {e.name}
           </div>
         </Link>
+        </motion.div>
       ))}
       <Link
         href="#"

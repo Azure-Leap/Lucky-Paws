@@ -6,6 +6,7 @@ import Image from "next/image"
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw } from "@fortawesome/free-solid-svg-icons";
+import {motion} from "framer-motion"
 
 import { useAnimals } from "@/hooks/usePets";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
@@ -44,6 +45,45 @@ const Section = () => {
     }
   };
 
+  const hoverVariant = {
+    hover: {
+      scale: 1.05,  
+    },
+    pressed: {
+      scale: 0.98,  
+    },
+  }
+
+  const containerLeft = {
+    hidden: {
+      opacity: 0,  
+      x: '-100vw',  
+    },
+    visible: {
+      opacity: 1,  
+      x: 0,  
+      transition: {
+        duration: 1,  
+        ease: 'easeInOut',  
+      },
+    },
+  };
+
+  const containerRight = {
+    hidden: {
+      opacity: 0,  // Starts with opacity 0
+      x: '100vw',  // Starts outside the right edge of the screen
+    },
+    visible: {
+      opacity: 1,  // Fades in with opacity 1
+      x: 0,  // Moves to the center of the screen
+      transition: {
+        duration: 1,  // Duration of the animation (in seconds)
+        ease: 'easeInOut',  // Easing function for a smooth animation
+      },
+    },
+  }
+
   const router = useRouter();
   const {} = useRouter();
   if (router.isFallback) {
@@ -54,14 +94,26 @@ const Section = () => {
     <div className="bg-[#FFF3D3] p-10">
       <Breadcrumbs breadCrumbs={breadCrumbs} />
       <div className="m-auto container grid grid-cols-6">
-        <div className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
+        <motion.div 
+        initial="hidden"
+        animate="visible"
+        variants={containerLeft}
+        className="md:col-span-1 bg-white  md:aspect-[9/12] rounded-lg m-5 sm:col-span-5 max-sm:col-span-5 shadow-[0_8px_16px_rgba(132,74,20,0.25)]">
           {/* <SortList /> */}
           <AnimalFilter animals={animals}  setFilteredList={setFilteredList} />
-        </div>
-        <div className="gap-6 mx-auto md:col-span-5 sm:col-span-5 max-sm:col-span-6 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
+        </motion.div>
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerRight}
+        className="gap-6 mx-auto md:col-span-5 sm:col-span-5 max-sm:col-span-6 grid xl:grid-cols-3 sm:grid-cols-3 md:grid-cols-2  max-sm:grid-cols-1 p-2">
           {filteredList?.map((animal: any, idx: number) => (
-            <div key={idx}>
-              <div className="group bg-white hover:scale-110  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3">
+            <motion.div 
+            whileHover="hover"
+            whileTap="pressed"
+            variants={hoverVariant}
+            key={idx}>
+              <div className="group bg-white  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3">
                 <div className="group grid grid-cols-2">
                   <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 relative ">
                     <Image
@@ -88,11 +140,15 @@ const Section = () => {
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-      <Pagination />
+      <motion.div initial="hidden"
+        animate="visible"
+        variants={containerRight} >
+        <Pagination />
+      </motion.div>
     </div>
   );
 };

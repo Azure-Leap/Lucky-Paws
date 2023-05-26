@@ -121,9 +121,9 @@ export default function Navbar() {
                   className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
                   <FontAwesomeIcon icon={faPaw} className="text-2xl" />
-                  <div className="bg-orange-300 rounded-full absolute bottom-1 text-lg text-white">
+                  <div className="bg-orange-400 rounded-full absolute ml-4  bottom-9 text-base w-5 h-5 text-white flex justify-center items-center">
                     {animalCount === 0 ? null : (
-                      <span className="block">{animalCount}</span>
+                      <span className="block mx-auto">{animalCount}</span>
                     )}
                   </div>
                 </Link>
@@ -132,9 +132,9 @@ export default function Navbar() {
                   className="rounded-full text-xl p-2  hover:text-orange-500 hidden xl:ml-6 xl:block"
                 >
                   <FontAwesomeIcon icon={faShoppingCart} onClick={handleOpen} />
-                  <div className="bg-orange-300 rounded-full absolute bottom-1 text-lg text-white">
+                  <div className="bg-orange-400 rounded-full absolute ml-4  bottom-9 text-base w-5 h-5 text-white flex justify-center items-center">
                     {cardCount === 0 ? null : (
-                      <span className="block">{cardCount}</span>
+                      <span className="block mx-auto">{cardCount}</span>
                     )}
                   </div>
                 </button>
