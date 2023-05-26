@@ -21,6 +21,7 @@ export const useFavAnimal = () => {
       console.log("ERR", err);
     }
   };
+
   useEffect(() => {
     addAnimalToFav();
   }, []);

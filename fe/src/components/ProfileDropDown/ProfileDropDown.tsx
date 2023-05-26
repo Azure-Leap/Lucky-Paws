@@ -65,7 +65,7 @@ const ProfileDropDown = () => {
                 className=" bg-white hover:bg-orange-500 hover:text-white pt-2 px-4 block whitespace-no-wrap"
                 href="/profile"
               >
-               Profile
+                Profile
               </Link>
               <Link
                 className="rounded-b-xl bg-white  hover:bg-orange-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
@@ -73,6 +73,10 @@ const ProfileDropDown = () => {
               >
                 <div
                   onClick={() => {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("name");
+
                     // logOut();
                     // alert("Bye!!!");
                   }}
