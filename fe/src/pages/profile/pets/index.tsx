@@ -5,18 +5,46 @@ import PetModal from "@/components/Dashboard/PetsModal/Modal";
 import { data } from "autoprefixer";
 
 export default function Pets() {
-  const { animals } = useAnimals();
+  const { animals, deleteAnimal } = useAnimals();
 
-  const [open, setOpen] = useState(false);
-  const [addNew, setAddNew] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [addNew, setAddNew] = useState(false);
   const [dataPass, setDataPass] = useState({
     name: "",
     age: "",
-    type: "",
+    animaltype: "",
+    typeId: "",
+    gender: "",
     size: "",
+    health: "",
+    location: "",
+    imgs: [{}],
+    publishedBy: "",
+    date: "",
   });
 
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {
+    setModalOpen(!modalOpen);
+    setAddNew(true);
+
+    if (addNew) {
+      setDataPass({
+        name: "",
+        age: "",
+        animaltype: "",
+        typeId: "",
+        gender: "",
+        size: "",
+        health: "",
+        location: "",
+        imgs: [{}],
+        publishedBy: "",
+        date: "",
+      });
+    } else {
+      dataPass;
+    }
+  };
   return (
     <div className="relative overflow-x-auto container grid bg-blue-300 mx-auto">
       <div className="bg-red-300 justify-self-end">
@@ -40,10 +68,19 @@ export default function Pets() {
               Type
             </th>
             <th scope="col" className="px-6 py-3">
+              Gender
+            </th>
+            <th scope="col" className="px-6 py-3">
               Size
             </th>
             <th scope="col" className="px-6 py-3">
               Age
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Location
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Health
             </th>
             <th scope="col" className="px-6 py-3">
               Action
@@ -60,20 +97,30 @@ export default function Pets() {
                 {animal.name}
               </th>
               <td className="px-6 py-4">{animal.animaltype.title}</td>
+              <td className="px-6 py-4">{animal.gender}</td>
               <td className="px-6 py-4">{animal.size}</td>
               <td className="px-6 py-4">{animal.age}</td>
+              <td className="px-6 py-4">{animal.location}</td>
+              <td className="px-6 py-4">{animal.health}</td>
               <td className="px-6 py-4">
                 <button
                   onClick={() => {
                     handleOpen();
                     setAddNew(false);
+                    console.log("EDIT BTN:", animal);
                     setDataPass({
                       name: animal.name,
                       age: animal.age,
-                      type: animal.animaltype.title,
+                      animaltype: animal.animaltype.title,
+                      typeId: animal.animaltype._id,
                       size: animal.size,
+                      health: animal.health,
+                      gender: animal.gender,
+                      location: animal.location,
+                      imgs: animal.imgs,
+                      publishedBy: animal.publishedBy,
+                      date: animal.date,
                     });
-                    console.log("Check: ", animal.name);
                   }}
                   className="mx-2 font-medium text-blue-600  hover:underline"
                 >
@@ -81,7 +128,8 @@ export default function Pets() {
                 </button>
                 <button
                   onClick={() => {
-                    console.log(dataPass);
+                    // setAnimalId(animal._id);
+                    deleteAnimal(animal._id);
                   }}
                   className="mx-2 font-medium text-red-600  hover:underline"
                 >
@@ -93,8 +141,8 @@ export default function Pets() {
         </tbody>
       </table>
       <PetModal
-        open={open}
-        setOpen={setOpen}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
         addNew={addNew}
         animals={animals}
         dataPass={dataPass}

@@ -93,23 +93,29 @@ export const UserContextProvider = ({ children }: any) => {
   };
   const login = async (email: string, password: string) => {
     try {
-      const result = await axios.post(`http://localhost:8080/user/signin`, {
-        email,
-        password,
-      });
+      const result = await axios.post(
+        `https://lucky-paws-api.onrender.com/user/signin`,
+        {
+          email,
+          password,
+        }
+      );
       const data = await result.data;
       const token = await data.token;
       const name = await data.user.name;
+      const id = await data.user._id;
 
       console.log("SUCCESS", await data.user);
       console.log("TOKEN", await token);
       console.log("name", await name);
+      console.log("userID: ", await id);
 
       localStorage.setItem("user", String(data.user));
 
       localStorage.setItem("name", String(data.user.name));
 
       localStorage.setItem("profile", String(data.user.profileImg));
+      localStorage.setItem("userId", String(data.user._id));
 
       // console.log(localStorage.getItem("user"));
 
@@ -127,6 +133,7 @@ export const UserContextProvider = ({ children }: any) => {
         localStorage.setItem("token", String(data.token));
         localStorage.setItem("name", String(data.user.name));
         localStorage.setItem("profile", String(data.user.profileImg));
+        localStorage.setItem("userId", String(data.user._id));
 
         setTimeout(() => {
           router.push("/");
@@ -157,11 +164,14 @@ export const UserContextProvider = ({ children }: any) => {
   <ToastContainer />;
   const signup = async (name: string, email: string, password: string) => {
     try {
-      const res = await axios.post("http://localhost:8080/user/signup", {
-        name,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://lucky-paws-api.onrender.com/user/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
       console.log("res", res);
 
       // alert(res.data.message);

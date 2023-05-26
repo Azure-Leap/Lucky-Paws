@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import HeroPaws from "./HeroPaws/HeroPaws";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { motion } from "framer-motion";
 
 const linesImg = require("../../assets/images/HeroSection/Lines.png");
 const catImg = require("../../assets/images/HeroSection/Cat.png");
@@ -19,11 +20,44 @@ const paw5 = require("../../assets/images/HeroPaws/paw5.png");
 const fredokaOne = Fredoka_One({ subsets: ["latin"], weight: ["400"] });
 
 export default function HeroSection(): JSX.Element {
+  const containerLeft = {
+    hidden: {
+      opacity: 0,  
+      x: '-100vw',  
+    },
+    visible: {
+      opacity: 1,  
+      x: 0,  
+      transition: {
+        duration: 1,  
+        ease: 'easeInOut',  
+      },
+    },
+  };
+  const containerRight = {
+    hidden: {
+      opacity: 0,  // Starts with opacity 0
+      x: '100vw',  // Starts outside the right edge of the screen
+    },
+    visible: {
+      opacity: 1,  // Fades in with opacity 1
+      x: 0,  // Moves to the center of the screen
+      transition: {
+        duration: 1,  // Duration of the animation (in seconds)
+        ease: 'easeInOut',  // Easing function for a smooth animation
+      },
+    },
+    
+  };
   return (
     <section className="relative">
       <HeroPaws />
       <div className="grid max-w-screen-xl px-4 pt-24 pb-32 mx-auto lg:grid-cols-12">
-        <div className=" my-auto lg:col-span-7 sm:mx-auto md:mr-48">
+        <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerLeft}
+        className=" my-auto lg:col-span-7 sm:mx-auto md:mr-48">
           <div className="relative">
             <Image
               src={linesImg}
@@ -83,8 +117,12 @@ export default function HeroSection(): JSX.Element {
             height={190}
             className="absolute left-[200px] bottom-[-10px] -z-10"
           />
-        </div>
-        <div className="hidden relative lg:mt-0 lg:col-span-5 lg:flex justify-end">
+        </motion.div>
+        <motion.div 
+        initial="hidden"
+        animate="visible"
+        variants={containerRight}
+        className="hidden relative lg:mt-0 lg:col-span-5 lg:flex justify-end">
           <Image
             src={paw1}
             alt="paw_no1"
@@ -107,7 +145,7 @@ export default function HeroSection(): JSX.Element {
             className="absolute right-[500px] top-[350px]"
           />
           <Image src={dogImg} alt="dog" width={331} height={499} />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -39,17 +39,17 @@ const getAllAnimals = async (req: Request, res: Response) => {
 
 const createAnimal = async (req: Request, res: Response) => {
   console.log(req.body);
-  const { img, age, size, gender, health, location, publishedBy, AnimalType } =
+  const { imgs, age, size, gender, health, location, publishedBy, animaltype } =
     req.body;
   if (
-    !img ||
+    !imgs ||
     !age ||
     !size ||
     !gender ||
     !health ||
     !location ||
     !publishedBy ||
-    !AnimalType
+    !animaltype
   ) {
     res.status(400).json({ message: "Medeelliig buren oruulna uu" });
   }

@@ -10,6 +10,7 @@ import {
   faTable,
   faShoppingCart,
   faPaw,
+  faPenToSquare
 } from "@fortawesome/free-solid-svg-icons";
 
 const SideBarDet = ({ open }: any) => {
@@ -64,6 +65,16 @@ const SideBarDet = ({ open }: any) => {
               className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 "
             />
             <div className="flex-1 ml-3 whitespace-nowrap">Users</div>
+          </Link>
+          <Link
+            href="/profile/blogWrite"
+            className="flex items-center p-2 text-gray-900 rounded-lg "
+          >
+            <FontAwesomeIcon
+            icon={faPenToSquare}
+              className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 "
+            />
+            <div className="flex-1 ml-3 whitespace-nowrap">Blogs</div>
           </Link>
         </div>
       </div>
