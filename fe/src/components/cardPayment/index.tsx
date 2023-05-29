@@ -7,20 +7,18 @@ import RightLeft01 from "./RightLeft01";
 import Image from "next/image";
 import Link from "next/link";
 
-
-
 const CardPayment = () => {
   const cardChip = require("../../assets/images/CardPayment/card_chip.png");
   // const check = require("../../assets/images/CardPayment/check.png");
   const nfcIcon = require("../../assets/images/CardPayment/nfc-icon.png");
   const cardLogo = require("../../assets/images/CardPayment/cardLogo.png");
 
-  const [cardNumber, setCardNumber] = useState("2417 3125 3544 3546");
-  const [cvvNumber, setCvvNumber] = useState("327");
-  const [expiryMonth, setExpiryMonth] = useState("09");
-  const [expiryYear, setExpiryYear] = useState("22");
-  const [password, setPassword] = useState("adjsbj");
-  const [fullName, setFullName] = useState("Jonathan Micheal");
+  const [cardNumber, setCardNumber] = useState("");
+  const [cvvNumber, setCvvNumber] = useState("");
+  const [expiryMonth, setExpiryMonth] = useState("");
+  const [expiryYear, setExpiryYear] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
   const [isFlip, setIsFlip] = useState(false);
 
   const handleCardNumberChange = (event: any) => {
@@ -67,7 +65,12 @@ const CardPayment = () => {
             <div className="grid grid-cols-3 place-content-around">
               <div className="col-span-2 inline-flex items-center space-x-4">
                 <div className="w-16">
-                  <Image width={200} height={200} src={cardLogo} alt="cardLogo" />
+                  <Image
+                    width={200}
+                    height={200}
+                    src={cardLogo}
+                    alt="cardLogo"
+                  />
                 </div>
                 <div className="">
                   <input
@@ -101,9 +104,7 @@ const CardPayment = () => {
             <div className="grid grid-cols-2 place-content-between space-x-6 items-center mt-4">
               <div className="">
                 <h3 className="text-black font-bold text-base">FullName</h3>
-                <p className="text-black mt-1 text-sm">
-                  Enter your fullName
-                </p>
+                <p className="text-black mt-1 text-sm">Enter your fullName</p>
               </div>
               <div className="border-2 rounded-xl text-center">
                 <input
@@ -188,7 +189,7 @@ const CardPayment = () => {
           <div className="mt-8">
             <div className="bg-transparent border-2 border-gray-300 text-center rounded-xl ">
               <Link
-              href={"/tran"}
+                href={"/ComingSoon"}
                 className="text-black text-base font-bold py-4 "
                 onClick={handlePayNowClick}
               >
@@ -211,16 +212,22 @@ const CardPayment = () => {
               <div className="p-8">
                 <div className="grid grid-cols-2 place-content-evenly mb-14">
                   <div className="">
-                    <Image 
-                      width={100} 
+                    <Image
+                      width={100}
                       height={100}
-                      src={cardChip} alt="cardChip" className="w-12" />
+                      src={cardChip}
+                      alt="cardChip"
+                      className="w-12"
+                    />
                   </div>
                   <div className="justify-self-end">
-                    <Image 
-                      width={100} 
-                      height={100}src={nfcIcon}
-                     alt="wifiLogo" className="w-8" />
+                    <Image
+                      width={100}
+                      height={100}
+                      src={nfcIcon}
+                      alt="wifiLogo"
+                      className="w-8"
+                    />
                   </div>
                 </div>
                 <div>
@@ -240,8 +247,8 @@ const CardPayment = () => {
                     </p>
                   </div>
                   <div className="justify-self-end">
-                    <Image 
-                      width={100} 
+                    <Image
+                      width={100}
                       height={100}
                       src={cardLogo}
                       alt="cardLogo"

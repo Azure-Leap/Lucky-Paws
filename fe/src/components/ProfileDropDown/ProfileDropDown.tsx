@@ -78,7 +78,7 @@ const ProfileDropDown = () => {
                     localStorage.removeItem("name");
 
                     // logOut();
-                    // alert("Bye!!!");
+                    alert("Loggin Out Bye!!!");
                   }}
                 >
                   <ToastContainer />
