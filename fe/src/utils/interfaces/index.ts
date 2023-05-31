@@ -19,7 +19,7 @@ export interface IProductType {
 export interface IBlog {
   _id?: string;
   title: string;
-  imgList: string[];
+  img: string;
   description: string;
   publishedBy: string;
   date?: Date;
@@ -34,16 +34,16 @@ export interface IAnimal {
   location: string;
 }
 
-export interface ICard {
+export interface ICart {
   user_Id: string;
-  items: any[];
+  products: any[];
 }
 export interface ICardContext {
-  card: ICard;
-  setCard: React.Dispatch<React.SetStateAction<ICard>>;
+  addProductToShoppingCart: ICart;
+  setProductToShoppingCart: React.Dispatch<React.SetStateAction<ICart>>;
 }
 export interface IFavAnimal {
-  user_Id: string;
+  user_Id: string | null;
   animals: any[];
 }
 export interface IFavAnimalContext {

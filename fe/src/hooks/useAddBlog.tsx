@@ -4,8 +4,9 @@ import axios from "axios";
 import {IBlog } from "@/utils/interfaces";
 
 export const useAddBlogs = () => {
-  const [newBlog, setNewBlog] = useState<IBlog>({title: "",
-    imgList: [],
+  const [newBlog, setNewBlog] = useState<IBlog>({
+    title: "",
+    img: "",
     description: "",
     publishedBy: ""});
 
@@ -14,8 +15,9 @@ export const useAddBlogs = () => {
       const result = await axios.post(
         "http://localhost:8000/blog", blog
       );
-      setNewBlog({title: "",
-      imgList: [],
+      setNewBlog({
+      title: "",
+      img:"",
       description: "",
       publishedBy: ""});
       clearFields()

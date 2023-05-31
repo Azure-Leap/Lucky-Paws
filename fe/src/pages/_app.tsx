@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import Layout from "./layout";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FavAnimalProvider } from "@/context/FavAnimalContext";
-import { CardProvider } from "@/context/ShoppingCardContext";
+import { CartProvider } from "@/context/ShoppingCartContext";
 import { UserContextProvider } from "@/context/UserContext";
 
 export default function App({ Component, pageProps }: any) {
@@ -12,11 +12,11 @@ export default function App({ Component, pageProps }: any) {
     function (page: any) {
       return (
         <UserContextProvider>
-          <CardProvider>
+          <CartProvider>
             <FavAnimalProvider>
               <Layout>{page}</Layout>
             </FavAnimalProvider>
-          </CardProvider>
+          </CartProvider>
         </UserContextProvider>
       );
     };

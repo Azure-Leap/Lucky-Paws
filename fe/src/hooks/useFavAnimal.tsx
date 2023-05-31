@@ -1,45 +1,55 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { IAnimal } from "@/utils/interfaces";
+import { UserContext } from "@/context/UserContext"
 
 
 export const useFavAnimal = () => {
-  const [addAnimal, setAddAnimal] = useState<IAnimal[]>([]);
-  const [removeAnimal, setRemoveAnimal] = useState<IAnimal[]>([]);
-
-  const addAnimalToFav = async () => {
+  const { user}:any = useContext(UserContext)
+  const [addAnimal, setAddAnimal] = useState<IAnimal[]>(user.favAnimal);
+  
+  const getFavAnimalByUserId = async (uid:string,aid:string) => {
+    const userId = localStorage.getItem("userId");
     try {
-      const result = await axios.post(
-        "https://lucky-paws-api.onrender.com/favAnimal"
-      );
-      setAddAnimal(result.data.favAnimal);
-      const favAnimal = await result.data.favAnimal;
+      const res = await axios.get(`http://localhost:8000/user/favorites/${uid}`,
+     );
 
-      console.log("SUCCESS", favAnimal);
-
-      // localStorage.setItem("user", String(data.user));
-
+     console.log({res})
+     setAddAnimal(res.data.user.favAnimal);
     } catch (err) {
-      console.log("ERR", err);
+      console.log("get error", err);
     }
   };
-  useEffect(() => {
-    addAnimalToFav();
-  }, []);
-
-  const removeFavAnimal = async () => {
+  const addAnimalToFav = async (uid:string,aid:string) =>  {
+    const userId = localStorage.getItem("userId");
     try {
-      const result = await axios.delete(
-        "https://lucky-paws-api.onrender.com/favAnimal"
-      );
-      setAddAnimal(result.data.favAnimal);
+      const res = await axios.post(`http://localhost:8000/user/favorites/${uid}`, {
+        userId:  user?._id,
+        aid
+      });
+
+      const updatedUser = res.data.user;
+      console.log("FAV",updatedUser.favAnimal);
+      setAddAnimal(updatedUser.favAnimav);
     } catch (err) {
-      console.log("ERR", err);
+      console.log("addFavorite err", err);
     }
   };
-  useEffect(() => {
-    addAnimalToFav();
-  }, []);
 
-  return {addAnimal,addAnimalToFav};
+  const removeFavAnimal = async (uid:string,aid:string) => {
+    const userId = localStorage.getItem("userId");
+    try {
+      const res = await axios.put(`http://localhost:8000/user/favorites/${uid}`, {
+        userId:  user?._id,
+        aid
+
+      });
+      const updatedUser = res.data.user;
+      setAddAnimal(updatedUser);
+    } catch (err) {
+      console.log("removeFavorite err", err);
+    }
+  };
+
+  return {addAnimal,addAnimalToFav ,removeFavAnimal,getFavAnimalByUserId};
 };

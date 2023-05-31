@@ -12,40 +12,45 @@ import {
 import { useRouter } from "next/router";
 import { useProducts } from "../../hooks/useProducts";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-import { CardContext } from "@/context/ShoppingCardContext";
+import { CartContext } from "@/context/ShoppingCartContext";
+import { UserContext } from "../../context/UserContext";
 
 import { IProduct } from "@/utils/interfaces";
 
 const Product = ({ product }: any) => {
+  const { user}:any = useContext(UserContext)
   const [count, setCount] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [slideIndex, setSlideIndex] = useState(1);
 
   const { products } = useProducts();
   const router = useRouter();
-  const {card, setCard} = useContext(CardContext)
+  const {addProductToShoppingCart,setProductToShoppingCart } = useContext(CartContext);
   const handleClick = (product: IProduct) => {
-    if (product._id) {
-      let newProduct = card?.items?.length >0 ? [...card?.items] : []
+      console.log("u",user._id);
+      console.log("a",product._id);
+      setProductToShoppingCart(user._id);
+    // if (product._id) {
+    //   let newProduct = cart?.items?.length >0 ? [...cart?.items] : []
       
-      const newFav  = {
-        products:product,
-        count: 1
-      }
+    //   const newFav  = {
+    //     products:product,
+    //     count: 1
+    //   }
 
-      const selectedProIProductIdx = newProduct?.findIndex( e=> e?.products?._id === product?._id)
-      if(selectedProIProductIdx > -1){
-        newProduct[selectedProIProductIdx].count ++
-      } else{
-        newProduct = [... newProduct, newFav]
-      }
+    //   const selectedProIProductIdx = newProduct?.findIndex( e=> e?.products?._id === product?._id)
+    //   if(selectedProIProductIdx > -1){
+    //     newProduct[selectedProIProductIdx].count ++
+    //   } else{
+    //     newProduct = [... newProduct, newFav]
+    //   }
      
-      const cardItem = {
-        user_Id:"jhbmb",
-        items: newProduct
-      }
-      setCard(cardItem);
-    }
+    //   const cardItem = {
+    //     user_Id:"jhbmb",
+    //     items: newProduct
+    //   }
+    //   setCard(cardItem);
+    // }
   };
 
   
@@ -62,7 +67,7 @@ const Product = ({ product }: any) => {
     setTotalPrice(updatedTotalPrice);
   }, [count]);
   
-  const ShoppingCart = card?.items;
+  const ShoppingCart = addProductToShoppingCart?.products;
   const priceTotal = () => {
     if (!ShoppingCart) return 0;
   

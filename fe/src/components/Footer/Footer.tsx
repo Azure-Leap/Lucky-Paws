@@ -1,4 +1,5 @@
-import React from "react";
+import React  from "react";
+import {useState} from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,10 +16,16 @@ import {
   faEnvelope,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import ShoppingCart from "../ShoppingCart/ShoppingCart";
 
 const Footer = () => {
   const logoImg = require("../../assets/images/NavBar/logo.png");
   const luckyPaws = require("../../assets/images/NavBar/LuckyPaws.png");
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const handleOpen = () => {
+    setIsCartOpen(!isCartOpen);
+  };
 
   const navigation = [
     { name: "Home", href: "#", current: false },
@@ -39,7 +46,7 @@ const Footer = () => {
     { name: "Feature stories", href: "#", current: false },
   ];
   return (
-    <div>
+    <div className="relative">
       <div className=" bg-white hidden w-[100vw] xl:block pt-12 mt-20">
         <div className="grid grid-cols-3 gap-24 max-w-[85vw] mx-auto sm:px-6 lg:px-8s">
           <div>
@@ -133,29 +140,27 @@ const Footer = () => {
         <hr className="m-2" />
         <div className="mx-auto grid grid-cols-1 max-w-[100vw] text-center text-stone-200">
           <p className="text-base">Lucky Paws ©2023</p>
-          {/* <p className="text-2xl">|</p> */}
-          {/* <p className="text-xl">Lucky Paws</p> */}
         </div>
       </div>
-      <div className="xl:hidden  grid grid-cols-3 w-[100vw] h-[10vh] bg-white">
-        <button
-          type="button"
-          className="rounded-full text-3xl p-2  hover:text-orange-500"
+      <div className="xl:hidden  grid grid-cols-3 w-[100vw] h-[10vh] bg-white  ">
+        <Link
+          href="/"
+          className="rounded-full text-3xl p-5 mx-5 hover:text-orange-500"
         >
           <FontAwesomeIcon icon={faHouse} />
-        </button>
-        <button
-          type="button"
-          className="rounded-full text-3xl p-2  hover:text-orange-500"
+        </Link>
+        <Link
+          href="/favAnimal"
+          className="rounded-full text-3xl p-5 mx-5  hover:text-orange-500"
         >
           <FontAwesomeIcon icon={faPaw} />
-        </button>
-        <button
-          type="button"
-          className="rounded-full text-3xl p-2  hover:text-orange-500"
+        </Link>
+        <div
+          className="rounded-full text-3xl p-5 mx-5  hover:text-orange-500"
         >
+           <ShoppingCart open={isCartOpen} setOpen={setIsCartOpen} />
           <FontAwesomeIcon icon={faShoppingCart} />
-        </button>
+        </div>
       </div>
     </div>
   );

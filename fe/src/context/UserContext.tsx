@@ -4,13 +4,14 @@ import React, { createContext, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { log } from "console";
+import { IUser } from "@/utils/interfaces";
+
 
 export const UserContext = createContext({});
 
 export const UserContextProvider = ({ children }: any) => {
   const router = useRouter();
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
@@ -100,18 +101,22 @@ export const UserContextProvider = ({ children }: any) => {
       const data = await result.data;
       const token = await data.token;
       const name = await data.user.name;
+      const id =await data.user._id
 
-      console.log("SUCCESS", await data.user);
-      console.log("TOKEN", await token);
-      console.log("name", await name);
+      console.log({data})
+
+      setUser(data?.user)
+
 
       localStorage.setItem("user", String(data.user));
 
       localStorage.setItem("name", String(data.user.name));
 
+      localStorage.setItem("userId", String(data.user._id));
+
       localStorage.setItem("profile", String(data.user.profileImg));
 
-      
+
       // console.log(localStorage.getItem("user"));
 
       localStorage.setItem("token", String(data.token));
@@ -127,8 +132,10 @@ export const UserContextProvider = ({ children }: any) => {
         localStorage.setItem("user", String(data.user.email));
         localStorage.setItem("token", String(data.token));
         localStorage.setItem("name", String(data.user.name));
+        localStorage.setItem("favAnimal",String(data.user.favAnimal))
+        // localStorage.setItem("userId",String(data.user._id))
         localStorage.setItem("profile", String(data.user.profileImg));
-
+        console.log("userID", id)
         setTimeout(() => {
           router.push("/");
         }, 3000);
@@ -164,6 +171,8 @@ export const UserContextProvider = ({ children }: any) => {
         password,
       });
       console.log("res", res);
+
+
 
       // alert(res.data.message);
       Resuccess();
@@ -204,6 +213,8 @@ export const UserContextProvider = ({ children }: any) => {
         rePassword,
         setRePassword,
         handleRegister,
+        user,
+        setUser
       }}
     >
       {children}

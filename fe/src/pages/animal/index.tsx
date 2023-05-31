@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import Pagination from "../../components/Petlist/pagination";
-import SortList from "../../components/Petlist/SortList";
+
 import Link from "next/link";
 import Image from "next/image"
 import { useRouter } from "next/router";
@@ -9,39 +9,24 @@ import { faPaw } from "@fortawesome/free-solid-svg-icons";
 
 import { useAnimals } from "@/hooks/usePets";
 import Breadcrumbs from "@/components/Breadcrumbs/Breadcrumbs";
-import { IAnimal, ICard } from "@/utils/interfaces";
+import { IAnimal } from "@/utils/interfaces";
 import { FavAnimalContext } from "@/context/FavAnimalContext";
 import  {AnimalFilter}  from "@/components/Animal/AnimalFilter";
+import { UserContext } from "@/context/UserContext";
+import { useFavAnimal } from "@/hooks/useFavAnimal";
 
 const Section = () => {
   const { animals } = useAnimals();
+  const { user}:any = useContext(UserContext)
   const { addAnimal, setAddAnimal } = useContext(FavAnimalContext);
   const [filteredList,setFilteredList]= useState(animals)
+
+  const {addAnimalToFav}  = useFavAnimal();
+
   const handleClick = (animal: IAnimal) => {
-    if (animal._id) {
-      let newAnimal =
-        addAnimal?.animals?.length > 0 ? [...addAnimal?.animals] : [];
-
-      let newFav = {
-        animals: animal,
-        count: 1,
-      };
-
-      const selectedAnimalIdx = newAnimal?.findIndex(
-        (e) => e?.animals?._id === animal?._id
-      );
-      if (selectedAnimalIdx > -1) {
-        newAnimal[selectedAnimalIdx].count++;
-      } else {
-        newAnimal = [...newAnimal, newFav];
-      }
-
-      const favAnimal = {
-        user_Id: "jhbmb",
-        animals: newAnimal,
-      };
-      setAddAnimal(favAnimal);
-    }
+    console.log("u",user._id);
+    console.log("a",animal._id);
+    addAnimalToFav(user._id, animal._id);
   };
 
   const router = useRouter();
@@ -63,7 +48,7 @@ const Section = () => {
             <div key={idx}>
               <div className="group bg-white hover:scale-110  shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-3xl m-3">
                 <div className="group grid grid-cols-2">
-                  <div className="max-sm:col-span1 sm:col-span-2 md:col-span-2 xl:col-span-2 relative ">
+                  <div className="max-sm:col-span-2 sm:col-span-2 md:col-span-2 xl:col-span-2 relative ">
                     <Image
                       src={animal.imgs[0].src}
                       alt="animalsPhoto"

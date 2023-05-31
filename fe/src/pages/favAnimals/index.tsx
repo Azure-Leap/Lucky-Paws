@@ -3,8 +3,8 @@ import React, { useContext, useState } from "react";
 import Image from "next/image";
 
 const FavAnimals = ({}) => {
-  const { addAnimal, setAddAnimal } = useContext(FavAnimalContext);
-  const favAnimals = addAnimal?.animals;
+  const { addAnimal } = useContext(FavAnimalContext);
+  const favAnimals =addAnimal ;
 
   return (
     <div className="container mx-auto ">

@@ -47,7 +47,7 @@ export default function BlogWrite (){
     const filePaths = selectedFiles.map((f:any)=>  f.path)
 
     console.log(filePaths)
-    const createdBlog = {title, description, imgList: filePaths}
+    const createdBlog = {title, description, img: filePaths}
     const clearFields = ()=>{
       setTitle("");
       setDescripton("");
@@ -56,7 +56,7 @@ export default function BlogWrite (){
 
     createBlog(createdBlog, clearFields)
   }
-  const imgList=selectedFiles
+  const img=selectedFiles
   return (
     <div>
     <div className='bg-white container  rounded-xl mx-auto my-10 p-14'>

@@ -8,14 +8,14 @@ import {
   faX,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import ProfileDropDown from "../ProfileDropDown/ProfileDropDown";
 import { FavAnimalContext } from "@/context/FavAnimalContext";
-import { CardContext } from "@/context/ShoppingCardContext";
+import { CartContext } from "@/context/ShoppingCartContext";
+import { UserContext } from "@/context/UserContext";
 
 const logoImg = require("../../assets/images/NavBar/logo.png");
 const luckyPaws = require("../../assets/images/NavBar/LuckyPaws.png");
@@ -29,8 +29,10 @@ export default function Navbar() {
   const router = useRouter();
   const { addAnimal, setAddAnimal } = useContext(FavAnimalContext);
   const animalCount = addAnimal?.animals?.length;
-  const { card, setCard } = useContext(CardContext);
-  const cardCount = card?.items?.length;
+
+  const {addProductToShoppingCart,setProductToShoppingCart } = useContext(CartContext);
+  const { user }:any = useContext(UserContext);
+  const cardCount =addProductToShoppingCart?.items?.length;
   const [local, setLocal] = useState<any>();
   useEffect(() => {
     const a = localStorage.getItem("token");
@@ -122,8 +124,8 @@ export default function Navbar() {
                 >
                   <FontAwesomeIcon icon={faPaw} className="text-2xl" />
                   <div className="bg-orange-300 rounded-full absolute bottom-1 text-lg text-white">
-                    {animalCount === 0 ? null : (
-                      <span className="block">{animalCount}</span>
+                    {user?.favAnimal?.length === 0 ? null : (
+                      <span className="block">{user?.favAnimal?.length}</span>
                     )}
                   </div>
                 </Link>
@@ -143,7 +145,7 @@ export default function Navbar() {
                 {!local ? (
                   <div>
                     <Link href={"/auth"}>
-                      <button className="font-bold text-xl m-3 hidden md:ml-6 md:block">
+                      <button className="font-bold bg-orange-500 rounded-lg text-white p-2 m-3">
                         Login
                       </button>
                     </Link>

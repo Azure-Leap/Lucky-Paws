@@ -1,16 +1,16 @@
 import React, { useContext,useState, Fragment } from 'react'
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { CardContext } from '@/context/ShoppingCardContext';
+import {CartContext  } from '@/context/ShoppingCartContext';
 import { products } from '@/utils/routes';
 import Link from 'next/link';
 import Image from 'next/image';
 
 
 export default function ShoppingCart({ open, setOpen }: any) {
-const { card, setCard } = useContext(CardContext);
+const {addProductToShoppingCart,setProductToShoppingCart } = useContext(CartContext);
 const [totalPrice, setTotalPrice] = useState(0);
-const ShoppingCart = card?.items;
+const ShoppingCart = addProductToShoppingCart?.products;
 const priceArray: number[] = ShoppingCart?.map((el) => el.products.price);
 const priceTotal: number = priceArray?.reduce(function (a: number, b: number) {
   return a + b;
