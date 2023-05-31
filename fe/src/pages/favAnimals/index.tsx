@@ -1,6 +1,7 @@
 import { FavAnimalContext } from "@/context/FavAnimalContext";
 import React, { useContext, useState } from "react";
 import Image from "next/image";
+import ComingSoon from "../ComingSoon";
 
 const FavAnimals = ({}) => {
   const { addAnimal, setAddAnimal } = useContext(FavAnimalContext);
@@ -8,7 +9,8 @@ const FavAnimals = ({}) => {
 
   return (
     <div className="container mx-auto ">
-      {favAnimals?.map((el: any, idx: number) => (
+      <ComingSoon />
+      {/* {favAnimals?.map((el: any, idx: number) => (
         <div
           key={idx}
           className="group bg-white hover:scale-105 shadow-[0_8px_16px_rgba(132,74,20,0.25)] rounded-xl mx-6 mt-16 max-sm:col-span-3 sm:col-span-3  md:col-span-3 lg:col-span-1 "
@@ -30,7 +32,7 @@ const FavAnimals = ({}) => {
             </div>
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };
