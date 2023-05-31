@@ -1,4 +1,4 @@
-import React, { useState, useContext ,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,49 +23,50 @@ const Product = ({ product }: any) => {
 
   const { products } = useProducts();
   const router = useRouter();
-  const {card, setCard} = useContext(CardContext)
+  const { card, setCard } = useContext(CardContext);
   const handleClick = (product: IProduct) => {
     if (product._id) {
-      let newProduct = card?.items?.length >0 ? [...card?.items] : []
-      
-      const newFav  = {
-        products:product,
-        count: 1
+      let newProduct = card?.items?.length > 0 ? [...card?.items] : [];
+
+      const newFav = {
+        products: product,
+        count: 1,
+      };
+
+      const selectedProIProductIdx = newProduct?.findIndex(
+        (e) => e?.products?._id === product?._id
+      );
+      if (selectedProIProductIdx > -1) {
+        newProduct[selectedProIProductIdx].count++;
+      } else {
+        newProduct = [...newProduct, newFav];
       }
 
-      const selectedProIProductIdx = newProduct?.findIndex( e=> e?.products?._id === product?._id)
-      if(selectedProIProductIdx > -1){
-        newProduct[selectedProIProductIdx].count ++
-      } else{
-        newProduct = [... newProduct, newFav]
-      }
-     
       const cardItem = {
-        user_Id:"jhbmb",
-        items: newProduct
-      }
+        user_Id: "jhbmb",
+        items: newProduct,
+      };
       setCard(cardItem);
     }
   };
 
-  
   const addCount = () => {
     setCount(count + 1);
   };
-  
+
   const subCount = () => {
     setCount(count > 1 ? count - 1 : 1);
   };
-  
+
   useEffect(() => {
     const updatedTotalPrice = count * priceTotal();
     setTotalPrice(updatedTotalPrice);
   }, [count]);
-  
+
   const ShoppingCart = card?.items;
   const priceTotal = () => {
     if (!ShoppingCart) return 0;
-  
+
     return ShoppingCart.reduce(function (total: number, item: any) {
       const itemPrice = item.products.price;
       const itemQuantity = item.quantity;
@@ -73,7 +74,7 @@ const Product = ({ product }: any) => {
       return setTotalPrice(totalPrice + itemTotalPrice);
     }, 0);
   };
-  
+
   // const price: number = priceTotal();
 
   const plusSlides = (n: number) => {
@@ -216,7 +217,10 @@ const Product = ({ product }: any) => {
               </button>
             </div>
             <div className="grid grid-cols-6 my-12">
-              <button  onClick={() => handleClick(product)}  className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
+              <button
+                onClick={() => handleClick(product)}
+                className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2"
+              >
                 Add To Card
               </button>
               <Link href={`/payment`} passHref>
@@ -263,7 +267,7 @@ const Product = ({ product }: any) => {
 };
 
 export async function getStaticPaths() {
-  const res = await fetch("https://lucky-paws-api.onrender.com/product");
+  const res = await fetch("https://lucky-paws-chi.vercel.app/product");
   const products = await res.json();
   const ids = products?.product?.map((product: any) => product._id);
   const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
@@ -275,7 +279,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: any) {
   const res = await fetch(
-    `https://lucky-paws-api.onrender.com/product/${params.id}`
+    `https://lucky-paws-chi.vercel.app/product/${params.id}`
   );
   const data = await res.json();
   console.log("data:", data);

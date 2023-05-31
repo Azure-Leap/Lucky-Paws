@@ -171,7 +171,7 @@ const Animal = ({ animal }: any) => {
 };
 
 export async function getStaticPaths() {
-  const res = await fetch("https://lucky-paws-api.onrender.com/animal");
+  const res = await fetch("https://lucky-paws-chi.vercel.app/animal");
   const animals = await res.json();
   const ids = animals?.animal?.map((animal: any) => animal._id);
   const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
@@ -183,7 +183,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: any) {
   const res = await fetch(
-    `https://lucky-paws-api.onrender.com/animal/${params.id}`
+    `https://lucky-paws-chi.vercel.app/animal/${params.id}`
   );
   const data = await res.json();
   console.log("data:", data);
