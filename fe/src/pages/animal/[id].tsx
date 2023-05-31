@@ -111,7 +111,6 @@ const Animal = ({ animal }: any) => {
               ))}
             </div>
           </div>
-
           <div className="m-6  xl:col-span-1 sm:col-span-2 max-sm:col-span-2 ">
             <div className="mb-5 text-4xl p-1 font-bold my-2 ">
               {animal.name}
@@ -125,9 +124,13 @@ const Animal = ({ animal }: any) => {
             <div className="text-3xl p-1 font-bold">Health</div>
             <div className="mt-2 text-xl p-1">{animal.health}</div>
             <div className="grid grid-cols-6 my-16">
-              <button className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2"></button>
+              <button className="bg-orange-400 rounded-lg text-white font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-white hover:text-orange-400 hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
+                Start your inquiry
+              </button>
               <Link href={`#`} passHref>
-                <button className="bg-white rounded-lg mx-8 w-28 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2"></button>
+                <button className="bg-white rounded-lg mx-8 w-28 text-orange-400 font-bold h-10 border-2 border-orange-400 border-opacity-75  hover:bg-orange-400 hover:text-white hover:scale-110 xl:col-span-2 sm:col-span-2 max-sm:col-span-2">
+                  Sponsor
+                </button>
               </Link>
             </div>
           </div>
@@ -151,10 +154,10 @@ const Animal = ({ animal }: any) => {
                   </div>
                   <div className="max-sm:col-span-1 sm:col-span-1 md:col-span-1 xl:col-span-1 m-auto">
                     <div className=" max-sm:text-2xl sm:text-2xl md:text-xl text-center p-1 ">
-                      {animal.title}
+                      {animal.name}
                     </div>
                     <div className=" max-sm:p-4 sm:text-2xl md:text-xl p-1 ">
-                      {animal.price}
+                      {animal.health}
                     </div>
                   </div>
                 </div>
